@@ -1,0 +1,16 @@
+# Linear data structures
+- Arrays
+- Linked Lists
+  - Singly Linked Lists
+  - Doubly Linked Lists
+  - Circular Lists
+- Queues
+  - Linked list implementation of Queues
+  - Array implementation of Queues
+  - Priority Queues
+- Stacks
+  - Linked list implementation of Stacks
+  - Array implementation of Stacks
+  - Applications
+    - Function call stack
+    - Expression evaluation, infix to postfix

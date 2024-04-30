@@ -4,7 +4,17 @@
 Modules
 ---
 
-ΩΘ
+1. [Overview of data structures](./mod1/README.md)
+2. [Complexity analysis](./mod2/README.md)
+3. [Linear data structures](./mod3/README.md)
+4. [Nonlinear data structures](./mod4/README.md)
+5. [Sorting algorithms](./mod5/README.md)
+6. [Hashing](./mod6/README.md)
+---
+7. [Data compression](./mod7/README.md)
+8. [Memory management](./mod8/README.md)
+9. [String matching](./mod9/README.md)
+
 
 # References
 ---
