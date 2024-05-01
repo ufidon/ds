@@ -11,9 +11,9 @@ Modules
 5. [Sorting algorithms](./mod5/README.md)
 6. [Hashing](./mod6/README.md)
 ---
-7. [Data compression](./mod7/README.md)
-8. [Memory management](./mod8/README.md)
-9. [String matching](./mod9/README.md)
+1. [Data compression](./mod7/README.md)
+2. [Memory management](./mod8/README.md)
+3. [String matching](./mod9/README.md)
 
 
 # References
