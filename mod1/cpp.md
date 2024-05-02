@@ -387,5 +387,32 @@ int main() {
 }
 ```
 
+Raw pointers with new and delete
+---
+- `new` and `delete` operators for single objects and arrays
+
+| Operation | Description | Example |
+|-----------|-------------|---------|
+| `new`     | Allocates memory for a single object on the heap and returns a pointer to the object | `int* ptr = new int;` |
+| `delete`  | Deallocates memory for a single object allocated with `new` | `delete ptr;` |
+| `new[]`   | Allocates memory for an array on the heap and returns a pointer to the first element | `int* arr = new int[10];` |
+| `delete[]`| Deallocates memory for an array allocated with `new[]` | `delete[] arr;` |
+
+
+Smart Pointers in C++
+---
+- `std::shared_ptr`, `std::unique_ptr`, and `std::weak_ptr`
+  - ensure proper memory cleanup without manual intervention
+  - reduce the risk of memory leaks and dangling pointers
+
+| Smart Pointer | Description | Example |
+|---------------|-------------|---------|
+| `std::shared_ptr` | Manages `shared ownership` of dynamically allocated objects. It allows multiple pointers to refer to the same object, automatically deallocating the object when the last `shared_ptr` pointing to it is destroyed. | `std::shared_ptr<int> ptr = std::make_shared<int>(42);` |
+| `std::unique_ptr` | Manages ownership of dynamically allocated objects with `exclusive ownership`. It ensures that only one `unique_ptr` points to the object, and when the `unique_ptr` is destroyed, the object is automatically deallocated. | `std::unique_ptr<int> ptr = std::make_unique<int>(42);` |
+| `std::weak_ptr` | Provides a `non-owning "weak" reference` to an object managed by `std::shared_ptr`. It does `not contribute to the reference count` of the object, allowing the object to be deallocated even if weak pointers exist. | `std::weak_ptr<int> weakPtr = sharedPtr;` |
+
+
+
+
 # References
 - [clangd 找不到 c++ 头文件](https://zhuanlan.zhihu.com/p/531422156)
