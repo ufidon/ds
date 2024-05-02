@@ -19,7 +19,7 @@ Core concepts of C++
   - algorithms such as sorting and searching
 - `Memory Management`:  
   - dynamic memory allocation using `new` and `delete` operators 
-  - `normal pointers` and `smart pointers` such as std::shared_ptr and std::unique_ptr
+  - `normal pointers` and `smart pointers` such as `std::shared_ptr` and `std::unique_ptr`
   - Proper memory management is important to `avoid memory leaks` and `optimize program performance`
 - `Exception Handling`: 
   - deals with `runtime errors and exceptional situations` gracefully
@@ -142,7 +142,7 @@ int main() {
 - complemented or replaced by 
   - the `Rule of Five` which includes move constructor and move assignment operator 
   - or the `Rule of Zero` which eliminates the need to define these functions altogether 
-    - through the use of `smart pointers` and RAII principles
+    - through the use of `smart pointers` and `RAII (Resource Acquisition Is Initialization)` principles
 
 
 💡 Big three in C++
@@ -205,7 +205,187 @@ int main() {
 }
 ```
 
+Rule of Five
+---
+manages resources `when explicit control is necessary`:
+- defines all the five member functions if any of them are `explicitly` defined: 
+  - destructor, copy/move constructors, copy/move assignment operators
+- These functions `transfer and manage ownership of resource` such as 
+  - dynamic memory, file handles, or other external resources
+  - ensure resources are correctly managed and released throughout the `object's lifecycle`
 
+
+🍎 Example
+---
+```c++
+#include <iostream>
+
+class Resource {
+private:
+    int* data;
+
+public:
+    // Constructor
+    Resource(int value) : data(new int(value)) {
+        std::cout << "Resource allocated.\n";
+    }
+
+    // Destructor
+    ~Resource() {
+        delete data;
+        std::cout << "Resource deallocated.\n";
+    }
+
+    // Copy constructor
+    Resource(const Resource& other) : data(new int(*other.data)) {
+        std::cout << "Resource copied.\n";
+    }
+
+    // Move constructor
+    Resource(Resource&& other) noexcept : data(other.data) {
+        other.data = nullptr;
+        std::cout << "Resource moved.\n";
+    }
+
+    // Copy assignment operator
+    Resource& operator=(const Resource& other) {
+        if (this != &other) {
+            delete data;
+            data = new int(*other.data);
+        }
+        std::cout << "= Resource copied.\n";
+        return *this;
+    }
+
+    // Move assignment operator
+    Resource& operator=(Resource&& other) noexcept {
+        if (this != &other) {
+            delete data;
+            data = other.data;
+            other.data = nullptr;
+        }
+        std::cout << "= Resource moved.\n";
+        return *this;
+    }
+};
+
+int main() {
+    Resource res1(100); // Constructor
+
+    Resource res2(res1); // Copy constructor
+
+    Resource res3(200); // Constructor
+
+    res3 = res1; // Copy assignment operator
+
+    Resource res4(std::move(res3)); // Move constructor
+
+    res1 = std::move(res4); // Move assignment operator
+
+    return 0;
+}
+```
+
+
+Rule of Zero
+---
+`minimizes manual resource management` by `utilizing modern C++ features`:
+- whenever possible, `avoids explicit definition` of the five member functions
+  - destructor, copy/move constructors, copy/move assignment operators
+  - relies on the compilers' `default implementations`
+- encourages `automatic resource management` using `modern C++ features` such as 
+  - smart pointers, standard containers, and RAII (Resource Acquisition Is Initialization)
+
+
+🍎 Example
+---
+```c++
+#include <iostream>
+#include <vector>
+
+class Resource {
+private:
+    std::vector<int> data;
+
+public:
+    // Constructor
+    Resource(int value) : data(std::vector<int>(1, value)) {
+        std::cout << "Resource allocated.\n";
+    }
+
+    // default destructor, copy/move constructors, or copy/move assignment operators
+};
+
+int main() {
+    Resource res1(100); // Constructor
+
+    {
+        Resource res2(200); // Constructor
+    }
+
+    Resource res3(300); // Constructor
+
+    res3 = Resource(400); // Constructor and move assignment
+
+    return 0;
+}
+```
+
+💡 RAII (Resource Acquisition Is Initialization)
+---
+- ensures that the file is automatically closed when the File object goes out of scope
+  - regardless of how it exits the scope 
+    - e.g., normal return, exception thrown
+- widely used in C++ to manage resources such as files, memory, locks, etc.
+
+```c++
+#include <iostream>
+#include <memory>
+
+class File {
+private:
+    FILE* file;
+
+public:
+    // Constructor opens the file
+    explicit File(const char* filename) : file(fopen(filename, "r")) {
+        if (!file) {
+            throw std::runtime_error("Failed to open file.");
+        }
+        std::cout << "File opened.\n";
+    }
+
+    // Destructor closes the file
+    ~File() {
+        if (file) {
+            fclose(file);
+            std::cout << "File closed.\n";
+        }
+    }
+
+    // Read a line from the file
+    std::string readLine() {
+        char buffer[256];
+        if (fgets(buffer, sizeof(buffer), file)) {
+            return buffer;
+        } else {
+            return "";
+        }
+    }
+};
+
+int main() {
+    try {
+        File file("example.txt");
+        std::string line = file.readLine();
+        std::cout << "First line: " << line;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+```
 
 # References
 - [clangd 找不到 c++ 头文件](https://zhuanlan.zhihu.com/p/531422156)
