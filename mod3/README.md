@@ -1,16 +1,7 @@
-# Linear data structures
-- Arrays
-- Linked Lists
-  - Singly Linked Lists
-  - Doubly Linked Lists
-  - Circular Lists
-- Queues
-  - Linked list implementation of Queues
-  - Array implementation of Queues
-  - Priority Queues
-- Stacks
-  - Linked list implementation of Stacks
-  - Array implementation of Stacks
-  - Applications
-    - Function call stack
-    - Expression evaluation, infix to postfix
+# Complexity analysis
+- Time and space complexity
+  - Best, average and worst case
+- Asymptotic analysis
+  - Big-${O, Ω, Θ}$ and small ${o}$ notation
+
+${\displaystyle  T(n)=\underbrace{2T(\frac{n}{2})}_{Step\ 2} + \underbrace{O(n)}_{Step\ 3} = O(n\log n)}$

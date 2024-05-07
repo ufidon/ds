@@ -5,8 +5,8 @@ Modules
 ---
 
 1. [Overview of data structures](./mod1/README.md)
-2. [Complexity analysis](./mod2/README.md)
-3. [Linear data structures](./mod3/README.md)
+2. [Linear data structures](./mod2/README.md)
+3. [Complexity analysis](./mod3/README.md)
 4. [Nonlinear data structures](./mod4/README.md)
 5. [Sorting algorithms](./mod5/README.md)
 6. [Hashing](./mod6/README.md)
