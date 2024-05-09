@@ -195,8 +195,11 @@ How do we hold data?
 
 
 
-How do we organize data?
+How do we organize data with ${n}$ elements? 
 ---
+- Data structures are also called `containers`
+  - used to hold ${n \in ℕ}$, i.e. 0 or more elements
+  - designed to be **dynamically growable** in `capacity`
 - Linear data structures
 
 <table border="1">
