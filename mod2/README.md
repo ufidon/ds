@@ -20,7 +20,7 @@ Arrays
 ---
 | Feature | One-Dimensional Array | Multi-Dimensional Array |
 | ------- | --------------------- | ----------------------- |
-| **Definition** | A linear collection of elements, all of the same type, stored at contiguous memory locations. | An array consisting of more than one dimension, such as a 2D array (matrix) or 3D array (cube), allowing for complex data structures. |
+| **Definition** | A linear collection of elements, all of the same type, stored at `contiguous memory` locations. | An array consisting of more than one dimension, such as a 2D array (matrix) or 3D array (cube), allowing for complex data structures. |
 | **Declaration** | `datatype arrayName[size];` | `datatype arrayName[size1][size2]...[sizeN];` |
 | **Dimensionality** | Single line of elements. | Multiple lines, creating a table (2D), cube (3D), etc. |
 | **Access** | Accessed with a single index: `arrayName[index];` | Accessed with multiple indices: `arrayName[index1][index2]...[indexN];` |

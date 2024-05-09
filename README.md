@@ -26,6 +26,7 @@ Textbooks
   - [author website](https://users.cs.fiu.edu/~weiss/)
 - [Introduction to Java/Python/C++ Programming and Data Structures](https://yongdanielliang.github.io/book.html)
   - [Introduction to Programming with C++, 3e](https://liveexample.pearsoncmg.com/liang/cpp3e/toc.html)
+- [Open Data Structures](https://opendatastructures.org/)
 
 Classes
 ---
@@ -55,6 +56,7 @@ Online resources
 - [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
   - [Data Structure Visualizations](https://cmps-people.ok.ubc.ca/ylucet/DS/Algorithms.html)
 - [CS 1332 Data Structures and Algorithms Visualization Tool](https://csvistool.com/)
+- [Learning Algorithms with Dynamic Animations](https://web.eecs.utk.edu/~czheng4/viz/)
 - [Algorithms and Data Structures Animations for the Liang Java, C++, and Python Books](https://liveexample.pearsoncmg.com/liang/animation/animation.html)
 - [Online visual debugger](https://pythontutor.com/)
 - [boost c++ libraries](https://www.boost.org/)
