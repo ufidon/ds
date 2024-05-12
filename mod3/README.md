@@ -31,6 +31,7 @@ Growth rate of cost vs. input size
 💡Demo: dominant term
 ---
 - Given $f(n)=9n^2 + 99n + 999\log n + 9999$, which component is dominant when $n$ grows large?
+
 ![dominant term](./images/domc.png)
 
 - when $n→∞, f(n)$ is dominated by $9n^2$, so its `asymptotic behavior` can be described by
@@ -48,7 +49,7 @@ Asymptotic analysis
 - e.g.
   - Stirling’s Formula: $`n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n`$
     - $`n!∈Θ(\sqrt{n} \left(\frac{n}{e}\right)^n)`$
-  - Harmonic Numbers: $`H_n = \sum_{k=1}^n \frac{1}{k} ≈ \ln n + γ `$
+  - Harmonic Numbers: $H_n = \sum_{k=1}^n \frac{1}{k} ≈ \ln n + γ$
     - γ is Euler’s constant
     - $`H_n∈Θ(\ln n)`$
 
