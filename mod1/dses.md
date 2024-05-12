@@ -195,7 +195,7 @@ How do we hold data?
 
 
 
-How do we organize data with ${n}$ elements? 
+How do we organize and store data with ${n}$ elements? 
 ---
 - Data structures are also called `containers`
   - used to hold ${n \in ℕ}$, i.e. 0 or more elements
@@ -302,6 +302,20 @@ How do we organize data with ${n}$ elements?
 </table>
 
 
+ADTs (Abstract data types) vs data structures
+---
+- ADTs define `a set of data and operations` that can be performed on these data
+- Data structures are the `concrete ways of organizing and storing data` to implement ADTs
+
+| Feature | Abstract Data Type (ADT) | Data Structure |
+|---------|--------------------------|----------------|
+| **Definition** | A `mathematical model` that defines a set of data and a set of operations on the data | The `actual representation` of data, used to implement an ADT. |
+| **Purpose** | Defines the `type of data and operations` without concern for the actual representation of data. | Provides `concrete methods` for storing and manipulating data to implement an ADT. |
+| **Examples** | Stack, Queue, List | Linked List, Array, Tree |
+| **Focus** | `Logical properties` and effects of operations | `Physical layout` and efficiency of data |
+| **Implementation** | Typically described in `pseudocode` or natural language | Typically coded in a `programming language` |
+
+
 Applications of DSes
 ---
 | Data Structure | Use Cases | Examples |
@@ -315,18 +329,35 @@ Applications of DSes
 | **Heaps** | - Implementing priority queues in task scheduling algorithms. <br> - Finding the k largest or smallest elements in a collection efficiently. <br> - Implementing efficient algorithms for heap sort and heap-based binary search. | - `std::priority_queue<Task> taskScheduler;` <br> - `MinHeap<int> minHeap;` <br> - `MaxHeap<int> maxHeap;` |
 
 
-
-Analysis methods for algorithms on DSes
+How do we process data?
 ---
-| Aspect | Time Complexity | Space Complexity |
-| ------ | --------------- | ---------------- |
-| **Definition** | Measures the `amount of time` an algorithm takes to run as a function of the size of the input. | Measures the total `amount of memory` that an algorithm uses in relation to the size of the input. |
-| **Focus** | How quickly the runtime of an algorithm `grows` with the input size. | How much memory usage `grows` with the input size. |
-| **Importance** | Helps in understanding the `efficiency` of an algorithm in terms of `time`. | Helps in understanding the `efficiency` of an algorithm in terms of `memory usage`. |
-| **Typical Notations** | ${O(1), O(log n), O(n), O(n log n), O(n^2)}$, etc. | ${O(1), O(log n), O(n), O(n^2)}$, etc. |
-| **Example** | A linear search has a time complexity of ${O(n)}$ because it scans each element once. | A dynamic array (like a vector in C++) may have a space complexity of ${O(n)}$ due to the `storage of n elements`. |
-| **Trade-offs** | Sometimes, to achieve a faster runtime, more memory may be used (e.g., caching). | To save memory, sometimes an algorithm may run slower (e.g., algorithms that generate results on the fly). |
-| **Optimization** | Often achieved by reducing the number of operations or optimizing the algorithm's structure. | Often achieved by reducing the size of the data structures or the number of data structures used. |
+- acquire, create, destroy, store
+- compare, search, traverse
+- move, copy, combine, split
+- sort, transform, aggregate
+- extend, compress
+- analyze, mine, visualize
+
+
+Algorithm
+---
+- `A set of instructions or a step-by-step process` 
+  - used to solve a specific problem: `Input —Algorithms→ Output`
+- Used in various fields such as artificial intelligence, databases, graphics, networking, operating systems, and security. 
+- The `efficiency` of an algorithm is often measured by its `complexity`
+  - `complexity` refers to the `amount of resources (like time or memory)` required to solve a problem as `the size of the input grows`
+
+
+
+🍎 Example
+---
+| Algorithm | Definition | Complexity | Application |
+|-----------|------------|------------|-------------|
+| Bubble Sort | A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. | Average: $O(n^2)$ | Used in educational settings for teaching sorting algorithms. |
+| Quicksort | An efficient sorting algorithm that uses a divide-and-conquer approach to sort elements. | Average: $O(n \log n)$ | Widely used in practice for sorting large datasets. |
+| Merge Sort | A divide-and-conquer algorithm that divides the input array into two halves, sorts them, and then merges them. | Average: $O(n \log n)$ | Useful in sorting linked lists and for external sorting. |
+| Binary Search | A search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half. | Average: $O(\log n)$ | Efficient for searching in large sorted arrays. |
+| Dijkstra's Algorithm | An algorithm for finding the shortest paths between nodes in a graph, which may represent, for example, road networks. | Average: $O(V^2)$, with $V$ being the number of vertices. | Used in GPS systems to find the shortest path. |
 
 
 

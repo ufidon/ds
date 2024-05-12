@@ -2,33 +2,10 @@
 - Time and space complexity
   - Best, average and worst case
 - Asymptotic analysis
-  - Big ${O, Ω, Θ}$ notation
+  - Big ${Θ, O, Ω}$ notation
 
 
-Objectives
----
-- Estimate algorithm efficiency using the Big O notation
-  -  explain growth rates and 
-     -  why constants and nondominating terms can be ignored
-  - describe common growth functions 
-    - constant, logarithmic, log-linear, quadratic, cubic, and exponential
-- Analyze and determine the complexity of various types of algorithms
-  -  binary search
-  -  selection sort
-  -  Tower of Hanoi
-- Design efficient algorithms for 
-  - finding 
-    - Fibonacci numbers using dynamic programming
-    - the GCD using Euclid’s algorithm
-    - prime numbers using the sieve of Eratosthene
-    - the closest pair of point using the divide-and-conquer approach
-    - a convex hull for a set of points
-  - solving
-    -  the Eight Queens problem using the backtracking approach
-    -  string matching using Boyer-Moor and KMP algorithms
-
-
-Executing Time 
+Algorithm executing Time 
 ---
 - can be used to measure the performance of algorithms
   - by profilers
@@ -37,21 +14,48 @@ Executing Time
   - depends on specific input
 
 
-Growth Rate
+
+
+Growth rate of cost vs. input size
 ---
 - a theoretical measure of algorithm performance
-- find how fast `the time consumed` by a algorithm increases when `the size of input` increases
-  - $t=f(inputSize)$, find the function $f$
-  - its *order of magnitude* can be denoted by Big ${O, Ω}$ or ${Θ}$
-- Constant time: $O(1)$
-  - independent from the input size
-  - for example, access an element from an array
+- `the time or storage consumed` by a algorithm increases when `the size of input or problem scale` grows
+  - $p=f(inputSize)$
+  - the *order of magnitude* of function $f$ can be denoted by Big ${Θ, O}$ or ${Ω}$
+  - it uses `logical units` instead of real time units or storage units
 - provides a good theoretical estimate of algorithm efficiency
-- but two algorithms of the same time complexity are not necessarily equally efficient
+  - independent of specific hardware, programming language or conditions
+  - but two algorithms of the same time complexity are not necessarily equally efficient
 
 
-Big ${O, Ω, Θ}$
+💡Demo: dominant term
 ---
+- Given $f(n)=9n^2 + 99n + 999\log n + 9999$, which component is dominant when $n$ grows large?
+![dominant term](./images/domc.png)
+
+- when $n→∞, f(n)$ is dominated by $9n^2$, so its `asymptotic behavior` can be described by
+  - `dropping the non-dominant terms`: $f(n)=9n^2 + 99n + 999\log n + 9999 ∈ Θ(9n^2)$
+  - it can be simplified further by `dropping the constant coefficient`: $Θ(9n^2) ∈ Θ(n^2)$
+  - ∴ $f(n)∈Θ(n^2)$
+- `Big theta Θ` describes that $f(n)$ is `proportional` to $n^2$ when n is large enough
+- A constant function $f(n)=c$ is always proportional to 1 so $f(n)∈Θ(c)∈Θ(1)$
+
+
+Asymptotic analysis
+---
+- describes the behavior of a function near its limits
+  - how a function behaves as its input value becomes very large
+- e.g.
+  - Stirling’s Formula: $`n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n`$
+    - $`n!∈Θ(\sqrt{n} \left(\frac{n}{e}\right)^n)`$
+  - Harmonic Numbers: $`H_n = \sum_{k=1}^n \frac{1}{k} ≈ \ln n + γ `$
+    - γ is Euler’s constant
+    - $`H_n∈Θ(\ln n)`$
+
+
+Big ${Θ, O, Ω}$
+---
+![asyms](./images/asyms.png)
 <table>
   <thead>
     <tr>
@@ -62,6 +66,18 @@ Big ${O, Ω, Θ}$
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>Big Theta (Θ)</td>
+      <td>Describes the tight bound or average-case scenario of an algorithm's time complexity.</td>
+      <td>Θ(f(n)) represents a proportional bound on the growth rate of the function f(n) as n approaches infinity.</td>
+      <td>
+        <ul>
+          <li>Defines both the maximum and minimum growth rates of a function.</li>
+          <li>Formally, f(n) is Θ(g(n)) if there exist constants c1, c2, and n0 such that c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0.</li>
+          <li>Commonly used to analyze the average-case performance of algorithms.</li>
+        </ul>
+      </td>
+    </tr>  
     <tr>
       <td>Big O (O)</td>
       <td>Describes the upper bound or worst-case scenario of an algorithm's time complexity.</td>
@@ -86,34 +102,36 @@ Big ${O, Ω, Θ}$
         </ul>
       </td>
     </tr>
-    <tr>
-      <td>Big Theta (Θ)</td>
-      <td>Describes the tight bound or average-case scenario of an algorithm's time complexity.</td>
-      <td>Θ(f(n)) represents a proportional bound on the growth rate of the function f(n) as n approaches infinity.</td>
-      <td>
-        <ul>
-          <li>Defines both the maximum and minimum growth rates of a function.</li>
-          <li>Formally, f(n) is Θ(g(n)) if there exist constants c1, c2, and n0 such that c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0.</li>
-          <li>Commonly used to analyze the average-case performance of algorithms.</li>
-        </ul>
-      </td>
-    </tr>
   </tbody>
 </table>
 
 
+☯️ Theorem 
+---
+Let's  
+- denote $f(n)∈Θ(g(n))$ by $f(n)∼g(n)$, $f(n)$ is `proportional` to $g(n)$ asymptotically
+- denote $f(n)∈O(g(n))$ by $f(n)⪝g(n)$, $g(n)$ is an `asymptotical upper bound` of $f(n)$ 
+- denote $f(n)∈Ω(g(n))$ by $f(n)⪞g(n)$, $g(n)$ is an `asymptotical lower bound` of $f(n)$ 
+
+then
+- $f(n)∼g(n)$ if and only if $f(n)⪝g(n)$ and $f(n)⪞g(n)$
+  - i.e. $g(n)⪝f(n)⪝g(n)$, $g(n)⪞f(n)⪞g(n)$, $f(n)⪝g(n)⪝f(n)$, and $f(n)⪞g(n)⪞f(n)$
+- $f(n)⪝g(n)$ if and only if $g(n)⪞f(n)$
+- if $f_1∼f_2$ and $f_2∼f_3$ then $f_1∼f_3$
+- if $f_1⪝f_2$ and $f_2⪝f_3$ then $f_1⪝f_3$
+- if $f_1⪞f_2$ and $f_2⪞f_3$ then $f_1⪞f_3$
+
 
 Best, Worst, and Average Cases 
 ---
-- an analysis of inputs
-- best-case: results in the shortest execution time
-- worst-case: results in the longest execution time 
-  - determines the lower bound of performance
+- `best-case`: results in the `shortest` execution time
+- `worst-case`: results in the `longest` execution time 
+  - determines the `lower bound` of performance
   - easier to obtain and commonly used
-- average-case: 
-  - attempts to determine the average amount of time among all possible input of the same size
+- `average-case`: 
+  - attempts to determine the `average` amount of time among `all possible inputs` of the same size
   - ideal, but difficult to perform
-    - hard to determine the relative probabilities and distributions of various input instances for many problems
+    - hard to determine the relative `probabilities and distributions` of various input instances for many problems
 
 
 <table>
@@ -130,78 +148,78 @@ Best, Worst, and Average Cases
     <tr>
       <td rowspan="3">Array</td>
       <td>Insertion (at end)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Deletion (at end)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Search</td>
-      <td>O(n)</td>
-      <td>O(n)</td>
-      <td>O(1)</td>
+      <td>Θ(n)</td>
+      <td>Θ(n)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td rowspan="3">Linked List</td>
       <td>Insertion (at beginning)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Deletion (at beginning)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Search</td>
-      <td>O(n)</td>
-      <td>O(n)</td>
-      <td>O(1)</td>
+      <td>Θ(n)</td>
+      <td>Θ(n)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td rowspan="3">Stack</td>
       <td>Push</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Pop</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Peek</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td rowspan="3">Queue</td>
       <td>Enqueue</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Dequeue</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
     <tr>
       <td>Peek</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
-      <td>O(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
+      <td>Θ(1)</td>
     </tr>
   </tbody>
 </table>
@@ -226,13 +244,13 @@ int linearSearch(int arr[], int n, int x)
 
 - The execution time of Linear search is proportional to the size of the array
   - so it has an order of $n$
-  - denoted as $O(n)$
+  - denoted as $Θ(n)$
 - analysis
   - ignore multiplicative constants
   - ignore non-dominating terms
 
 
-Practice 📝 : determine Big-O
+Practice 📝 : determine Big-Θ
 ---
 - Repetition
 - Sequence 
@@ -243,15 +261,82 @@ Practice 📝 : determine Big-O
 Repetition: simple loops
 ---
 ```c++
+// case 1
 for(i=1; i<=n; i++){
   s += i;
 }
-```
-- Time complexity: $T(n) = cn = O(n)$
 
+// case 2
+for(i=n; i>=-10; i--){
+  s |= i;
+}
+
+// case 3
+i= 99*n;
+while(i--);
+
+// case 4
+for(i=99; i<=9*n; i += 2){
+  s += i;
+}
+```
+- Time complexity: $T(n) = cn = Θ(n)$
+
+```c++
+// case 1
+for(i=1; i<=n; i++){
+  s += i;
+  n /= 2;
+}
+
+// case 2
+while(n>9999){
+  n /= 2;
+}
+
+// case 3
+while(k<12345*n){
+  k *= 2;
+}
+```
+- Time complexity: $T(n) = c\log_2 n = Θ(\log_2n)$
 
 Repetition: nested loops
 ---
+```c++
+// case 1
+for(i=1; i<=n; i++){
+  for(j=1; j<=n; j++){
+    for(k=1; k<=n; k++){
+      c[i][j] += a[i][k]*b[k][j];
+    }
+  }
+
+// case 2
+for(i=9; i<n; i++)
+  for(j=99; j<n*n; j++)
+    cout <<"Who am I?"<< endl;
+
+// case 3
+for(i=9; i<3*n*n; i++)
+  for(j=99; j<7*n; j++)
+    cout <<"Who am I?"<< endl;
+```
+- Time complexity: $T(n) = cn^3 = Θ(n^3)$
+
+```c++
+// case 1
+for(i=1; i<=n; i *= 3)
+  for(j=1; j<=n; j++)
+    cout <<"Who am I?"<< endl;
+
+// case 2
+for(i=9; i<n*3; i++)
+  for(j=99; j<n*4; j *= 3)
+    cout <<"Who am I?"<< endl;
+```
+- Time complexity: $T(n) = cn\log_3 n = Θ(n\log_3 n)$
+
 - matrix multiplication: $C=A\times B$
   ```c++
   for(i=1; i<=n; i++){
@@ -260,9 +345,8 @@ Repetition: nested loops
         c[i][j] += a[i][k]*b[k][j];
       }
     }
-  }
   ```
-- Time complexity: $T(n) = cn^3 = O(n^3)$
+- Time complexity: $T(n) = cn^3 = Θ(n^3)$
 
 - partial sum: ${\displaystyle S[i] = \sum_{k=1}^{i} k}$
   ```c++
@@ -272,7 +356,7 @@ Repetition: nested loops
     }
   }
   ```
-- Time complexity: ${\displaystyle T(n) = c\frac{n(n+1)}{2} = O(n^2)}$  
+- Time complexity: ${\displaystyle T(n) = c\frac{n(n+1)}{2} = Θ(n^2)}$  
 
 - print a table: n rows x K columns
   ```c++
@@ -283,7 +367,7 @@ Repetition: nested loops
     cout<<endl;
   }
   ```
-- Time complexity: $T(n) = cKn = c'n = O(n)$ 
+- Time complexity: $T(n) = cKn = c'n = Θ(n)$ 
 
 
 Sequence
@@ -301,7 +385,7 @@ Sequence
     cout<<endl;
   }
   ```
-- Time complexity: $T(n) = cK + cKn \approx  c'n = O(n)$ 
+- Time complexity: $T(n) = cK + cKn \approx  c'n = Θ(n)$ 
 
 
 Selection
@@ -322,8 +406,8 @@ Selection
     }
   }
   ```
-- Time complexity: $T(n)=O(n)+O(n)=O(n)$
-  - An algorithm with the  $O( n)$ time complexity is called a *linear algorithm*
+- Time complexity: $T(n)=Θ(n)+Θ(n)=Θ(n)$
+  - An algorithm with the  $Θ( n)$ time complexity is called a *linear algorithm*
 
 - Logarithm time: Binary search in an ordered array
   ```c++
@@ -339,8 +423,8 @@ Selection
     }
   }
   ```
-- Time complexity: $T(n)=T(\frac{n}{2})+c = O(\log n)$ 
-  - An algorithm with the  $O(\log n)$ time complexity is called a *logarithmic algorithm*
+- Time complexity: $T(n)=T(\frac{n}{2})+c = Θ(\log n)$ 
+  - An algorithm with the  $Θ(\log n)$ time complexity is called a *logarithmic algorithm*
 
 Selection sort
 ---
@@ -358,8 +442,8 @@ Selection sort
     swap(a[i], a[minIndex]);
   }
   ```
-- Time complexity: ${\displaystyle T(n) = (n-1) + c + (n-2) + c + \cdots + 1+c=\frac{(n-1)n}{2}+(n-1)c = O(n^2)}$
-  - An algorithm with the $O(n^2)$ time complexity is called a *quadratic algorithm*
+- Time complexity: ${\displaystyle T(n) = (n-1) + c + (n-2) + c + \cdots + 1+c=\frac{(n-1)n}{2}+(n-1)c = Θ(n^2)}$
+  - An algorithm with the $Θ(n^2)$ time complexity is called a *quadratic algorithm*
 
 
 Tower of Hanoi
@@ -377,26 +461,53 @@ void Hanoi(n, A, B, C){
   Hanoi(n-1, C,B,A);
 }
 ```
-- Time complexity: $T(n) = T(n-1)+c+T(n-1) \Rightarrow T(n) = O(2^n)$
+- Time complexity: $T(n) = T(n-1)+c+T(n-1) \Rightarrow T(n) = Θ(2^n)$
 
 
 Common Recurrence Relations
 ---
 | Recurrence relation | Result | Example |
 | --- | --- | --- |
-| $T(n)=T(\frac{n}{2})+O(1)$ | $T(n)=O(\log n)$ | Binary search, Euclid's GCD |
-| $T(n)=T(n-1)+O(1)$ | $T(n)=O(n)$ | Linear search |
-| $T(n)=2T(\frac{n}{2})+O(1)$ | $T(n)=O(n)$ |  |
-| $T(n)=2T(\frac{n}{2})+O(n)$ | $T(n)=O(n\log n)$ | Merge sort |
-| $T(n)=2T(\frac{n}{2})+O(n\log n)$ | $T(n)=O(n\log^2 n)$ |  |
-| $T(n)=T(n-1)+O(n)$ | $T(n)=O(n^2)$ | Selection sort, insertion sort|
-| $T(n)=2T(n-1)+O(1)$ | $T(n)=O(n^2)$ | Tower of Hanoi |
-| $T(n)=T(n-1) + T(n-2) +O(1)$ | $T(n)=O(n^2)$ | Recursive Fibonacci algorithm |
+| $T(n)=T(\frac{n}{2})+Θ(1)$ | $T(n)=Θ(\log n)$ | Binary search, Euclid's GCD |
+| $T(n)=T(n-1)+Θ(1)$ | $T(n)=Θ(n)$ | Linear search |
+| $T(n)=2T(\frac{n}{2})+Θ(1)$ | $T(n)=Θ(n)$ |  |
+| $T(n)=2T(\frac{n}{2})+Θ(n)$ | $T(n)=Θ(n\log n)$ | Merge sort |
+| $T(n)=2T(\frac{n}{2})+Θ(n\log n)$ | $T(n)=Θ(n\log^2 n)$ |  |
+| $T(n)=T(n-1)+Θ(n)$ | $T(n)=Θ(n^2)$ | Selection sort, insertion sort|
+| $T(n)=2T(n-1)+Θ(1)$ | $T(n)=Θ(n^2)$ | Tower of Hanoi |
+| $T(n)=T(n-1) + T(n-2) +Θ(1)$ | $T(n)=Θ(n^2)$ | Recursive Fibonacci algorithm |
 
 - Order of common growth functions
-  - a ≺ b means b dominates a so a in O(a+b) can be omitted
+  - a ≺ b means b dominates a so a in Θ(a+b) can be omitted
 
-$$O(1) ≺ O(\log n) ≺ O(n) ≺ O(n\log n) ≺ O(n^2) ≺ O(n^3) ≺ O(2^n) ≺ O(3^n)$$
+$$Θ(1) ≺ Θ(\log n) ≺ Θ(\sqrt{n}) ≺ Θ(n) ≺ Θ(n\log n) ≺ Θ(n^2) ≺ Θ(n^3) ≺ Θ(2^n) ≺ Θ(3^n) ≺ Θ(n!)$$
+
+![common functions](./images/stds.png)
+
+
+🏃 Practice
+---
+List the following functions by `complexity categroy` in the `increasing order of efficiency`:
+- $7n\log (3n+99), 3n^{5/2}, 4n^2+9n+99, 99⋅2^n, 4^n/9999, 3⋅n^{10}+4⋅10^n, 2024⋅n!+999^n$
+
+Solution:
+- $2024⋅n!+999^n∼n!+999^n∼n!$
+- $3⋅n^{10}+4⋅10^n∼n^{10}+10^n∼10^n$
+- $4^n/9999∼4^n$
+- $99⋅2^n∼2^n$
+- $3n^{5/2}∼n^{5/2}∼n^{2.5}$
+- $4n^2+9n+99∼n^2+n∼n^2$
+- $7n\log(3n+99)∼n\log 3n∼n\log 3+n\log n∼n+n\log n∼n\log n$
+
+
+🏃 Practice
+---
+Prove $∀a,b>1: \log_a n ∼ \log_b n$.
+
+Proof:
+- $\displaystyle \log_a n = \frac{\ln n}{\ln a} ∼ \ln n$
+- $\displaystyle \log_b n = \frac{\ln n}{\ln b} ∼ \ln n$
+- ∴ $\log_a n ∼ \log_b n$
 
 
 Recursive [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_sequence) algorithm
@@ -409,7 +520,7 @@ long fib(long n){
   return fib(n-1)+fib(n-2);
 }
 ```
-- Time complexity: $T(n) = T(n-1)+T(n-2) +c \Rightarrow T(n) = O(2^n)$
+- Time complexity: $T(n) = T(n-1)+T(n-2) +c \Rightarrow T(n) = Θ(2^n)$
 
 
 Fibonacci sequence by *dynamic programming*
@@ -437,7 +548,7 @@ long fib(long n){
   return f2;
 }
 ```
-  - Time complexity: $O(n)$
+  - Time complexity: $Θ(n)$
 
 
 Practice 📝: find the *greatest common divisor (gcd)* of two integers
@@ -455,7 +566,7 @@ Practice 📝: find the *greatest common divisor (gcd)* of two integers
     return gcd;
   }
   ```
-  - Time complexity: $O(n)$
+  - Time complexity: $Θ(n)$
 - GCD algorithm version 2: brute force
   - check half of all possible divisors
   ```c++
@@ -470,7 +581,7 @@ Practice 📝: find the *greatest common divisor (gcd)* of two integers
     return gcd;
   }
   ```
-  - Time complexity: $O(n)$
+  - Time complexity: $Θ(n)$
 
 
 [Euclid's algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)
@@ -487,7 +598,7 @@ Practice 📝: find the *greatest common divisor (gcd)* of two integers
       return gcd(n, m%n);
   }
   ```
-  - Time complexity: $O(\log n)$
+  - Time complexity: $Θ(\log n)$
 
 
 Find all prime numbers no larger than n
@@ -506,7 +617,7 @@ Find all prime numbers no larger than n
     if(isprime) cout<<i<<endl;
   }
   ```
-  - Time complexity: $O( n^2)$
+  - Time complexity: $Θ( n^2)$
 - divide each integer i  from 2 to $\sqrt{i}$
   - check divisors up to $\sqrt{n}$
   ```c++
@@ -521,7 +632,7 @@ Find all prime numbers no larger than n
     if(isprime) cout<<i<<endl;
   }
   ```
-  - Time complexity: $O(n\sqrt{n})$
+  - Time complexity: $Θ(n\sqrt{n})$
 - Improved: divide each prime integer i  from 2 to $\sqrt{i}$
   - check prime divisors up to $\sqrt{n}$
   ```c++
@@ -560,7 +671,7 @@ Find all prime numbers no larger than n
     return 0;
   }
   ```
-  - Time complexity: ${\displaystyle O(\frac{n\sqrt{n}}{\log n})}$
+  - Time complexity: ${\displaystyle Θ(\frac{n\sqrt{n}}{\log n})}$
     - derive with ${\displaystyle \pi(n) \approx \frac{n}{\log n}}$
     - where $\pi(n)$ denotes the number of prime numbers no larger than $n$ 
 - [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
@@ -598,7 +709,7 @@ Find all prime numbers no larger than n
     return 0;
   }
   ```
-  - Time complexity: ${\displaystyle O(\frac{n\sqrt{n}}{\log n})}$
+  - Time complexity: ${\displaystyle Θ(\frac{n\sqrt{n}}{\log n})}$
 
 
 
@@ -606,15 +717,15 @@ Practice 📝: solve the [Closest-pair problem](https://en.wikipedia.org/wiki/Cl
 ---
 - Given a set of points, find the two points that are nearest to each other
 - brute force: computes the distances between all pairs of points and finds the one with the minimum distance
-  - Time complexity: ${\displaystyle T(n)={n \choose 2} = \frac{n(n-1)}{2} = O(\frac{n\sqrt{n}}{\log n})}$
+  - Time complexity: ${\displaystyle T(n)={n \choose 2} = \frac{n(n-1)}{2} = Θ(\frac{n\sqrt{n}}{\log n})}$
 - divide-and-conquer
   - Step 1: sort the points in increasing order of x-coordinates then y-coordinates into a sorted list $S$ of points
-    - Time complexity with mergesort: ${\displaystyle T(n) = O(n\log n)}$
+    - Time complexity with mergesort: ${\displaystyle T(n) = Θ(n\log n)}$
   - Step 2: Divide $S$ into two subsets $S_1$ and $S_2$ with its midpoint $m$
     - let $m$ in $S_1$, recursively find the closest pair $p_1$ and $p_2$ recursively
   - Step 3: Find the closest pair $p_3$ between $S_1$ and $S_2$. Then the closest pair is the closest one from $(p_1,p_2,p_3)$
     - Time complexity of Step 2 and Step 3: 
-      - $`{\displaystyle T(n)=\underbrace{2T(\frac{n}{2})}_{Step\ 2} + \underbrace{O(n)}_{Step 3} = O(n\log n)}`$
+      - $`{\displaystyle T(n)=\underbrace{2T(\frac{n}{2})}_{Step\ 2} + \underbrace{Θ(n)}_{Step 3} = Θ(n\log n)}`$
 
 
 Practice 📝: solve the [eight queens problem](https://en.wikipedia.org/wiki/Eight_queens_puzzle) with backtracking
@@ -638,10 +749,10 @@ points
 - [algorithms to be discussed](https://en.wikipedia.org/wiki/Convex_hull_algorithms)
   - Gift wrapping algorithm
     - [source code](./demos/ConvexHullbyGiftWrapping.cpp)
-    - Time complexity: ${\displaystyle O(nh)}$
+    - Time complexity: ${\displaystyle Θ(nh)}$
   - Graham's algorithm
     - [source code](./demos/ConvexHullbyGraham.cpp)
-    - Time complexity: ${\displaystyle O(n\log n)}$
+    - Time complexity: ${\displaystyle Θ(n\log n)}$
 
 
 Practice 📝: the [string search problem](https://en.wikipedia.org/wiki/String-searching_algorithm) 
@@ -653,14 +764,36 @@ Practice 📝: the [string search problem](https://en.wikipedia.org/wiki/String-
 - algorithms to be discussed
   -  brute force
      -  [source code](./demos/StringMatch.cpp)
-     -  Time complexity: $O(nm)$
+     -  Time complexity: $Θ(nm)$
   -  Boyer-Moore algorithm
      -  [source code](./demos/StringMatchBoyerMoore.cpp)
-     -  Time complexity: $O(nm)$
+     -  Time complexity: $Θ(nm)$
   -  Knuth-Morris-Pratt  algorithm
      -  [source code](./demos/StringMatchKMP.cpp)
-     -  Time complexity: $O(n + m)$
+     -  Time complexity: $Θ(n + m)$
 
+
+Objectives
+---
+- Estimate algorithm efficiency using the Big Θ notation
+  -  explain growth rates and 
+     -  why constants and nondominating terms can be ignored
+  - describe common growth functions 
+    - constant, logarithmic, log-linear, quadratic, cubic, and exponential
+- Analyze and determine the complexity of various types of algorithms
+  -  binary search
+  -  selection sort
+  -  Tower of Hanoi
+- Design efficient algorithms for 
+  - finding 
+    - Fibonacci numbers using dynamic programming
+    - the GCD using Euclid’s algorithm
+    - prime numbers using the sieve of Eratosthene
+    - the closest pair of point using the divide-and-conquer approach
+    - a convex hull for a set of points
+  - solving
+    -  the Eight Queens problem using the backtracking approach
+    -  string matching using Boyer-Moor and KMP algorithms
 
 
 # Math appendix
