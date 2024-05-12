@@ -2,7 +2,7 @@
 - Time and space complexity
   - Best, average and worst case
 - Asymptotic analysis
-  - Big-${O, Ω, Θ}$ notation
+  - Big ${O, Ω, Θ}$ notation
 
 
 Objectives
@@ -50,7 +50,7 @@ Growth Rate
 - but two algorithms of the same time complexity are not necessarily equally efficient
 
 
-Big-${O, Ω, Θ}$
+Big ${O, Ω, Θ}$
 ---
 <table>
   <thead>
@@ -210,6 +210,20 @@ Best, Worst, and Average Cases
 
 Example 💡: find the growth rate of linear search
 ---
+```c++
+int linearSearch(int arr[], int n, int x)
+{
+  for (int i = 0; i < n; i++)
+  {
+    if (arr[i] == x)
+    {
+      return i; // Element found at index i
+    }
+  }
+  return -1; // Element not found
+}
+```
+
 - The execution time of Linear search is proportional to the size of the array
   - so it has an order of $n$
   - denoted as $O(n)$
@@ -380,6 +394,7 @@ Common Recurrence Relations
 | $T(n)=T(n-1) + T(n-2) +O(1)$ | $T(n)=O(n^2)$ | Recursive Fibonacci algorithm |
 
 - Order of common growth functions
+  - a ≺ b means b dominates a so a in O(a+b) can be omitted
 
 $$O(1) ≺ O(\log n) ≺ O(n) ≺ O(n\log n) ≺ O(n^2) ≺ O(n^3) ≺ O(2^n) ≺ O(3^n)$$
 
@@ -599,7 +614,7 @@ Practice 📝: solve the [Closest-pair problem](https://en.wikipedia.org/wiki/Cl
     - let $m$ in $S_1$, recursively find the closest pair $p_1$ and $p_2$ recursively
   - Step 3: Find the closest pair $p_3$ between $S_1$ and $S_2$. Then the closest pair is the closest one from $(p_1,p_2,p_3)$
     - Time complexity of Step 2 and Step 3: 
-      - ${\displaystyle T(n)=\underbrace{2T(\frac{n}{2})}_{Step\ 2} + \underbrace{O(n)}_{Step 3} = O(n\log n)}$
+      - $`{\displaystyle T(n)=\underbrace{2T(\frac{n}{2})}_{Step\ 2} + \underbrace{O(n)}_{Step 3} = O(n\log n)}`$
 
 
 Practice 📝: solve the [eight queens problem](https://en.wikipedia.org/wiki/Eight_queens_puzzle) with backtracking
