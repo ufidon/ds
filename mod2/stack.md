@@ -467,6 +467,90 @@ int main()
 }
 ```
 
+
+Parentheses Matching Algorithm
+---
+- checks the `well-formedness` of expressions containing various types of brackets such as `{}`, `()`, and `[]`. 
+- ensures that `each opening bracket has a corresponding closing bracket` in the `correct order`.
+- Steps:
+  1. **Initialize** a stack to keep track of opening brackets.
+  2. **Traverse** the expression string character by character.
+  3. **For each character**:
+     - If it's an opening bracket, **push** it onto the stack.
+     - If it's a closing bracket, **check** the stack:
+       - If the stack is empty or the top doesn't match the corresponding opening bracket, the expression is **not balanced**.
+       - If it matches, **pop** the top of the stack.
+  4. After traversing the entire string, if the stack is **empty**, the expression is **balanced**; otherwise, it is **not balanced**.
+
+- Implementation
+
+```c++
+#include <iostream>
+#include <stack>
+#include <string>
+
+bool areBracketsBalanced(const std::string &expr)
+{
+  std::stack<char> s;
+  char x;
+
+  // Traversing the expression
+  for (int i = 0; i < expr.length(); i++)
+  {
+    if (expr[i] == '(' || expr[i] == '[' || expr[i] == '{')
+    {
+      // Push the element in the stack
+      s.push(expr[i]);
+      continue;
+    }
+
+    // If current character is not opening bracket, then it must be closing. So stack cannot be empty at this point.
+    if (s.empty())
+      return false;
+
+    switch (expr[i])
+    {
+    case ')':
+      x = s.top();
+      s.pop();
+      if (x == '{' || x == '[')
+        return false;
+      break;
+
+    case '}':
+      x = s.top();
+      s.pop();
+      if (x == '(' || x == '[')
+        return false;
+      break;
+
+    case ']':
+      x = s.top();
+      s.pop();
+      if (x == '(' || x == '{')
+        return false;
+      break;
+    }
+  }
+
+  // Check empty stack
+  return (s.empty());
+}
+
+int main()
+{
+  std::string expr = "{()}[]";
+
+  if (areBracketsBalanced(expr))
+    std::cout << "Balanced\n";
+  else
+    std::cout << "Not Balanced\n";
+
+  return 0;
+}
+```
+
+
 Arithmetic expression notations and evaluation
 ---
 
@@ -676,6 +760,7 @@ int main()
   return 0;
 }
 ```
+
 
 # References
 - [ROPgadget Tool](https://github.com/JonathanSalwan/ROPgadget)

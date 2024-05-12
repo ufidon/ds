@@ -900,6 +900,69 @@ int main()
 }
 ```
 
+Reverse a singly linked list
+---
+```c++
+#include <iostream>
+
+// Define the structure for the linked list node
+struct Node
+{
+  int data;
+  Node *next;
+
+  Node(int val) : data(val), next(nullptr) {}
+};
+
+// Function to reverse the linked list
+Node *reverseLinkedList(Node *head)
+{
+  Node *prev = nullptr;
+  Node *current = head;
+  Node *next = nullptr;
+
+  while (current != nullptr)
+  {
+    next = current->next; // Save next
+    current->next = prev; // Reverse current node's pointer
+    prev = current;       // Move pointers one position ahead
+    current = next;
+  }
+  return prev; // prev is the new head of the reversed list
+}
+
+// Function to print the linked list
+void printList(Node *node)
+{
+  while (node != nullptr)
+  {
+    std::cout << node->data << " ";
+    node = node->next;
+  }
+  std::cout << std::endl;
+}
+
+// Example usage
+int main()
+{
+  Node *head = new Node(1);
+  head->next = new Node(2);
+  head->next->next = new Node(3);
+  head->next->next->next = new Node(4);
+
+  std::cout << "Original Linked List: ";
+  printList(head);
+
+  head = reverseLinkedList(head);
+
+  std::cout << "Reversed Linked List: ";
+  printList(head);
+
+  return 0;
+}
+```
+
+
 C++ STL [list](https://en.cppreference.com/w/cpp/header/list)
 ---
 <table border="1">

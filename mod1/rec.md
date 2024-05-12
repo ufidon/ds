@@ -278,6 +278,92 @@ void towerOfHanoi(int disks, char source, char auxiliary, char destination) {
 }
 ```
 
+Permutation and Combination Algorithms
+---
+- A **permutation** is an arrangement of all or part of a set of objects, with regard to the order of the arrangement. 
+  - For example, the permutations of the set `{A, B, C}` when selecting 2 at a time are `AB`, `BA`, `AC`, `CA`, `BC`, and `CB`.
+- Algorithm steps for permutations:
+  1. **Choose** the first element for the permutation.
+  2. **Recurse** with the remaining elements.
+  3. **Swap** the elements back to their original position (backtrack).
+  4. **Repeat** the process for each element in the set.
+- Implementation
+  ```c++
+  #include <iostream>
+  #include <algorithm>
+
+  void permute(std::string str, int l, int r)
+  {
+    if (l == r)
+    {
+      std::cout << str << std::endl;
+    }
+    else
+    {
+      for (int i = l; i <= r; i++)
+      {
+        std::swap(str[l], str[i]);
+        permute(str, l + 1, r);
+        std::swap(str[l], str[i]); // backtrack
+      }
+    }
+  }
+
+  int main()
+  {
+    std::string str = "ABCD";
+    permute(str, 0, str.size() - 1);
+    return 0;
+  }
+  ```
+---
+
+- A **combination** is a selection of all or part of a set of objects, without regard to the order of the selection. 
+  - For example, the combinations of the set `{A, B, C}` when selecting 2 at a time are `AB`, `AC`, and `BC`.
+- Algorithm steps for combinations:
+  1. **Select** the current element for the combination.
+  2. **Recurse** with the remaining elements and reduce the selection count.
+  3. **Exclude** the current element and recurse with the remaining elements.
+  4. **Repeat** the process until the selection count is met.
+- Implementation
+  ```c++
+  #include <iostream>
+  #include <vector>
+
+  void combine(const std::string &str, std::string out, int i, int n, int k)
+  {
+    // current combination is ready to be printed
+    if (k == 0)
+    {
+      std::cout << out << std::endl;
+      return;
+    }
+
+    // return if no more elements are there to put in data
+    if (i >= n)
+    {
+      return;
+    }
+
+    // current is included, put next at next location
+    combine(str, out + str[i], i + 1, n, k - 1);
+
+    // current is excluded, replace it with next
+    combine(str, out, i + 1, n, k);
+  }
+
+  int main()
+  {
+    std::string str = "ABCD";
+    int k = 2; // change this value for different combinations
+    combine(str, "", 0, str.size(), k);
+    return 0;
+  }
+  ```
+
+
+
+
 Greatest Common Divisor (GCD)
 ---
 - examples
