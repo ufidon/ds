@@ -676,3 +676,6 @@ int main()
   return 0;
 }
 ```
+
+# References
+- [ROPgadget Tool](https://github.com/JonathanSalwan/ROPgadget)
