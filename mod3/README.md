@@ -47,11 +47,11 @@ Asymptotic analysis
 - describes the behavior of a function near its limits
   - how a function behaves as its input value becomes very large
 - e.g.
-  - Stirling’s Formula: $`n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n`$
-    - $`n!∈Θ(\sqrt{n} \left(\frac{n}{e}\right)^n)`$
-  - Harmonic Numbers: $H_n = \sum_{k=1}^n \frac{1}{k} ≈ \ln n + γ$
+  - Stirling’s Formula: $\displaystyle n! \approx \sqrt{2 \pi n} \left(\frac{n}{e}\right)^n$
+    - $\displaystyle n!∈Θ(\sqrt{n} \left(\frac{n}{e}\right)^n)$
+  - Harmonic Numbers: $\displaystyle H_n = \sum_{k=1}^n \frac{1}{k} ≈ \ln n + γ$
     - γ is Euler’s constant
-    - $`H_n∈Θ(\ln n)`$
+    - $H_n∈Θ(\ln n)$
 
 
 Big ${Θ, O, Ω}$
