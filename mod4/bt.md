@@ -3,6 +3,7 @@
 💡 Intuition
 ---
 ![tree](./images/tree.png)
+<img src="./images/tree.svg" width="400" />
 
 
 Terms about trees
@@ -133,7 +134,7 @@ Binary Trees vs. Binary Search Trees
 ---
 | Feature | [Binary Tree]((https://en.wikipedia.org/wiki/Binary_tree)) | [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) |
 |---------|-------------|--------------------------|
-| **Illustration** | ![bt](./images/bt.png) | ![bst](./images/bst.png)  |
+| **Illustration** | ![bt](./images/bt.png) <img src="./images/bt.svg" width="400" /> | ![bst](./images/bst.png)  |
 | **Definition** | A tree data structure where each node can have `at most two children` nodes. | A binary tree in which for each node, all elements in its `left subtree` are `less` than the node, and all elements in its `right subtree` are `greater than` the node. |
 | **Node Insertion** | Nodes are inserted without any specific order. | Nodes are inserted according to their values, maintaining the BST property. |
 | **Node Lookup/Search** | No specific order; full tree traversal may be needed to find a node. | Efficient lookup using the binary search property, reducing the search space by half at each step. |
