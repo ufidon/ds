@@ -2,7 +2,7 @@
 
 💡 Intuition
 ---
-![tree](https://upload.wikimedia.org/wikipedia/commons/5/5f/Tree_%28computer_science%29.svg)
+![tree](./images/tree.svg)
 
 
 Terms about trees
@@ -133,7 +133,7 @@ Binary Trees vs. Binary Search Trees
 ---
 | Feature | [Binary Tree]((https://en.wikipedia.org/wiki/Binary_tree)) | [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) |
 |---------|-------------|--------------------------|
-| **Illustration** | ![bt](https://upload.wikimedia.org/wikipedia/commons/5/5e/Binary_tree_v2.svg) | ![bst](https://upload.wikimedia.org/wikipedia/commons/d/da/Binary_search_tree.svg)  |
+| **Illustration** | ![bt](./images/bt.svg) | ![bst](./images/bst.svg)  |
 | **Definition** | A tree data structure where each node can have `at most two children` nodes. | A binary tree in which for each node, all elements in its `left subtree` are `less` than the node, and all elements in its `right subtree` are `greater than` the node. |
 | **Node Insertion** | Nodes are inserted without any specific order. | Nodes are inserted according to their values, maintaining the BST property. |
 | **Node Lookup/Search** | No specific order; full tree traversal may be needed to find a node. | Efficient lookup using the binary search property, reducing the search space by half at each step. |
@@ -146,7 +146,7 @@ Full Binary Tree vs. Complete Binary Tree
 ---
 | Feature  | Full Binary Tree   | Complete Binary Tree   |
 |-----|------|-------|
-| **Illustration** | ![fbt](https://upload.wikimedia.org/wikipedia/commons/b/b0/Full_binary.svg) | ![cbt](https://upload.wikimedia.org/wikipedia/commons/d/d9/Complete_binary2.svg) |
+| **Illustration** | ![fbt](./images/fbt.svg) | ![cbt](./images/cbt.svg) |
 | **Definition** | A binary tree where every node has either `0 or 2 children`. | A binary tree in which all levels are `completely filled except` possibly `the last`, which is filled `from left to right`. |
 | **Node Properties** | Each node has exactly two children or none.  | Each level, except the last, is completely filled. Nodes in the last level are as far left as possible. |
 | **Shape**  | Can be skewed if nodes only have one child direction, but still requires each node to have two or no children. | Tends to be more balanced as it fills from left to right.  |
