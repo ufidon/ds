@@ -146,6 +146,8 @@ Binary Trees vs. Binary Search Trees
 
 Full Binary Tree vs. Complete Binary Tree
 ---
+<p><img src="./images/fbt.svg" width="400" hspace="10"/> <img src="./images/cbt.svg" width="400" hspace="10"/> </p>
+
 | Feature  | Full Binary Tree   | Complete Binary Tree   |
 |-----|------|-------|
 | **Illustration** | <img src="./images/fbt.svg" width="400" /> | <img src="./images/cbt.svg" width="400" /> |
