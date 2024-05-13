@@ -131,6 +131,8 @@ Terms about trees
 
 Binary Trees vs. Binary Search Trees
 ---
+<p><img src="./images/bt.svg" width="400" hspace="10"/> <img src="./images/bst.svg" width="400" hspace="10"/> </p>
+
 | Feature | [Binary Tree]((https://en.wikipedia.org/wiki/Binary_tree)) | [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) |
 |---------|-------------|--------------------------|
 | **Illustration** | <img src="./images/bt.svg" width="400" /> | <img src="./images/bst.svg" width="400" />  |
