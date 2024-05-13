@@ -107,12 +107,15 @@ int main()
 Practice 📝
 ---
 - run the code above
-  - show [call stacks](https://pythontutor.com/) of the three recursive functions
-  - show call stacks on paper
+- 💡 animate
+  - [factorial](https://www.cs.usfca.edu/~galles/visualization/RecFact.html)
+  - [Fibonacci](https://web.eecs.utk.edu/~czheng4/viz/animations/recursion/fibonacci/fibonacci.html)
+- show [call stacks](https://pythontutor.com/) of the three recursive functions
 - write recursive functions
   - print a message $n$ times
   - determine whether a string is a palindrome
   - [reference implementation](./demos/pp.cpp)
+- [reverse a string](https://www.cs.usfca.edu/~galles/visualization/RecReverse.html)
 
 
 Recursive Helper functions
@@ -141,6 +144,7 @@ bool isPalindrome(const std::string& str) {
 
 Recursive Selection Sort
 ---
+- 💡 Intuition: [selection sort animation](https://liveexample.pearsoncmg.com/dsanimation13ejava/SelectionSorteBook.html)
 - Find the smallest number in the list and swaps it with the first number
 - Ignore the first number and sort the remaining smaller list recursively
 
@@ -184,6 +188,7 @@ void selectionSort(std::vector<int> &arr)
 
 Recursive Binary Search
 ---
+- 💡 Intuition: [binary search animation](https://liveexample.pearsoncmg.com/dsanimation13ejava/BinarySearcheBook.html)
 - Case 1: If the key is equal to the middle element, the search ends with a match
 - Case 2: If the key is less than the middle element, recursively search the key in the first half of the array
 - Case 3: If the key is greater than the middle element, recursively search the key in the second half of the array
@@ -250,8 +255,9 @@ uintmax_t directorySize(const fs::path& path) {
 
 [Tower of Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi)
 ---
-- [normal case](https://yongdanielliang.github.io/animation/web/TowerOfHanoi.html)
-- [extended case](https://towersofhanoi.info/Animate.aspx)
+- 💡 Intuition: animate tower of Hanoi
+  - [normal case](https://yongdanielliang.github.io/animation/web/TowerOfHanoi.html)
+  - [extended case](https://towersofhanoi.info/Animate.aspx)
 - There are n disks labeled 1, 2, 3, . . ., n, and three towers labeled A, B, and C
 - No disk can be on top of a smaller disk at any time
 - All the disks are initially placed on tower A
@@ -446,13 +452,13 @@ Sierpinski Triangle Solution
 
 Recursion vs. Iteration
 ---
-- Recursion is essentially repetition without a loop
+- Recursion is `essentially repetition without a loop`
 - Recursion bears substantial overhead
   - the system must assign space for all of the recursive function’s local variables and parameters its called each time
   - consume considerable memory and require extra time to manage the additional space
-- Recursion is good for solving inherently recursive problems 
+- Recursion is good for solving `inherently recursive` problems 
 - `tail recursion` has no pending operations to be performed on return from a recursive call
-  - converted into iteration automatically by the compiler
+  - can be converted into iteration automatically by the compiler
 
 ```c++
 // Helper function for factorial using tail recursion

@@ -10,7 +10,7 @@
   <tbody>
     <tr>
       <td>Definition</td>
-      <td>A data structure similar to a regular queue but each element has an associated priority.</td>
+      <td>A data structure similar to a regular queue but <span style="color:green">each element has an associated priority</span>.</td>
     </tr>
     <tr>
       <td>Implementation</td>
@@ -18,7 +18,7 @@
     </tr>
     <tr>
       <td>Operations</td>
-      <td>Insert (enqueue an element with a priority), DeleteMax/DeleteMin (dequeue the element with the highest/lowest priority), Peek (get the element with the highest/lowest priority without removing it).</td>
+      <td>▶️Insert: enqueue an element with a priority<br>▶️DeleteMax/DeleteMin: dequeue the element with the highest/lowest priority<br>▶️Peek: get the element with the highest/lowest priority without removing it</td>
     </tr>
     <tr>
       <td>Features</td>

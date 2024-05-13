@@ -1,11 +1,11 @@
 # Nonlinear data structures
-- Binary Trees
+- [Binary Trees](./bt.md)
   - Binary Search Trees
-- Balanced BSTs (AVL Trees)
+- [Balanced BSTs (AVL Trees)](./avl.md)
   - Heaps
   - Priority Queues
-- Tries
-- Graphs
+- [Tries](./tries.md)
+- [Graphs](./graphs.md)
   - BFS, DFS
   - MST
   - Graph coloring

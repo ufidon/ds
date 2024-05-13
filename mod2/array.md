@@ -112,7 +112,7 @@ Dynamic array
 
 💡 Intuition
 ---
-- [animation](https://liveexample.pearsoncmg.com/dsanimation13ejava/ArrayListeBook.html)
+- [animation](https://csvistool.com/ArrayList)
 
 
 🍎 Example implementation

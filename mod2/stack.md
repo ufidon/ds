@@ -10,7 +10,7 @@
   <tbody>
     <tr>
       <td>Definition</td>
-      <td>A linear data structure that follows the Last In, First Out (LIFO) principle.</td>
+      <td>A linear data structure that follows the <span style="color:blue">Last In, First Out (LIFO)</span> principle.</td>
     </tr>
     <tr>
       <td>Implementation</td>
@@ -18,11 +18,11 @@
     </tr>
     <tr>
       <td>Operations</td>
-      <td>Push (insert an element onto the stack), Pop (remove the top element from the stack), Peek (get the top element without removing it), isEmpty (check if the stack is empty).</td>
+      <td> ▶️Push: insert an element onto the stack<br>▶️Pop: remove the top element from the stack<br>▶️Peek: get the top element without removing it<br>▶️isEmpty: check if the stack is empty.</td>
     </tr>
     <tr>
       <td>Complexity</td>
-      <td>Efficient insertion and deletion at one end (the top), Constant-time complexity O(1) for push, pop, and peek operations, Space efficiency.</td>
+      <td>Constant-time complexity O(1) for push, pop, and peek operations, Space efficiency.</td>
     </tr>
     <tr>
       <td>Applications</td>
@@ -36,15 +36,17 @@
 ---
 ![stack](https://upload.wikimedia.org/wikipedia/commons/e/e4/Lifo_stack.svg)
 
-- [Top is top](https://liveexample.pearsoncmg.com/liang/animation/web/Stack.html)
-- [Top is right - array implementation](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
-- [Top is left - linked list implementation](https://www.cs.usfca.edu/~galles/visualization/StackLL.html)
-  - [Detailed view](https://web.eecs.utk.edu/~czheng4/viz/animations/linked_data_structures/stack/stack.html)
+- Animation
+  - [Top is top](https://liveexample.pearsoncmg.com/liang/animation/web/Stack.html)
+  - [Top is right - array implementation](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
+  - [Top is left - linked list implementation](https://www.cs.usfca.edu/~galles/visualization/StackLL.html)
+    - [Detailed view](https://web.eecs.utk.edu/~czheng4/viz/animations/linked_data_structures/stack/stack.html)
 
 
 ## Implementation
 🍎 Example: by fixed-size array
 ---
+- 💡 [Intuition by animation](https://csvistool.com/StackArray)
 ```c++
 #include <iostream>
 
@@ -255,6 +257,8 @@ int main()
 
 🍎 Example: by linked list
 ---
+- 💡 [Intuition by animation](https://csvistool.com/StackLL)
+
 ```c++
 #include <iostream>
 

@@ -52,15 +52,18 @@
 💡 Intuition
 ---
 ![queue](https://upload.wikimedia.org/wikipedia/commons/5/52/Data_Queue.svg)
-- [Array implementation](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
-- [Linked list implementation](https://www.cs.usfca.edu/~galles/visualization/QueueLL.html)
-  - [Detailed view](https://web.eecs.utk.edu/~czheng4/viz/animations/linked_data_structures/queue/queue.html)
+
+- Animation
+  - [Array implementation](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
+  - [Linked list implementation](https://www.cs.usfca.edu/~galles/visualization/QueueLL.html)
+    - [Detailed view](https://web.eecs.utk.edu/~czheng4/viz/animations/linked_data_structures/queue/queue.html)
 
 
 ## Queue implementation
 🍎 Example: array implementation
 ---
 - Fixed-size queue with array implementation
+- 💡 [Intuition by animation](https://csvistool.com/QueueArray)
 
 ```c++
 #include <iostream>
@@ -296,6 +299,7 @@ int main()
 
 🍎 Example: linked list implementation
 ---
+- 💡 [Intuition by animation](https://csvistool.com/QueueLL)
 ```c++
 #include <iostream>
 #include <stdexcept>
@@ -407,6 +411,7 @@ int main()
 🍎 Example
 ---
 - implemented with array
+- 💡 [intuition by animation](https://csvistool.com/DequeArray)
 
 ```c++
 #include <iostream>
@@ -555,6 +560,7 @@ int main()
 
 ---
 - implemented with doubly-linked list
+- 💡 [intuition by animation](https://csvistool.com/DequeLL)
 
 ```c++
 #include <iostream>

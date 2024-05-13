@@ -2,7 +2,7 @@
 - Time and space complexity
   - Best, average and worst case
 - Asymptotic analysis
-  - Big ${Θ, O, Ω}$ notation
+  - Big ${Θ, O, Ω}$ notations
 
 
 Algorithm executing Time 
@@ -38,7 +38,10 @@ Growth rate of cost vs. input size
   - `dropping the non-dominant terms`: $f(n)=9n^2 + 99n + 999\log n + 9999 ∈ Θ(9n^2)$
   - it can be simplified further by `dropping the constant coefficient`: $Θ(9n^2) ∈ Θ(n^2)$
   - ∴ $f(n)∈Θ(n^2)$
-- `Big theta Θ` describes that $f(n)$ is `proportional` to $n^2$ when n is large enough
+  - ⚠️ `∈` is used here because $Θ(n^2)$ denotes `the set of all functions` asymptotically proportional to $n^2$ 
+- $f(n)∈Θ(n^2)$ describes that $f(n)$ is `proportional` to $n^2$ when n is large enough
+  - i.e $\displaystyle \lim_{n→∞}\dfrac{f(n)}{n^2}=c$ 
+    - $c$ is a constant
 - A constant function $f(n)=c$ is always proportional to 1 so $f(n)∈Θ(c)∈Θ(1)$
 
 
@@ -57,60 +60,18 @@ Asymptotic analysis
 Big ${Θ, O, Ω}$
 ---
 ![asyms](./images/asyms.png)
-<table>
-  <thead>
-    <tr>
-      <th>Notation</th>
-      <th>Definition</th>
-      <th>Representation</th>
-      <th>Properties</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Big Theta (Θ)</td>
-      <td>Describes the tight bound or average-case scenario of an algorithm's time complexity.</td>
-      <td>Θ(f(n)) represents a proportional bound on the growth rate of the function f(n) as n approaches infinity.</td>
-      <td>
-        <ul>
-          <li>Defines both the maximum and minimum growth rates of a function.</li>
-          <li>Formally, f(n) is Θ(g(n)) if there exist constants c1, c2, and n0 such that c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0.</li>
-          <li>Commonly used to analyze the average-case performance of algorithms.</li>
-        </ul>
-      </td>
-    </tr>  
-    <tr>
-      <td>Big O (O)</td>
-      <td>Describes the upper bound or worst-case scenario of an algorithm's time complexity.</td>
-      <td>O(f(n)) represents an upper bound on the growth rate of the function f(n) as n approaches infinity.</td>
-      <td>
-        <ul>
-          <li>Defines the maximum growth rate of a function.</li>
-          <li>Formally, f(n) is O(g(n)) if there exist constants c and n0 such that f(n) ≤ c * g(n) for all n ≥ n0.</li>
-          <li>Commonly used to analyze the worst-case performance of algorithms.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Big Omega (Ω)</td>
-      <td>Describes the lower bound or best-case scenario of an algorithm's time complexity.</td>
-      <td>Ω(f(n)) represents a lower bound on the growth rate of the function f(n) as n approaches infinity.</td>
-      <td>
-        <ul>
-          <li>Defines the minimum growth rate of a function.</li>
-          <li>Formally, f(n) is Ω(g(n)) if there exist constants c and n0 such that f(n) ≥ c * g(n) for all n ≥ n0.</li>
-          <li>Commonly used to analyze the best-case performance of algorithms.</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+
+| Notation  | Short Notation | Representation   | Definition  |
+| ---------- | ------------ |  -------- | -------- |
+| Big O $O(f(n))$ | $f(n)⪝g(n)$   | an `asymptotical upper bound` on the `growth rate` of the function $f(n)$ as $n→∞$. |  $f(n)$ is $O(g(n))$ if there exist constants $c$ and $n_0$ such that $f(n) ≤ c g(n)$ for all $n ≥ n_0$. |
+| Big Omega $Ω(f(n))$ | $f(n)⪞g(n)$   | an `asymptotical lower bound` on the `growth rate` of the function $f(n)$ as $n→∞$. | $f(n)$ is $Ω(g(n))$ if there exist constants $c$ and $n_0$ such that $f(n) ≥ c g(n)$ for all $n ≥ n_0$. |
+| Big Theta $f(n)∈Θ(g(n))$ | $f(n)∼g(n)$   |  an `asymptotical proportional bound` on the `growth rate` of the function $f(n)$ as $n→∞$. | $f(n)$ is $Θ(g(n))$ if there exist constants $c_1, c_2$, and $n_0$ such that $c_1  g(n) ≤ f(n) ≤ c_2  g(n)$ for all $n ≥ n0$. |
 
 
 ☯️ Theorem 
 ---
 Let's  
-- denote $f(n)∈Θ(g(n))$ by $f(n)∼g(n)$, $f(n)$ is `proportional` to $g(n)$ asymptotically
+- denote $f(n)∈Θ(g(n))$ by $f(n)∼g(n)$, $f(n)$ is `asymptotically proportional` to $g(n)$
 - denote $f(n)∈O(g(n))$ by $f(n)⪝g(n)$, $g(n)$ is an `asymptotical upper bound` of $f(n)$ 
 - denote $f(n)∈Ω(g(n))$ by $f(n)⪞g(n)$, $g(n)$ is an `asymptotical lower bound` of $f(n)$ 
 
@@ -133,7 +94,8 @@ Best, Worst, and Average Cases
   - attempts to determine the `average` amount of time among `all possible inputs` of the same size
   - ideal, but difficult to perform
     - hard to determine the relative `probabilities and distributions` of various input instances for many problems
-
+- each case can described by any one of ${Θ, O}$, or $Ω$
+  - $Θ$ is preferred, unfortunately, $O$ is widely used
 
 <table>
   <thead>
@@ -389,9 +351,12 @@ Sequence
 - Time complexity: $T(n) = cK + cKn \approx  c'n = Θ(n)$ 
 
 
-Selection
+Searching
 ---
-- Linear search for e in list
+- 💡 Intuition by animation
+  - [linear search in arbitrary array](https://liveexample.pearsoncmg.com/dsanimation13ejava/LinearSearcheBook.html)
+  - [linear search in sorted array](https://www.cs.usfca.edu/~galles/visualization/Search.html)
+- `Linear search` for e in list
   ```c++
   bool found = false;
   for(auto& o: list){
@@ -410,7 +375,10 @@ Selection
 - Time complexity: $T(n)=Θ(n)+Θ(n)=Θ(n)$
   - An algorithm with the  $Θ( n)$ time complexity is called a *linear algorithm*
 
-- Logarithm time: Binary search in an ordered array
+- Logarithm time: `Binary search` in an ordered array
+- 💡 Intuition by animation
+  - [binary search in short array](https://liveexample.pearsoncmg.com/dsanimation13ejava/BinarySearcheBook.html)
+  - [binary search](https://www.cs.usfca.edu/~galles/visualization/Search.html)
   ```c++
   int bsearch(int a[], int t, int left, int right){
     while(left < right){
@@ -429,6 +397,9 @@ Selection
 
 Selection sort
 ---
+- 💡 Intuition by animation
+  - [with pseudocode](https://csvistool.com/SelectionSort)
+  - [without pseudocode](https://liveexample.pearsoncmg.com/dsanimation13ejava/SelectionSorteBook.html)
 - Find the minimum from the unsorted part and append it to the sorted part
   ```c++
   for(i=1; i<=n-1; i++){
@@ -449,6 +420,9 @@ Selection sort
 
 Tower of Hanoi
 ---
+- 💡 Intuition by animation
+  - [normal case](https://yongdanielliang.github.io/animation/web/TowerOfHanoi.html)
+  - [extended case](https://towersofhanoi.info/Animate.aspx)
 - moves n disks from tower A to tower B via tower C recursively as follows:
   - Move the first n – 1 disks from A to C via B
   - Move disk n from A to B
@@ -478,12 +452,26 @@ Common Recurrence Relations
 | $T(n)=2T(n-1)+Θ(1)$ | $T(n)=Θ(n^2)$ | Tower of Hanoi |
 | $T(n)=T(n-1) + T(n-2) +Θ(1)$ | $T(n)=Θ(n^2)$ | Recursive Fibonacci algorithm |
 
-- Order of common growth functions
-  - a ≺ b means b dominates a so a in Θ(a+b) can be omitted
+Order of growth of common functions
+---
+- $f(n) ≺ g(n)$ and $g(n)≻f(n)$ means $g(n)$ `dominates` $f(n)$ so $c_1f(n)$ in $c_1f(n) + c_2g(n)$ can be omitted in asymptotical analysis
+  - $c_1,c_2$ are non-zero constants
+- $\displaystyle f(n)≺g(n)$ and $\displaystyle g(n)≻f(n)$  represents $\displaystyle\lim_{n→∞}\dfrac{f(n)}{g(n)}=0$
 
-$$Θ(1) ≺ Θ(\log n) ≺ Θ(\sqrt{n}) ≺ Θ(n) ≺ Θ(n\log n) ≺ Θ(n^2) ≺ Θ(n^3) ≺ Θ(2^n) ≺ Θ(3^n) ≺ Θ(n!)$$
+
+$$1 ≺ \log n ≺ \sqrt{n} ≺ n ≺ n\log n ≺ n^2 ≺ n^3 ≺ 2^n ≺ 3^n ≺ n!$$
+
+$$n! \succ 3^n \succ 2^n \succ n^3 \succ n^2 \succ n\log n \succ n \succ \sqrt{n} \succ \log n \succ 1
+$$
 
 ![common functions](./images/stds.png)
+
+Relationship between order of growth and ${Θ, O, Ω}$
+---
+- $f(n)≺g(n) → f(n)⪝g(n)$ and $g(n)⪞f(n)$ but NOT $f(n)∼g(n)$
+  - the converse is NOT true, i.e. $f(n)⪝g(n)$ or $g(n)⪞f(n) ↛ f(n)≺g(n)$
+- $1 ⪝ \log n ⪝ \sqrt{n} ⪝ n ⪝ n\log n ⪝ n^2 ⪝ n^3 ⪝ 2^n ⪝ 3^n ⪝ n!$
+- $n! ⪞ 3^n ⪞ 2^n ⪞ n^3 ⪞ n^2 ⪞ n\log n ⪞ n ⪞ \sqrt{n} ⪞ \log n ⪞ 1$
 
 
 🏃 Practice
@@ -513,6 +501,7 @@ Proof:
 
 Recursive [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_sequence) algorithm
 ---
+- 💡 [animation](https://web.eecs.utk.edu/~czheng4/viz/animations/recursion/fibonacci/fibonacci.html)
 - $F_0=0, F_1=1, F_n=F_{n-1}+F_{n-2}$
 ```c++
 long fib(long n){
@@ -673,7 +662,7 @@ Find all prime numbers no larger than n
   }
   ```
   - Time complexity: ${\displaystyle Θ(\frac{n\sqrt{n}}{\log n})}$
-    - derive with ${\displaystyle \pi(n) \approx \frac{n}{\log n}}$
+    - derived by ${\displaystyle \pi(n) \approx \frac{n}{\log n}}$
     - where $\pi(n)$ denotes the number of prime numbers no larger than $n$ 
 - [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
   ```c++
@@ -717,8 +706,9 @@ Find all prime numbers no larger than n
 Practice 📝: solve the [Closest-pair problem](https://en.wikipedia.org/wiki/Closest_pair_of_points_problem) with divide-and-conquer
 ---
 - Given a set of points, find the two points that are nearest to each other
+  - 💡 [intuition by animation](https://liveexample.pearsoncmg.com/dsanimation13ejava/ClosestPaireBook.html)
 - brute force: computes the distances between all pairs of points and finds the one with the minimum distance
-  - Time complexity: ${\displaystyle T(n)={n \choose 2} = \frac{n(n-1)}{2} = Θ(\frac{n\sqrt{n}}{\log n})}$
+  - Time complexity: ${\displaystyle T(n)={n \choose 2} = \frac{n(n-1)}{2} = Θ(n^2)}$
 - divide-and-conquer
   - Step 1: sort the points in increasing order of x-coordinates then y-coordinates into a sorted list $S$ of points
     - Time complexity with mergesort: ${\displaystyle T(n) = Θ(n\log n)}$
@@ -732,6 +722,7 @@ Practice 📝: solve the [Closest-pair problem](https://en.wikipedia.org/wiki/Cl
 Practice 📝: solve the [eight queens problem](https://en.wikipedia.org/wiki/Eight_queens_puzzle) with backtracking
 ---
 -  place a queen in each row on a chessboard such that no two queens can attack each other
+   -  💡 [intuition by animation](https://liveexample.pearsoncmg.com/dsanimation13ejava/EightQueenseBook.html)
    -  many solutions
 - algorithm 1: recursion
   - [source code](./demos/EightQueensRecursion.cpp)
@@ -744,9 +735,9 @@ Practice 📝: solve the [eight queens problem](https://en.wikipedia.org/wiki/Ei
 
 Practice 📝: Computational Geometry: the [convex hull problem](https://en.wikipedia.org/wiki/Convex_hull) with backtracking
 ---
-- Given a set of $n$ points, a convex hull of size $h$ is the smallest convex polygon that encloses all these
-points
+- Given a set of $n$ points, a convex hull of size $h$ is the smallest convex polygon that encloses all these points
   - every line connecting two vertices is inside the polygon
+  - 💡 [intuition by animation](https://liveexample.pearsoncmg.com/dsanimation13ejava/ConvexHulleBook.html)
 - [algorithms to be discussed](https://en.wikipedia.org/wiki/Convex_hull_algorithms)
   - Gift wrapping algorithm
     - [source code](./demos/ConvexHullbyGiftWrapping.cpp)
@@ -763,15 +754,18 @@ Practice 📝: the [string search problem](https://en.wikipedia.org/wiki/String-
     - contains(pattern) tests if a pattern is in the string
     - indexOf(pattern) returns the index of the first matching of the pattern in the string
 - algorithms to be discussed
-  -  brute force
-     -  [source code](./demos/StringMatch.cpp)
-     -  Time complexity: $Θ(nm)$
-  -  Boyer-Moore algorithm
-     -  [source code](./demos/StringMatchBoyerMoore.cpp)
-     -  Time complexity: $Θ(nm)$
-  -  Knuth-Morris-Pratt  algorithm
-     -  [source code](./demos/StringMatchKMP.cpp)
-     -  Time complexity: $Θ(n + m)$
+  - brute force
+    - 💡 [intuition by animation](https://csvistool.com/BruteForce)
+    - [source code](./demos/StringMatch.cpp)
+    - Time complexity: $Θ(nm)$
+  - Boyer-Moore algorithm
+    - 💡 [intuition by animation](https://csvistool.com/BoyerMoore)
+    - [source code](./demos/StringMatchBoyerMoore.cpp)
+    - Time complexity: $Θ(nm)$
+  - Knuth-Morris-Pratt  algorithm
+    - 💡 [intuition by animation](https://csvistool.com/KMP)
+    - [source code](./demos/StringMatchKMP.cpp)
+    - Time complexity: $Θ(n + m)$
 
 
 Objectives

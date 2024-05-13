@@ -209,7 +209,7 @@ Rule of Five
 ---
 manages resources `when explicit control is necessary`:
 - defines all the five member functions if any of them are `explicitly` defined: 
-  - destructor, copy/move constructors, copy/move assignment operators
+  - `destructor, copy/move constructors, copy/move assignment operators`
 - These functions `transfer and manage ownership of resource` such as 
   - dynamic memory, file handles, or other external resources
   - ensure resources are correctly managed and released throughout the `object's lifecycle`

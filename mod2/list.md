@@ -40,11 +40,11 @@
 
 💡 Intuition
 ---
-- [Singly Linked List animation](https://liveexample.pearsoncmg.com/liang/animation/web/LinkedList.html): 
+- [Singly Linked List animation](https://csvistool.com/LinkedList): 
   - ![sll](https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg) 
-- [Doubly Linked List animation](https://web.eecs.utk.edu/~czheng4/viz/animations/linked_data_structures/dlist/dlist.html): 
+- [Doubly Linked List animation](https://csvistool.com/DoublyLinkedList): 
   - ![dll](https://upload.wikimedia.org/wikipedia/commons/5/5e/Doubly-linked-list.svg)
-- Circularly linked list: 
+- [Circularly linked list animation](https://csvistool.com/CircularlyLinkedList) 
   - ![cll](https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg)
 
 

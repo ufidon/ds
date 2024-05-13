@@ -53,10 +53,10 @@ Online resources
 - _Wikipedia_
   - [List of data structures](https://en.wikipedia.org/wiki/List_of_data_structures)
   - [List of algorithms](https://en.wikipedia.org/wiki/List_of_algorithms)
-- [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
-  - [Data Structure Visualizations](https://cmps-people.ok.ubc.ca/ylucet/DS/Algorithms.html)
 - [CS 1332 Data Structures and Algorithms Visualization Tool](https://csvistool.com/)
-- [Learning Algorithms with Dynamic Animations](https://web.eecs.utk.edu/~czheng4/viz/)
+  - [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
+  - [Data Structure Visualizations](https://cmps-people.ok.ubc.ca/ylucet/DS/Algorithms.html)
+  - [Learning Algorithms with Dynamic Animations](https://web.eecs.utk.edu/~czheng4/viz/)
 - [Algorithms and Data Structures Animations for the Liang Java, C++, and Python Books](https://liveexample.pearsoncmg.com/liang/animation/animation.html)
 - [Online visual debugger](https://pythontutor.com/)
 - [boost c++ libraries](https://www.boost.org/)
