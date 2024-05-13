@@ -63,9 +63,9 @@ Big ${Θ, O, Ω}$
 
 | Notation  | Short Notation | Representation   | Definition  |
 | ---------- | ------------ |  -------- | -------- |
-| Big O $O(f(n))$ | $f(n)⪝g(n)$   | an `asymptotical upper bound` on the `growth rate` of the function $f(n)$ as $n→∞$. |  $f(n)$ is $O(g(n))$ if there exist constants $c$ and $n_0$ such that $f(n) ≤ c g(n)$ for all $n ≥ n_0$. |
-| Big Omega $Ω(f(n))$ | $f(n)⪞g(n)$   | an `asymptotical lower bound` on the `growth rate` of the function $f(n)$ as $n→∞$. | $f(n)$ is $Ω(g(n))$ if there exist constants $c$ and $n_0$ such that $f(n) ≥ c g(n)$ for all $n ≥ n_0$. |
-| Big Theta $f(n)∈Θ(g(n))$ | $f(n)∼g(n)$   |  an `asymptotical proportional bound` on the `growth rate` of the function $f(n)$ as $n→∞$. | $f(n)$ is $Θ(g(n))$ if there exist constants $c_1, c_2$, and $n_0$ such that $c_1  g(n) ≤ f(n) ≤ c_2  g(n)$ for all $n ≥ n0$. |
+| Big O:<br> $f(n)∈O(g(n))$ | $f(n)⪝g(n)$   | an `asymptotical upper bound` on the `growth rate` of the function $f(n)$ as $n→∞$. |  $f(n)$ is $O(g(n))$ if there exist constants $c$ and $n_0$ such that $f(n) ≤ c g(n)$ for all $n ≥ n_0$. |
+| Big Omega:<br> $f(n)∈Ω(g(n))$ | $f(n)⪞g(n)$   | an `asymptotical lower bound` on the `growth rate` of the function $f(n)$ as $n→∞$. | $f(n)$ is $Ω(g(n))$ if there exist constants $c$ and $n_0$ such that $f(n) ≥ c g(n)$ for all $n ≥ n_0$. |
+| Big Theta:<br> $f(n)∈Θ(g(n))$ | $f(n)∼g(n)$   |  an `asymptotical proportional bound` on the `growth rate` of the function $f(n)$ as $n→∞$. | $f(n)$ is $Θ(g(n))$ if there exist constants $c_1, c_2$, and $n_0$ such that $c_1  g(n) ≤ f(n) ≤ c_2  g(n)$ for all $n ≥ n0$. |
 
 
 ☯️ Theorem 
