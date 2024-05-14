@@ -150,7 +150,7 @@ Full Binary Tree vs. Complete Binary Tree
 
 | Feature  | Full Binary Tree   | Complete Binary Tree   |
 |-----|------|-------|
-| **Illustration** | <img src="./images/fbt.svg" width="400" /> | <img src="./images/cbt.svg" width="400" /> |
+| **Illustration** | <`img src="./images/fbt.svg" width="400"`/> | <img src="./images/cbt.svg" width="400" /> |
 | **Definition** | A binary tree where every node has either `0 or 2 children`. | A binary tree in which all levels are `completely filled except` possibly `the last`, which is filled `from left to right`. |
 | **Node Properties** | Each node has exactly two children or none.  | Each level, except the last, is completely filled. Nodes in the last level are as far left as possible. |
 | **Shape**  | Can be skewed if nodes only have one child direction, but still requires each node to have two or no children. | Tends to be more balanced as it fills from left to right.  |
