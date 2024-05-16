@@ -167,6 +167,12 @@ D   E   F
 * **Post-order traversal:** D E B F C A
 * **Level-order traversal:** A B C D E F
 
+
+💡 Intuition
+---
+- [BST simulation](https://csvistool.com/BST)
+
+
 🏃 Recursive implementation of IPP
 ---
 - Pseudo code
@@ -502,9 +508,11 @@ int main()
 
 💡 Intuition
 ---
-- [BST slow simulation](https://liveexample.pearsoncmg.com/dsanimation13ejava/BSTeBook.html)
-- [BST fast simulation](https://cmps-people.ok.ubc.ca/ylucet/DS/BST.html)
-- [BST speed-adjustable simulation](https://web.eecs.utk.edu/~czheng4/viz/animations/tree_structures/binary_search_tree/bst.html)
+- [BST simulation](https://csvistool.com/BST)
+- other simulators
+  - [fast simulation](https://www.cs.usfca.edu/~galles/visualization/BST.html)
+  - [slow simulation](https://liveexample.pearsoncmg.com/dsanimation13ejava/BSTeBook.html)
+  - [adjustable simulation](https://web.eecs.utk.edu/~czheng4/viz/animations/tree_structures/binary_search_tree/bst.html)
 
 
 The insert, delete, and search operations in a BST
