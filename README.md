@@ -27,6 +27,7 @@ Textbooks
 - [Introduction to Java/Python/C++ Programming and Data Structures](https://yongdanielliang.github.io/book.html)
   - [Introduction to Programming with C++, 3e](https://liveexample.pearsoncmg.com/liang/cpp3e/toc.html)
 - [Open Data Structures](https://opendatastructures.org/)
+- [Applied Discrete Structures](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Applied_Discrete_Structures_(Doerr_and_Levasseur))
 
 Classes
 ---

@@ -1,8 +1,8 @@
-# Trees
+# [Trees](https://en.wikipedia.org/wiki/Tree_(data_structure))
 
 💡 Intuition
 ---
-<img src="./images/tree.svg" width="400" />
+<img src="./images/tree.svg">
 
 
 Terms about trees
@@ -23,6 +23,11 @@ Terms about trees
     <td>A node with no children.</td>
     <td>In a file system, a file without subdirectories.</td>
   </tr>
+  <tr>
+    <td>Non-leaf</td>
+    <td>A node with at least one children.</td>
+    <td>In a file system, a file without subdirectories.</td>
+  </tr>  
   <tr>
     <td>Edge</td>
     <td>The connection between one node and another.</td>
@@ -121,7 +126,379 @@ Terms about trees
 </table>
 
 
-# Binary Trees (BTs) and Binary Search Trees (BSTs)
+
+
+
+# [Binary Trees (BTs)](https://en.wikipedia.org/wiki/Binary_tree)
+
+| Type | Definition | Properties | Remarks |
+|---|---|---|---|
+| Binary Tree | A tree data structure in which `each node can have at most two child nodes` | ▶️ Each node can have `at most two child nodes` (`left` child and `right` child) | ▶️ The `most basic` tree structure |
+| `Full` Binary Tree | A binary tree in which `every node has exactly zero or two child nodes` | ▶️ All non-leaf nodes have two child nodes  | ▶️ Often used to implement heap data structures |
+| `Complete` Binary Tree | A binary tree in which <br>▶️every level is `completely filled` except possibly the last level<br>▶️ the last level must be filled from left to right | ▶️ All levels except the last one should be completely filled <br>▶️ Leaf nodes in the last level should be as leftmost as possible |  ▶️ Often used in some searching algorithms |
+| `Perfect` Binary Tree | A binary tree that is both a `full` binary tree and a `complete` binary tree | ▶️ All non-leaf nodes have two child nodes <br>▶️ All leaf nodes are on the same level | ▶️ A special type of full binary tree |
+| `Balanced` Binary Tree | A binary tree in which `the height of the left subtree and the right subtree differ by at most 1` | ▶️ Left and right subtrees have approximately equal height |  ▶️ Search, insert, and delete operations are efficient $Θ(\log n)$ |
+| `Degenerate` Binary Tree | ▶️ A binary tree in which each node has `zero or one` child node<br>▶️ or a binary tree with `a large difference in height` between the left and right subtrees | ▶️  the worst case becomes a `linked list` <br>▶️ or has a very large difference in height between the left and right subtrees | ▶️ Search, insert, and delete operations are inefficient $Θ(n)$ |
+
+
+# [Binary tree traversal](https://en.wikipedia.org/wiki/Tree_traversal)
+
+| Traversal Method | Definition | Complexity | Data Structures | Applications |
+|---|---|---|---|---|
+| **In-order traversal** | Visits the left subtree, then the root node, and then the right subtree. | O(n) time, O(n) space | Stack | Printing a tree in sorted order, traversing an expression tree |
+| **Pre-order traversal** | Visits the root node, then the left subtree, and then the right subtree. | O(n) time, O(n) space | Stack | Copying a tree, creating a prefix expression |
+| **Post-order traversal** | Visits the left subtree, then the right subtree, and then the root node. | O(n) time, O(n) space | Stack | Destroying a tree, creating a postfix expression |
+| **Level-order traversal** | Visits all nodes at the same level from left to right, before moving to the next level. | O(n) time, O(n) space | Queue | Checking if a tree is balanced, printing nodes at each level |
+
+
+💡 Example
+---
+Traverse the binary tree below:
+
+```
+    A
+   / \
+  B   C
+ / \   \
+D   E   F
+```
+* **In-order traversal:** D B E A C F
+* **Pre-order traversal:** A B D E C F
+* **Post-order traversal:** D E B F C A
+* **Level-order traversal:** A B C D E F
+
+🏃 Recursive implementation of IPP
+---
+- Pseudo code
+
+```c++
+procedure inorder(node)
+    if node = null
+        return
+    inorder(node.left)
+    visit(node)
+    inorder(node.right)
+
+procedure preorder(node)
+    if node = null
+        return
+    visit(node)
+    preorder(node.left)
+    preorder(node.right)
+
+procedure postorder(node)
+    if node = null
+        return
+    postorder(node.left)
+    postorder(node.right)
+    visit(node)    
+```
+
+- Implementation in C++
+
+```c++
+#include <iostream>
+#include <queue>
+
+template <typename T>
+class Node
+{
+public:
+  T data;
+  Node<T> *left;
+  Node<T> *right;
+
+  Node(const T &value) : data(value), left(nullptr), right(nullptr) {}
+};
+
+template <typename T>
+class BinaryTree
+{
+public:
+  Node<T> *root;
+
+  BinaryTree() : root(nullptr) {}
+
+  // In-order traversal
+  void inOrder(Node<T> *tree)
+  {
+    if (tree == nullptr)
+    {
+      return;
+    }
+
+    inOrder(tree->left);
+    std::cout << tree->data << " ";
+    inOrder(tree->right);
+  }
+
+  // Pre-order traversal
+  void preOrder(Node<T> *tree)
+  {
+    if (tree == nullptr)
+    {
+      return;
+    }
+
+    std::cout << tree->data << " ";
+    preOrder(tree->left);
+    preOrder(tree->right);
+  }
+
+  // Post-order traversal
+  void postOrder(Node<T> *tree)
+  {
+    if (tree == nullptr)
+    {
+      return;
+    }
+
+    postOrder(tree->left);
+    postOrder(tree->right);
+    std::cout << tree->data << " ";
+  }
+
+  // Level-order traversal
+  void levelOrder(Node<T> *tree)
+  {
+    std::queue<Node<T> *> queue;
+    queue.push(tree);
+
+    while (!queue.empty())
+    {
+      Node<T> *current = queue.front();
+      queue.pop();
+
+      if (current != nullptr)
+      {
+        std::cout << current->data << " ";
+        queue.push(current->left);
+        queue.push(current->right);
+      }
+    }
+  }
+};
+
+int main()
+{
+  BinaryTree<char> tree;
+
+  tree.root = new Node<char>('A');
+  tree.root->left = new Node<char>('B');
+  tree.root->right = new Node<char>('C');
+  tree.root->left->left = new Node<char>('D');
+  tree.root->left->right = new Node<char>('E');
+  tree.root->right->right = new Node<char>('F');
+
+  std::cout << "In-order traversal: ";
+  tree.inOrder(tree.root);
+  std::cout << std::endl;
+
+  std::cout << "Pre-order traversal: ";
+  tree.preOrder(tree.root);
+  std::cout << std::endl;
+
+  std::cout << "Post-order traversal: ";
+  tree.postOrder(tree.root);
+  std::cout << std::endl;
+
+  std::cout << "Level-order traversal: ";
+  tree.levelOrder(tree.root);
+  std::cout << std::endl;
+
+  return 0;
+}
+```
+
+🏃 Stack-based implementation of IPP
+---
+- Pseudo code
+
+```c++
+procedure iterativeInorder(node)
+    stack ← empty stack
+    while not stack.isEmpty() or node ≠ null
+        if node ≠ null
+            stack.push(node)
+            node ← node.left
+        else
+            node ← stack.pop()
+            visit(node)
+            node ← node.right
+
+procedure iterativePreorder(node)
+    if node = null
+        return
+    stack ← empty stack
+    stack.push(node)
+    while not stack.isEmpty()
+        node ← stack.pop()
+        visit(node)
+        // right child is pushed first so that left is processed first
+        if node.right ≠ null
+            stack.push(node.right)
+        if node.left ≠ null
+            stack.push(node.left)
+
+procedure iterativePostorder(node)
+    stack ← empty stack
+    lastNodeVisited ← null
+    while not stack.isEmpty() or node ≠ null
+        if node ≠ null
+            stack.push(node)
+            node ← node.left
+        else
+            peekNode ← stack.peek()
+            // if right child exists and traversing node
+            // from left child, then move right
+            if peekNode.right ≠ null and lastNodeVisited ≠ peekNode.right
+                node ← peekNode.right
+            else
+                visit(peekNode)
+                lastNodeVisited ← stack.pop()                       
+```
+
+- Implementation in C++
+
+```c++
+#include <iostream>
+#include <stack>
+using namespace std;
+
+// Definition for a binary tree node.
+template <typename T>
+class Node
+{
+public:
+  T val;
+  Node *left;
+  Node *right;
+  Node(T x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+// Binary Tree class that encapsulates traversal methods
+template <typename T>
+class BinaryTree
+{
+public:
+  Node<T> *root;
+
+  BinaryTree() : root(nullptr) {}
+  // Function to visit a node (print its value here)
+  void visit(Node<T> *node)
+  {
+    cout << node->val << " ";
+  }
+
+  // Iterative Inorder Traversal
+  void iterativeInorder(Node<T> *root)
+  {
+    stack<Node<T> *> stack;
+    Node<T> *node = root;
+
+    while (!stack.empty() || node != nullptr)
+    {
+      if (node != nullptr)
+      {
+        stack.push(node);
+        node = node->left;
+      }
+      else
+      {
+        node = stack.top();
+        stack.pop();
+        visit(node);
+        node = node->right;
+      }
+    }
+  }
+
+  // Iterative Preorder Traversal
+  void iterativePreorder(Node<T> *root)
+  {
+    if (root == nullptr)
+      return;
+    stack<Node<T> *> stack;
+    stack.push(root);
+
+    while (!stack.empty())
+    {
+      Node<T> *node = stack.top();
+      stack.pop();
+      visit(node);
+
+      if (node->right != nullptr)
+        stack.push(node->right);
+      if (node->left != nullptr)
+        stack.push(node->left);
+    }
+  }
+
+  // Iterative Postorder Traversal
+  void iterativePostorder(Node<T> *root)
+  {
+    stack<Node<T> *> stack;
+    Node<T> *lastNodeVisited = nullptr;
+    Node<T> *node = root;
+
+    while (!stack.empty() || node != nullptr)
+    {
+      if (node != nullptr)
+      {
+        stack.push(node);
+        node = node->left;
+      }
+      else
+      {
+        Node<T> *peekNode = stack.top();
+        if (peekNode->right != nullptr && lastNodeVisited != peekNode->right)
+        {
+          node = peekNode->right;
+        }
+        else
+        {
+          visit(peekNode);
+          lastNodeVisited = stack.top();
+          stack.pop();
+        }
+      }
+    }
+  }
+};
+
+int main()
+{
+  BinaryTree<char> tree;
+
+  tree.root = new Node<char>('A');
+  tree.root->left = new Node<char>('B');
+  tree.root->right = new Node<char>('C');
+  tree.root->left->left = new Node<char>('D');
+  tree.root->left->right = new Node<char>('E');
+  tree.root->right->right = new Node<char>('F');
+
+  std::cout << "In-order traversal: ";
+  tree.iterativeInorder(tree.root);
+  std::cout << std::endl;
+
+  std::cout << "Pre-order traversal: ";
+  tree.iterativePreorder(tree.root);
+  std::cout << std::endl;
+
+  std::cout << "Post-order traversal: ";
+  tree.iterativePostorder(tree.root);
+  std::cout << std::endl;
+
+  return 0;
+}
+```
+
+# [Binary Search Trees (BSTs)](https://en.wikipedia.org/wiki/Binary_search_tree)
+- A binary tree in which for each node
+  - all elements in its `left subtree` are `less` than the node
+  - and all elements in its `right subtree` are `greater than` the node
+
+<img src="./images/bst.svg" width="400" hspace="10"/> 
 
 💡 Intuition
 ---
@@ -129,42 +506,15 @@ Terms about trees
 - [BST fast simulation](https://cmps-people.ok.ubc.ca/ylucet/DS/BST.html)
 - [BST speed-adjustable simulation](https://web.eecs.utk.edu/~czheng4/viz/animations/tree_structures/binary_search_tree/bst.html)
 
-Binary Trees vs. Binary Search Trees
----
-<p><img src="./images/bt.svg" width="400" hspace="10"/> <img src="./images/bst.svg" width="400" hspace="10"/> </p>
-
-| Feature | [Binary Tree]((https://en.wikipedia.org/wiki/Binary_tree)) | [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) |
-|---------|-------------|--------------------------|
-| **Illustration** | <img src="./images/bt.svg" width="400" /> | <img src="./images/bst.svg" width="400" />  |
-| **Definition** | A tree data structure where each node can have `at most two children` nodes. | A binary tree in which for each node, all elements in its `left subtree` are `less` than the node, and all elements in its `right subtree` are `greater than` the node. |
-| **Node Insertion** | Nodes are inserted without any specific order. | Nodes are inserted according to their values, maintaining the BST property. |
-| **Node Lookup/Search** | No specific order; full tree traversal may be needed to find a node. | Efficient lookup using the binary search property, reducing the search space by half at each step. |
-| **Time Complexity (average case)** | $O(n)$ for insertion, deletion, and search. | $O(h)$ for insertion, deletion, and search, where h is the height of the tree. |
-| **Space Complexity** | $O(n)$ as it only depends on the number of nodes in the tree. | $O(n)$ as it only depends on the number of nodes in the tree. |
-| **Application** | Used in various tree-related algorithms and data structures. | Ideal for applications where efficient search, insertion, and deletion are required, such as in databases and dictionaries. |
-
-
-Full Binary Tree vs. Complete Binary Tree
----
-<p><img src="./images/fbt.svg" width="400" hspace="10"/> <img src="./images/cbt.svg" width="400" hspace="10"/> </p>
-
-| Feature  | Full Binary Tree   | Complete Binary Tree   |
-|-----|------|-------|
-| **Illustration** | <`img src="./images/fbt.svg" width="400"`/> | <img src="./images/cbt.svg" width="400" /> |
-| **Definition** | A binary tree where every node has either `0 or 2 children`. | A binary tree in which all levels are `completely filled except` possibly `the last`, which is filled `from left to right`. |
-| **Node Properties** | Each node has exactly two children or none.  | Each level, except the last, is completely filled. Nodes in the last level are as far left as possible. |
-| **Shape**  | Can be skewed if nodes only have one child direction, but still requires each node to have two or no children. | Tends to be more balanced as it fills from left to right.  |
-| **Height**  | Height can vary. The minimum height is $\log(n+1)-1$.  | Height is minimized. The tree is as compact as possible.|
-| **Examples**  | A tree with nodes having 0 or 2 children, like expression trees. | A binary heap is a complete binary tree and used in heap sort. |
-
 
 The insert, delete, and search operations in a BST
 ---
 | Operation | Description | Time Complexity | Notes |
 |-----------|-------------|-----------------|-------|
+| **Search** | Looks for a node with a specific value. | Average: $O(\log n)$<br>Worst: $O(n)$ | Starts from the root and traverses left or right depending on whether the value is smaller or larger than the current node. |
 | **Insert** | Inserts a new node with a specific value. The new node is always inserted at a leaf. | Average: $O(\log n)$<br>Worst: $O(n)$ | The tree starts from the root and the new node is inserted on the left if it's smaller than the current node, or on the right if it's larger. |
 | **Delete** | Removes a node with a specific value. This can involve replacing the node with its `in-order successor or predecessor` if it has two children. | Average: $O(\log n)$<br>Worst: $O(n)$ | After deletion, the properties of the BST must be maintained. |
-| **Search** | Looks for a node with a specific value. | Average: $O(\log n)$<br>Worst: $O(n)$ | Starts from the root and traverses left or right depending on whether the value is smaller or larger than the current node. |
+
 
 
 🍎 Implementation
@@ -310,6 +660,19 @@ int main()
   return 0;
 }
 ```
+
+
+# Tree traversal
+| Criteria | Depth-First Traversal (DFT) | Breadth-First Traversal (BFT) |
+| --- | --- | --- |
+| **Traversal Strategy** | Explores as far as possible along each branch before backtracking. | Explores all the nodes at the present depth before moving to the next level. |
+| **Data Structure** | Uses a stack, which can be implemented using recursion or iteration. | Uses a queue to visit nodes in the order they were discovered. |
+| **Node Visit Order** | Visits nodes vertically down the tree paths before visiting sibling nodes. | Visits nodes horizontally across the tree levels. |
+| **Implementation** | Can be implemented recursively, making it more succinct and easier to understand. | Typically implemented iteratively, requiring an explicit data structure to hold all the nodes at the current level. |
+| **Space Complexity** | O(h), where h is the height of the tree. | O(w), where w is the maximum width of the tree. |
+| **Time Complexity** | O(n), where n is the number of nodes in the tree. | O(n), where n is the number of nodes in the tree. |
+| **Applications** | Useful for tasks that need to visit nodes in a path, like checking if a path exists between two nodes. | Useful for finding the shortest path or for level-order traversal. |
+
 
 # References
 - [Depth First Traversal: Inorder, Preorder and Postorder tree traversals - Animated guide](https://csanim.com/tutorials/inorder-preorder-and-postorder-tree-traversals-animated-guide)
