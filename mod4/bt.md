@@ -5,6 +5,16 @@
 <img src="./images/tree.svg">
 
 
+- A tree consists of `nodes` and `edges`
+- Unlike a natural tree, it is depicted `upside down` 
+  - the `root` at the `top`
+    - can have only child nodes but `no parent`
+  - the `leaves` (terminal nodes) at the `bottom`
+    - have no children
+    - or their children are `EMPTY structures`
+- The edges have arrows or not does not matter
+
+
 Terms about trees
 ---
 <table border="1">
@@ -142,6 +152,23 @@ Terms about trees
 
 
 # [Binary tree traversal](https://en.wikipedia.org/wiki/Tree_traversal)
+
+| Criteria | Depth-First Traversal (DFT) | Breadth-First Traversal (BFT) |
+| --- | --- | --- |
+| **Traversal Strategy** | Explores as far as possible along each branch before backtracking. | Explores all the nodes at the present depth before moving to the next level. |
+| **Data Structure** | Uses a stack, which can be implemented using recursion or iteration. | Uses a queue to visit nodes in the order they were discovered. |
+| **Node Visit Order** | Visits nodes vertically down the tree paths before visiting sibling nodes. | Visits nodes horizontally across the tree levels. |
+| **Implementation** | Can be implemented recursively, making it more succinct and easier to understand. | Typically implemented iteratively, requiring an explicit data structure to hold all the nodes at the current level. |
+| **Space Complexity** | O(h), where h is the height of the tree. | O(w), where w is the maximum width of the tree. |
+| **Time Complexity** | O(n), where n is the number of nodes in the tree. | O(n), where n is the number of nodes in the tree. |
+| **Applications** | Useful for tasks that need to visit nodes in a path, like checking if a path exists between two nodes. | Useful for finding the shortest path or for level-order traversal. |
+
+
+Pre, in, post and level -order traversal
+---
+- DFT includes in-order traversal, pre-order traversal and post-order traversal
+  - the three traversals are abbreviated as IPP
+- BFT is also called level-order traversal
 
 | Traversal Method | Definition | Complexity | Data Structures | Applications |
 |---|---|---|---|---|
@@ -515,6 +542,129 @@ int main()
   - [adjustable simulation](https://web.eecs.utk.edu/~czheng4/viz/animations/tree_structures/binary_search_tree/bst.html)
 
 
+BST traversal
+---
+- In-order traversal prints BST elements in `non-decreasing` order
+
+```c++
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class BST
+{
+private:
+  struct Node
+  {
+    T data;
+    Node *left;
+    Node *right;
+    Node(T val) : data(val), left(nullptr), right(nullptr) {}
+  };
+
+  Node *root;
+
+  void inorder(Node *node)
+  {
+    if (node != nullptr)
+    {
+      inorder(node->left);
+      cout << node->data << " ";
+      inorder(node->right);
+    }
+  }
+
+  void preorder(Node *node)
+  {
+    if (node != nullptr)
+    {
+      cout << node->data << " ";
+      preorder(node->left);
+      preorder(node->right);
+    }
+  }
+
+  void postorder(Node *node)
+  {
+    if (node != nullptr)
+    {
+      postorder(node->left);
+      postorder(node->right);
+      cout << node->data << " ";
+    }
+  }
+
+public:
+  BST() : root(nullptr) {}
+
+  void insert(T data)
+  {
+    root = insert(data, root);
+  }
+
+  Node *insert(T data, Node *node)
+  {
+    if (node == nullptr)
+    {
+      return new Node(data);
+    }
+    if (data < node->data)
+    {
+      node->left = insert(data, node->left);
+    }
+    else if (data > node->data)
+    {
+      node->right = insert(data, node->right);
+    }
+    return node;
+  }
+
+  void displayInorder()
+  {
+    inorder(root);
+    cout << endl;
+  }
+
+  void displayPreorder()
+  {
+    preorder(root);
+    cout << endl;
+  }
+
+  void displayPostorder()
+  {
+    postorder(root);
+    cout << endl;
+  }
+};
+
+int main()
+{
+  BST<int> tree;
+  tree.insert(8);
+  tree.insert(3);
+  tree.insert(10);
+  tree.insert(1);
+  tree.insert(6);
+  tree.insert(14);
+  tree.insert(4);
+  tree.insert(7);
+  tree.insert(13);
+
+  cout << "Inorder traversal: ";
+  tree.displayInorder();
+
+  cout << "Preorder traversal: ";
+  tree.displayPreorder();
+
+  cout << "Postorder traversal: ";
+  tree.displayPostorder();
+
+  return 0;
+}
+```
+
+
 The insert, delete, and search operations in a BST
 ---
 | Operation | Description | Time Complexity | Notes |
@@ -524,8 +674,177 @@ The insert, delete, and search operations in a BST
 | **Delete** | Removes a node with a specific value. This can involve replacing the node with its `in-order successor or predecessor` if it has two children. | Average: $O(\log n)$<br>Worst: $O(n)$ | After deletion, the properties of the BST must be maintained. |
 
 
+Search in BST t for a node n with a specific value d
+---
+- Pseudo-code of `recursive` search
+```c++
+Recursive-Tree-Search(t, d)
+    if t = NIL or d = t.data then
+        return t
+    if d < t.data then
+        return Recursive-Tree-Search(t.left, d)
+    else
+        return Recursive-Tree-Search(t.right, d)
+    end if
+```
+- Pseudo-code of `iterative` search
+```c++
+Iterative-Tree-Search(t, d)
+    while t ≠ NIL and d ≠ t.data do
+        if d < t.data then
+            t ← t.left
+        else
+            t ← t.right
+        end if
+    repeat
+    return t
+```
 
-🍎 Implementation
+Maximum and Minimum of BST t
+---
+```c++
+BST-Maximum(t)
+     while t.right ≠ NIL do
+         t ← t.right
+     repeat
+     return t
+
+BST-Minimum(t)
+     while t.left ≠ NIL do
+         t ← t.left
+     repeat
+     return t     
+```     
+
+Successor and predecessor of node n
+---
+In a BST,
+- The `successor` of node n is the node with data `next to` n's data in ascending order
+- The `predecessor` of node n is the node with data `previous to` n's data in ascending order
+
+- Pseudo-code for successor
+```c++
+ BST-Successor(n)
+     if n.right ≠ NIL then
+         return BST-Minimum(n.right)
+     end if
+     s ← n.parent
+     while s ≠ NIL and n = s.right do
+         n ← s
+         s ← s.parent
+     repeat
+     return s
+```     
+
+
+Insert into BST t a node n with a specific value d
+---
+- Pseudo-code of `recursive` insert
+```c++
+Recursive-Insert(t, d)
+    if t = NIL then
+        create a new node n
+        n.data ← d; n.left ← NIL; n.right ← NIL
+        return n
+    end if
+    if d < t.data then
+        return Recursive-Insert(t.left, d)
+    else
+        return Recursive-Insert(t.right, d)
+    end if
+```
+- Pseudo-code of `iterative` insert
+  - The procedure maintains a `trailing pointer` `parent` as the parent of `current`
+
+```c++
+BST-Insert(t, n)
+  parent ← NIL
+  current ← t
+  while current ≠ NIL do
+    parent ← current
+    if n.data < current.data then
+      current ← current.left
+    else
+      current ← current.right
+    end if
+  repeat
+  n.parent ← parent
+  if parent = NIL then
+    t ← n
+  else if n.data < parent.data then
+    parent.left ← n
+  else
+    parent.right ← n
+  end if
+```  
+
+
+Delete node n with specific value d from BST t
+---
+- Idea
+  1. if n is a leaf node, delete it
+  2. if n is a non-leaf node with only one child
+     - replace it with the child
+  3. if n has two children, replace it with 
+     - its `successor`: the minimum node of its right child
+     - or its `predecessor`: the maximum node of its left child
+- Pseudo-code of `recursive` delete
+```c++
+BST-Delete(t, d)
+  if t = NIL then
+    return NIL
+  end if
+
+  if d < t.data then
+    t.left ← BST-Delete(t.left, d)
+  else if d > t.data then
+    t.right ← BST-Delete(t.right, d)
+  else
+    if t.left = NIL then
+      return t.right
+    else if t.right = NIL then
+      return t.left
+    end if
+    t.data ← t.successor.data
+    t.right ← BST-Delete(t.right, t.successor.data)
+  end if
+  return t
+```
+- Pseudo-code of `iterative` delete
+```c++
+BST-Delete(t, n)
+  if n.left = NIL then
+    Replace(t, n, n.right)
+  else if n.right = NIL then
+    Replace(t, n, n.left)
+  else
+    E ← BST-Successor(n)
+    if E.parent ≠ n then
+      Replace(t, E, E.right)
+      E.right ← n.right
+      E.right.parent ← E
+    end if
+    Replace(t, n, E)
+    E.left ← n.left
+    E.left.parent ← E
+  end if
+  
+// replace node u with v in BST t 
+Replace(t, u, v)
+  if u.parent = NIL then
+    t.root ← v
+  else if u = u.parent.left then
+    u.parent.left ← v
+  else
+    u.parent.right ← v
+  end if
+  if v ≠ NIL then
+    v.parent ← u.parent
+  end if
+```
+
+
+🍎 Implementation: recursive delete
 ---
 ```c++
 #include <iostream>
@@ -548,7 +867,7 @@ private:
   // Helper function for inserting a new node
   Node *insertHelper(Node *node, const T &val)
   {
-    if (!node)
+    if (node == nullptr)
     {
       return new Node(val);
     }
@@ -566,7 +885,7 @@ private:
   // Helper function for searching a value
   bool searchHelper(Node *node, const T &val) const
   {
-    if (!node)
+    if (node == nullptr)
     {
       return false;
     }
@@ -594,10 +913,10 @@ private:
     return node;
   }
 
-  // Helper function for deleting a node
+  // Helper function for deleting a node with a specific value
   Node *deleteHelper(Node *node, const T &val)
   {
-    if (!node)
+    if (node == nullptr)
     {
       return nullptr;
     }
@@ -611,13 +930,13 @@ private:
     }
     else
     {
-      if (!node->left)
+      if (node->left == nullptr)
       {
         Node *temp = node->right;
         delete node;
         return temp;
       }
-      else if (!node->right)
+      else if (node->right == nullptr)
       {
         Node *temp = node->left;
         delete node;
@@ -650,6 +969,22 @@ public:
   {
     root = deleteHelper(root, val);
   }
+
+  void inorder(Node *node)
+  {
+    if (node != nullptr)
+    {
+      inorder(node->left);
+      std::cout << node->data << " ";
+      inorder(node->right);
+    }
+  }
+
+  void displayInorder()
+  {
+    inorder(root);
+    std::cout << std::endl;
+  }
 };
 
 int main()
@@ -658,28 +993,236 @@ int main()
   bst.insert(10);
   bst.insert(5);
   bst.insert(15);
+  bst.insert(3);
+  bst.insert(2);
+  bst.insert(9);
+  bst.insert(1);
+  bst.insert(8);
+  bst.insert(6);
+  bst.insert(20);
+  bst.insert(14);
+
+  bst.displayInorder();
 
   std::cout << "Search 10: " << (bst.search(10) ? "Found" : "Not found") << std::endl;
   std::cout << "Search 7: " << (bst.search(7) ? "Found" : "Not found") << std::endl;
 
   bst.remove(10);
+  bst.displayInorder();
   std::cout << "Search 10 after deletion: " << (bst.search(10) ? "Found" : "Not found") << std::endl;
 
+  bst.remove(5);
+  bst.displayInorder();
+
+  bst.remove(1);
+  bst.displayInorder();
+
+  bst.remove(9);
+  bst.displayInorder();
   return 0;
 }
 ```
 
 
-# Tree traversal
-| Criteria | Depth-First Traversal (DFT) | Breadth-First Traversal (BFT) |
-| --- | --- | --- |
-| **Traversal Strategy** | Explores as far as possible along each branch before backtracking. | Explores all the nodes at the present depth before moving to the next level. |
-| **Data Structure** | Uses a stack, which can be implemented using recursion or iteration. | Uses a queue to visit nodes in the order they were discovered. |
-| **Node Visit Order** | Visits nodes vertically down the tree paths before visiting sibling nodes. | Visits nodes horizontally across the tree levels. |
-| **Implementation** | Can be implemented recursively, making it more succinct and easier to understand. | Typically implemented iteratively, requiring an explicit data structure to hold all the nodes at the current level. |
-| **Space Complexity** | O(h), where h is the height of the tree. | O(w), where w is the maximum width of the tree. |
-| **Time Complexity** | O(n), where n is the number of nodes in the tree. | O(n), where n is the number of nodes in the tree. |
-| **Applications** | Useful for tasks that need to visit nodes in a path, like checking if a path exists between two nodes. | Useful for finding the shortest path or for level-order traversal. |
+🍎 Implementation: iterative delete
+---
+```c++
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class BST
+{
+public:
+  struct Node
+  {
+    T data;
+    Node *left;
+    Node *right;
+    Node(const T &val) : data(val), left(nullptr), right(nullptr) {}
+  };
+
+  Node *root;
+
+  Node *findMin(Node *node)
+  {
+    while (node->left != nullptr)
+    {
+      node = node->left;
+    }
+    return node;
+  }
+
+  BST() : root(nullptr) {}
+
+  // Helper function for inserting a new node
+  Node *insertHelper(Node *node, const T &val)
+  {
+    if (node == nullptr)
+    {
+      return new Node(val);
+    }
+    if (val < node->data)
+    {
+      node->left = insertHelper(node->left, val);
+    }
+    else if (val > node->data)
+    {
+      node->right = insertHelper(node->right, val);
+    }
+    return node;
+  }
+
+  void insert(const T &val)
+  {
+    root = insertHelper(root, val);
+  }
+
+  void deleteNode(T data)
+  {
+    Node *current = root;
+    Node *parent = nullptr;
+    bool isleft = true;
+
+    // Find the node with the given data
+    while (current != nullptr && current->data != data)
+    {
+      parent = current;
+      if (data < current->data)
+      {
+        current = current->left;
+        isleft = true;
+      }
+      else
+      {
+        current = current->right;
+        isleft = false;
+      }
+    }
+
+    if (current == nullptr)
+      return; // Data not found
+
+    // data in a leaf node
+    if (current->left == nullptr && current->right == nullptr)
+    {
+      delete current;
+      current = nullptr;
+      if (parent != nullptr)
+      {
+        if (isleft)
+          parent->left = nullptr;
+        else
+          parent->right = nullptr;
+      }
+      return;
+    }
+
+    // data in a node with only one child
+    if (current->left == nullptr && current->right != nullptr)
+    {
+      *current = *current->right;
+      return;
+    }
+    if (current->left != nullptr && current->right == nullptr)
+    {
+      *current = *current->left;
+      return;
+    }
+
+    // Node with two children: Get the inorder successor
+    Node *succ = findMin(current->right);
+
+    // Copy the inorder successor's data to this node
+    current->data = succ->data;
+
+    // Delete the inorder successor
+    Node *successorParent = current;
+    Node *successor = current->right;
+    while (successor->left != nullptr)
+    {
+      successorParent = successor;
+      successor = successor->left;
+    }
+
+    if (successorParent != current)
+    {
+      successorParent->left = successor->right;
+    }
+    else
+    {
+      successorParent->right = successor->right;
+    }
+
+    delete successor;
+  }
+
+  void displayInorder(Node *node)
+  {
+    if (node != nullptr)
+    {
+      displayInorder(node->left);
+      cout << node->data << " ";
+      displayInorder(node->right);
+    }
+  }
+
+  void display()
+  {
+    displayInorder(root);
+    cout << endl;
+  }
+};
+
+int main()
+{
+  BST<int> tree;
+  tree.insert(5);
+  tree.insert(3);
+  tree.insert(10);
+  tree.insert(2);
+  tree.insert(4);
+  tree.insert(6);
+  tree.insert(11);
+  tree.insert(1);
+  tree.insert(9);
+  tree.insert(15);
+  tree.insert(8);
+
+  cout << "Inorder traversal before deletion: ";
+  tree.display();
+
+  tree.deleteNode(20);
+  cout << "Inorder traversal after deleting 20: ";
+  tree.display();
+
+  tree.deleteNode(6);
+  cout << "Inorder traversal after deleting 6: ";
+  tree.display();
+
+  tree.deleteNode(4);
+  cout << "Inorder traversal after deleting 4: ";
+  tree.display();
+
+  tree.deleteNode(5);
+  cout << "Inorder traversal after deleting 5: ";
+  tree.display();
+
+  tree.deleteNode(1);
+  cout << "Inorder traversal after deleting 1: ";
+  tree.display();
+
+  tree.deleteNode(15);
+  cout << "Inorder traversal after deleting 15: ";
+  tree.display();
+
+  tree.deleteNode(3);
+  cout << "Inorder traversal after deleting 3: ";
+  tree.display();  
+
+  return 0;
+}
+```
 
 
 # References
