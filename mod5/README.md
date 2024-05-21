@@ -79,7 +79,7 @@ Hash Function and Hash Code
 | **Radix Transformation** | Converts key to a string and uses a polynomial accumulation.   | $\displaystyle h(k) = \left( \sum_{i=0}^{n-1} k_i \cdot b^i \right) \mod m$ <br> ▶️ $b$ is the base (commonly a small prime number) and $k_i$ are the characters of the string | $h(\text{"abc"}) = (97 \cdot 31^2 + 98 \cdot 31 + 99) \mod 100 = 54$ |
 | **Simple XOR**  | XORs all the bytes of the key.  | $\displaystyle h(k) = k_1 \oplus k_2 \oplus \cdots \oplus k_n$ | $h(\text{"abc"}) = 97 \oplus 98 \oplus 99 = 96$ |
 | **Multiplication Method** | Multiplies the key by a constant fraction and takes the fractional part. | $\displaystyle h(k) = \lfloor m (k A \mod 1) \rfloor$ <br>▶️ $0 < A < 1$, $k A \mod 1$ means the fractional part of $kA$, that is, $kA-⌊kA⌋$ | $h(12345) = \lfloor 100 (12345 × 0.6180339887 \mod 1) \rfloor = 62$ |
-| **Mid-Square Method**  | Squares the key and extracts middle digits.  | $\displaystyle h(k) = \left( \frac{k^2}{b^r} \mod b^d \right)$ <br>▶️ $b$ is the the base of the number system representing $k$, $r$ is the right shift amount and $d$ is the number of digits extracted <br>▶️ `Special case`:<br> $h(k) = (k^2\ \&\ 0x00FFFF00) ≫ 8$ <br>▶️ $k$ is a 32 bits binary integer | $h(123) = (123^2 / 10^2) \mod 10^2 = 51$ |
+| **Mid-Square Method**  | Squares the key and extracts middle digits.  | $\displaystyle h(k) = \left( \frac{k^2}{b^r} \mod b^d \right)$ <br>▶️ $b$ is the the base of the number system representing $k$, $r$ is the right shift amount and $d$ is the number of digits extracted <br>▶️ `Special case`:<br> $`h(k) = (k^2\ \&\ 0x00FFFF00) ≫ 8`$ <br>▶️ $k$ is a 32 bits binary integer | $h(123) = (123^2 / 10^2) \mod 10^2 = 51$ |
 
 
 🏃 Implementation
