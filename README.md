@@ -6,14 +6,13 @@ Modules
 
 1. [Overview of data structures](./mod1/README.md)
 2. [Linear data structures](./mod2/README.md)
-3. [Complexity analysis](./mod3/README.md)
+3. [Complexity analysis and Sorting algorithms](./mod3/README.md)
 4. [Nonlinear data structures](./mod4/README.md)
-5. [Sorting algorithms](./mod5/README.md)
-6. [Hashing](./mod6/README.md)
+5. [Hashing](./mod5/README.md)
 ---
-1. [Data compression](./mod7/README.md)
-2. [Memory management](./mod8/README.md)
-3. [String matching](./mod9/README.md)
+1. [Data compression](./mod6/README.md)
+2. [Memory management](./mod7/README.md)
+3. [String matching](./mod8/README.md)
 
 
 # References
@@ -21,13 +20,17 @@ Modules
 
 Textbooks
 ---
-- [DSAC4e: Data structures and algorithms in C++, 4e](https://www.mathcs.duq.edu/drozdek/)
+- [Data structures and algorithms in C++, 4e](https://www.mathcs.duq.edu/drozdek/)
 - [Data Structures and Algorithm Analysis in C++, 4e](https://www.pearson.com/en-us/subject-catalog/p/data-structures-and-algorithm-analysis-in-c/P200000003459/9780133404180)
   - [author website](https://users.cs.fiu.edu/~weiss/)
 - [Introduction to Java/Python/C++ Programming and Data Structures](https://yongdanielliang.github.io/book.html)
   - [Introduction to Programming with C++, 3e](https://liveexample.pearsoncmg.com/liang/cpp3e/toc.html)
 - [Open Data Structures](https://opendatastructures.org/)
 - [Applied Discrete Structures](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Applied_Discrete_Structures_(Doerr_and_Levasseur))
+- [Data Structures and Algorithms in Python, 1e](https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python%2C+1st+Edition-p-9781118290279)
+- [Algorithms, 4e](https://algs4.cs.princeton.edu/)
+- [Introduction to Algorithms, 4e](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+
 
 Classes
 ---
