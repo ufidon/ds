@@ -1000,7 +1000,7 @@ C++ STL [list](https://en.cppreference.com/w/cpp/header/list)
     </tr>
     <tr>
         <td>Complexity</td>
-        <td>Insertion and deletion: O(1) at beginning or end, O(n) at specific position. Traversal: O(n).</td>
+        <td>Insertion and deletion: 𝐎(1) at beginning or end, 𝐎(n) at specific position. Traversal: 𝐎(n).</td>
     </tr>
 </table>
 

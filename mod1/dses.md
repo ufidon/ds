@@ -353,11 +353,11 @@ Algorithm
 ---
 | Algorithm | Definition | Complexity | Application |
 |-----------|------------|------------|-------------|
-| Bubble Sort | A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. | Average: $O(n^2)$ | Used in educational settings for teaching sorting algorithms. |
-| Quicksort | An efficient sorting algorithm that uses a divide-and-conquer approach to sort elements. | Average: $O(n \log n)$ | Widely used in practice for sorting large datasets. |
-| Merge Sort | A divide-and-conquer algorithm that divides the input array into two halves, sorts them, and then merges them. | Average: $O(n \log n)$ | Useful in sorting linked lists and for external sorting. |
-| Binary Search | A search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half. | Average: $O(\log n)$ | Efficient for searching in large sorted arrays. |
-| Dijkstra's Algorithm | An algorithm for finding the shortest paths between nodes in a graph, which may represent, for example, road networks. | Average: $O(V^2)$, with $V$ being the number of vertices. | Used in GPS systems to find the shortest path. |
+| Bubble Sort | A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. | Average: $𝐎(n^2)$ | Used in educational settings for teaching sorting algorithms. |
+| Quicksort | An efficient sorting algorithm that uses a divide-and-conquer approach to sort elements. | Average: $𝐎(n \log n)$ | Widely used in practice for sorting large datasets. |
+| Merge Sort | A divide-and-conquer algorithm that divides the input array into two halves, sorts them, and then merges them. | Average: $𝐎(n \log n)$ | Useful in sorting linked lists and for external sorting. |
+| Binary Search | A search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half. | Average: $𝐎(\log n)$ | Efficient for searching in large sorted arrays. |
+| Dijkstra's Algorithm | An algorithm for finding the shortest paths between nodes in a graph, which may represent, for example, road networks. | Average: $𝐎(V^2)$, with $V$ being the number of vertices. | Used in GPS systems to find the shortest path. |
 
 
 

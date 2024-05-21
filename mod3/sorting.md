@@ -43,7 +43,7 @@ Sorting
 
 ![sort weights](./images/balance.jpeg)
 
-- A comparison sort must have an `average-case lower bound` of $Ω(n\log n)$ comparison operations
+- A comparison sort must have an `average-case lower bound` of $𝛀(n\log n)$ comparison operations
   - which is known as `linearithmic` time
   - under the assumption that `the length of each key` is `constant`
     - therefore that all comparisons, swaps and other operations can proceed in constant time
@@ -83,7 +83,7 @@ void selectionSort(std::vector<int>& array)
 }
 ```
 
-- Time complexity: $O(n^2)$ in all cases
+- Time complexity: $𝐎(n^2)$ in all cases
 
 
 Insertion sort
@@ -115,8 +115,8 @@ void insertionSort(std::vector<int>& array) {
 }
 ```
 - time complexity: 
-  - best case: $O(n)$
-  - average and worst cases: $`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
+  - best case: $𝐎(n)$
+  - average and worst cases: $`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=𝐎(n^2)`$
 
 
 Selection sort vs. insertion sort
@@ -157,8 +157,8 @@ void bubbleSort(std::vector<int>& array) {
 }
 ```
 - time complexity: 
-  - best case: $O(n)$
-  - average and worst cases: $`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
+  - best case: $𝐎(n)$
+  - average and worst cases: $`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=𝐎(n^2)`$
 
 
 Merge sort
@@ -214,7 +214,7 @@ void merge(std::vector<T> &vec1, std::vector<T> &vec2, std::vector<T> &temp)
     temp[current3++] = vec2[current2++];
 }
 ```
-- Time complexity: $\displaystyle T(n) = T(\frac{n}{2})+T(\frac{n}{2})+2n-1=O(n\log n)$ for all cases
+- Time complexity: $\displaystyle T(n) = T(\frac{n}{2})+T(\frac{n}{2})+2n-1=𝐎(n\log n)$ for all cases
 
 
 Quicksort
@@ -293,13 +293,13 @@ void quickSort(std::vector<int> &vec)
 }
 ```
 - Time complexity: 
-  - worst-case: $O(n^2)$
+  - worst-case: $𝐎(n^2)$
     - when every time we picked a `bad` pivot such as the `mininum` or `maximum` element
     - Then, one partition will be empty and the other will have all of the remaining data, causing Quicksort to `degenerate into a Selection Sort`
-  - best-case:  $T(n) = T(\frac{n}{2})+T(\frac{n}{2})+n=O(n\log n)$
+  - best-case:  $T(n) = T(\frac{n}{2})+T(\frac{n}{2})+n=𝐎(n\log n)$
     - When a `perfect` pivot, the `median` element, is chosen as every time
     - then each partition will have half of the remaining data
-  - average case: $O(n\log n)$
+  - average case: $𝐎(n\log n)$
 
 
 Heap sort
@@ -483,7 +483,7 @@ void heapSort(std::vector<T> &vec)
   }
 }
 ```  
-- Time complexity: $O(n\log n)$ for all cases
+- Time complexity: $𝐎(n\log n)$ for all cases
 
 
 🏃 Exercise
@@ -556,10 +556,10 @@ void bucketSort(std::vector<int> &arr, int low, int high)
 ```
 - Time complexity: 
   - Worst case: when all elements are put in the same bucket
-    - then the time complexity is bounded by the sorting algorithm used to sort the elements in the single bucket: ex. $O(n^2)$ for insertion sort, $O(n\log n)$ for merge sort.
-  - Best case: $O(n)$
+    - then the time complexity is bounded by the sorting algorithm used to sort the elements in the single bucket: ex. $𝐎(n^2)$ for insertion sort, $𝐎(n\log n)$ for merge sort.
+  - Best case: $𝐎(n)$
     - when each bucket contains at most 1 element
-  - Average case: ${\displaystyle O\left(n+{\frac {n^{2}}{k}}+k\right)}$
+  - Average case: ${\displaystyle 𝐎\left(n+{\frac {n^{2}}{k}}+k\right)}$
     - $n$ is the number of elements, $k$ is the number of buckets
 
 
@@ -637,7 +637,7 @@ void countingSort(std::vector<int> &arr)
   arr = output;
 }
 ```
-- Time complexity: $O(n+r)$
+- Time complexity: $𝐎(n+r)$
 
 
 [Radix Sort](https://en.wikipedia.org/wiki/Radix_sort)
@@ -724,7 +724,7 @@ void radixSort(std::vector<int> &arr)
 ```
 
 
-- Time complexity: $O(d(n + k))$ for the worst case
+- Time complexity: $𝐎(d(n + k))$ for the worst case
   - $d$ is the number of digits, $n$ is the number of elements
   - $k$ is the range of the digit values 
     - for base 10, k = 10
@@ -737,7 +737,7 @@ Sort algorithm summary: Comparison Sort vs. Non-Comparison Sort
 |---------|-----------------|---------------------|
 | Method | Uses `comparisons` to determine the order of elements | Uses `operations other than comparisons` to sort |
 | Examples | Selection sort, Insertion sort, Bubble sort<br>Quicksort, Heapsort, Merge sort | Radix sort, Bucket sort |
-| Performance | Average-case lower bound of $\Omega(n \log n)$ comparisons | Can achieve $O(n)$ performance assuming elements are constant-sized |
+| Performance | Average-case lower bound of $\Omega(n \log n)$ comparisons | Can achieve $𝐎(n)$ performance assuming elements are constant-sized |
 | Adaptability | Easily adapts to complex orders and data types | Typically requires specialized versions for each data type |
 | Stability | Depends on the algorithm (e.g., Merge sort is stable) | Not inherently related to the sorting method |
 
@@ -754,7 +754,7 @@ Sort algorithm summary: Comparison Sort vs. Non-Comparison Sort
     - denote the sorted parts as $S_1, S_2, \cdots, S_n$
   - merge the sorted parts pairwise into $S_{(1,2)}, S_{(3,4)}, \cdots, S_{(n-1,n)}$
     - keep merging until done
-- time complexity: $O(n\log n)$
+- time complexity: $𝐎(n\log n)$
 
 
 📝 Practice on external sort
@@ -774,14 +774,14 @@ C++ STL sorting algorithms
   - **comparator**: (Optional) A comparison function that determines the sort order
     - defines custom sorting behavior, such as `descending` order using std::greater<>()
     - by default std::sort arranges elements in `ascending` order
-- **Average time complexity**:  $O(n\log n)$
+- **Average time complexity**:  $𝐎(n\log n)$
   - $n$ is the number of elements to be sorted
 - `Containers without random access` have their own sort functions
   - ex. `std::list::sort(Compare comp)` for `std::list`
     - **Syntax**:
       - `template<typename Compare> void sort(Compare comp)` sorts the elements in `ascending` order using the default comparison operator<
       - allows custom sorting using a comparison function comp
-    - **Average time complexity**:  $O(n\log n)$
+    - **Average time complexity**:  $𝐎(n\log n)$
 
 🍎 Example
 ---

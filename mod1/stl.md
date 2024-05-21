@@ -392,8 +392,8 @@ Sequential Containers vs. Associative Containers
 | Access            | Access by `position`         | Access by `key`                 |
 | Access Time          | Access time depends on the position of the element | Access time depends on the key value (logarithmic time) |
 | Iteration            | Easy iteration using iterators               | Iteration might be slower due to tree traversal |
-| Search Efficiency | Linear (O(n))                      | Logarithmic (binary search)  (O(log n))   |
-| Insertion/Deletion   | Fast insertion/deletion at the beginning or end (O(1)) | Might be slower due to maintaining order (O(log n)) |
+| Search Efficiency | Linear (𝐎(n))                      | Logarithmic (binary search)  (𝐎(log n))   |
+| Insertion/Deletion   | Fast insertion/deletion at the beginning or end (𝐎(1)) | Might be slower due to maintaining order (𝐎(log n)) |
 | Memory Usage         | Generally more memory-efficient              | Might require more memory due to tree structure |
 | Examples          | Vector, List, Deque          | Map, Set, Multimap, Multiset    |
 

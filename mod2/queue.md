@@ -38,8 +38,8 @@
         </tr>
         <tr>
             <td>Performance</td>
-            <td>Constant time O(1) for insertion and removal at the ends</td>
-            <td>Constant time O(1) for insertion and removal at both ends, linear time O(n) for middle operations</td>
+            <td>Constant time 𝐎(1) for insertion and removal at the ends</td>
+            <td>Constant time 𝐎(1) for insertion and removal at both ends, linear time 𝐎(n) for middle operations</td>
         </tr>
         <tr>
             <td>Use Case</td>

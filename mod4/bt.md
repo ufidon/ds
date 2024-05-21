@@ -147,8 +147,8 @@ Terms about trees
 | `Full` Binary Tree | A binary tree in which `every node has exactly zero or two child nodes` | ▶️ All non-leaf nodes have two child nodes  | ▶️ Often used to implement heap data structures |
 | `Complete` Binary Tree | A binary tree in which <br>▶️every level is `completely filled` except possibly the last level<br>▶️ the last level must be filled from left to right | ▶️ All levels except the last one should be completely filled <br>▶️ Leaf nodes in the last level should be as leftmost as possible |  ▶️ Often used in some searching algorithms |
 | `Perfect` Binary Tree | A binary tree that is both a `full` binary tree and a `complete` binary tree | ▶️ All non-leaf nodes have two child nodes <br>▶️ All leaf nodes are on the same level | ▶️ A special type of full binary tree |
-| `Balanced` Binary Tree | A binary tree in which `the height of the left subtree and the right subtree differ by at most 1` | ▶️ Left and right subtrees have approximately equal height |  ▶️ Search, insert, and delete operations are efficient $Θ(\log n)$ |
-| `Degenerate` Binary Tree | ▶️ A binary tree in which each node has `zero or one` child node<br>▶️ or a binary tree with `a large difference in height` between the left and right subtrees | ▶️  the worst case becomes a `linked list` <br>▶️ or has a very large difference in height between the left and right subtrees | ▶️ Search, insert, and delete operations are inefficient $Θ(n)$ |
+| `Balanced` Binary Tree | A binary tree in which `the height of the left subtree and the right subtree differ by at most 1` | ▶️ Left and right subtrees have approximately equal height |  ▶️ Search, insert, and delete operations are efficient $𝚯(\log n)$ |
+| `Degenerate` Binary Tree | ▶️ A binary tree in which each node has `zero or one` child node<br>▶️ or a binary tree with `a large difference in height` between the left and right subtrees | ▶️  the worst case becomes a `linked list` <br>▶️ or has a very large difference in height between the left and right subtrees | ▶️ Search, insert, and delete operations are inefficient $𝚯(n)$ |
 
 
 # [Binary tree traversal](https://en.wikipedia.org/wiki/Tree_traversal)
@@ -159,8 +159,8 @@ Terms about trees
 | **Data Structure** | Uses a stack, which can be implemented using recursion or iteration. | Uses a queue to visit nodes in the order they were discovered. |
 | **Node Visit Order** | Visits nodes vertically down the tree paths before visiting sibling nodes. | Visits nodes horizontally across the tree levels. |
 | **Implementation** | Can be implemented recursively, making it more succinct and easier to understand. | Typically implemented iteratively, requiring an explicit data structure to hold all the nodes at the current level. |
-| **Space Complexity** | O(h), where h is the height of the tree. | O(w), where w is the maximum width of the tree. |
-| **Time Complexity** | O(n), where n is the number of nodes in the tree. | O(n), where n is the number of nodes in the tree. |
+| **Space Complexity** | 𝐎(h), where h is the height of the tree. | 𝐎(w), where w is the maximum width of the tree. |
+| **Time Complexity** | 𝐎(n), where n is the number of nodes in the tree. | 𝐎(n), where n is the number of nodes in the tree. |
 | **Applications** | Useful for tasks that need to visit nodes in a path, like checking if a path exists between two nodes. | Useful for finding the shortest path or for level-order traversal. |
 
 
@@ -172,10 +172,10 @@ Pre, in, post and level -order traversal
 
 | Traversal Method | Definition | Complexity | Data Structures | Applications |
 |---|---|---|---|---|
-| **In-order traversal** | Visits the left subtree, then the root node, and then the right subtree. | O(n) time, O(n) space | Stack | Printing a tree in sorted order, traversing an expression tree |
-| **Pre-order traversal** | Visits the root node, then the left subtree, and then the right subtree. | O(n) time, O(n) space | Stack | Copying a tree, creating a prefix expression |
-| **Post-order traversal** | Visits the left subtree, then the right subtree, and then the root node. | O(n) time, O(n) space | Stack | Destroying a tree, creating a postfix expression |
-| **Level-order traversal** | Visits all nodes at the same level from left to right, before moving to the next level. | O(n) time, O(n) space | Queue | Checking if a tree is balanced, printing nodes at each level |
+| **In-order traversal** | Visits the left subtree, then the root node, and then the right subtree. | 𝐎(n) time, 𝐎(n) space | Stack | Printing a tree in sorted order, traversing an expression tree |
+| **Pre-order traversal** | Visits the root node, then the left subtree, and then the right subtree. | 𝐎(n) time, 𝐎(n) space | Stack | Copying a tree, creating a prefix expression |
+| **Post-order traversal** | Visits the left subtree, then the right subtree, and then the root node. | 𝐎(n) time, 𝐎(n) space | Stack | Destroying a tree, creating a postfix expression |
+| **Level-order traversal** | Visits all nodes at the same level from left to right, before moving to the next level. | 𝐎(n) time, 𝐎(n) space | Queue | Checking if a tree is balanced, printing nodes at each level |
 
 
 💡 Example
@@ -669,9 +669,9 @@ The insert, delete, and search operations in a BST
 ---
 | Operation | Description | Time Complexity | Notes |
 |-----------|-------------|-----------------|-------|
-| **Search** | Looks for a node with a specific value. | Average: $O(\log n)$<br>Worst: $O(n)$ | Starts from the root and traverses left or right depending on whether the value is smaller or larger than the current node. |
-| **Insert** | Inserts a new node with a specific value. The new node is always inserted at a leaf. | Average: $O(\log n)$<br>Worst: $O(n)$ | The tree starts from the root and the new node is inserted on the left if it's smaller than the current node, or on the right if it's larger. |
-| **Delete** | Removes a node with a specific value. This can involve replacing the node with its `in-order successor or predecessor` if it has two children. | Average: $O(\log n)$<br>Worst: $O(n)$ | After deletion, the properties of the BST must be maintained. |
+| **Search** | Looks for a node with a specific value. | Average: $𝐎(\log n)$<br>Worst: $𝐎(n)$ | Starts from the root and traverses left or right depending on whether the value is smaller or larger than the current node. |
+| **Insert** | Inserts a new node with a specific value. The new node is always inserted at a leaf. | Average: $𝐎(\log n)$<br>Worst: $𝐎(n)$ | The tree starts from the root and the new node is inserted on the left if it's smaller than the current node, or on the right if it's larger. |
+| **Delete** | Removes a node with a specific value. This can involve replacing the node with its `in-order successor or predecessor` if it has two children. | Average: $𝐎(\log n)$<br>Worst: $𝐎(n)$ | After deletion, the properties of the BST must be maintained. |
 
 
 Search in BST t for a node n with a specific value d

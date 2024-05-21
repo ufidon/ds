@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <td>Complexity</td>
-      <td>Constant-time complexity O(1) for push, pop, and peek operations, Space efficiency.</td>
+      <td>Constant-time complexity 𝐎(1) for push, pop, and peek operations, Space efficiency.</td>
     </tr>
     <tr>
       <td>Applications</td>
