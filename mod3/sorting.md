@@ -116,7 +116,7 @@ void insertionSort(std::vector<int>& array) {
 ```
 - time complexity: 
   - best case: $O(n)$
-  - average and worst cases:$(n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)$
+  - average and worst cases:$`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
 
 
 Selection sort vs. insertion sort
@@ -158,7 +158,7 @@ void bubbleSort(std::vector<int>& array) {
 ```
 - time complexity: 
   - best case: $O(n)$
-  - average and worst cases:$(n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)$
+  - average and worst cases:$`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
 
 
 Merge sort
