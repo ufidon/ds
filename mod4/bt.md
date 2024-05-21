@@ -237,7 +237,7 @@ template <typename T>
 class Node
 {
 public:
-  T data;
+  T data; // many literatures use key for data
   Node<T> *left;
   Node<T> *right;
 
