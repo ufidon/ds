@@ -116,7 +116,7 @@ void insertionSort(std::vector<int>& array) {
 ```
 - time complexity: 
   - best case: $O(n)$
-  - average and worst cases:$`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
+  - average and worst cases: $`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
 
 
 Selection sort vs. insertion sort
@@ -158,7 +158,7 @@ void bubbleSort(std::vector<int>& array) {
 ```
 - time complexity: 
   - best case: $O(n)$
-  - average and worst cases:$`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
+  - average and worst cases: $`\displaystyle (n-1)+(n-2)+\cdots+1=\frac{(n-1)n}{2}=O(n^2)`$
 
 
 Merge sort
@@ -214,7 +214,7 @@ void merge(std::vector<T> &vec1, std::vector<T> &vec2, std::vector<T> &temp)
     temp[current3++] = vec2[current2++];
 }
 ```
-- time complexity: $\displaystyle T(n) = T(\frac{n}{2})+T(\frac{n}{2})+2n-1=O(n\log n)$ for all cases
+- Time complexity: $\displaystyle T(n) = T(\frac{n}{2})+T(\frac{n}{2})+2n-1=O(n\log n)$ for all cases
 
 
 Quicksort
@@ -665,7 +665,7 @@ void countingSort(std::vector<int> &arr)
   - [Radix sort 3](https://liveexample.pearsoncmg.com/dsanimation13ejava/RadixSorteBook.html)
 
 
-🏃 Implementation
+🏃 Implementation of LSD radix sort
 ---
 ```c++
 // Function to get the maximum value in the array
