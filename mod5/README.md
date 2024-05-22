@@ -199,11 +199,12 @@ Compressing hash codes
 Handling Collisions Using Open Addressing
 ---
 - finds an `open location` in the hash table
-- open addressing: 
+  - `three` possible states for each cell need to be maintained: `occupied, marked (for deletion), or empty`
+- Three open addressing: 
   - linear probing
   - quadratic probing
   - double hashing
-- separate chaining
+
 
 
 Linear probing
@@ -212,7 +213,7 @@ Linear probing
   - $hashTable[(h(key)+i)\mod L]$, increment $i$ from zero until an available cell is found
 - may cause groups of consecutive cells to be occupied
   - such a group is called a `cluster`
--  `guarantees` an available cell can be found for insertion in `non-full table`
+- `guarantees` an available cell can be found for insertion in `non-full table`
 
 
 Quadratic probing
@@ -230,22 +231,9 @@ Double hashing
 - finds the next available location by $hashTable[(h_1(key)+i×h_2(key))\mod L]$
   - increment  $i$ from zero until an available cell is found
   - $h_2(key)$ is the second hash function
-    -  should never produce a zero value
+    - should never produce a zero value
+    - should not equal $h_1(key)$ to avoid clustering
 - probing functions should be designed to produce a probe sequence that reaches the entire table
-
-
-💡 Intuition
----
-- [Hash table with open addressing simulation](https://csvistool.com/OpenHash)
-  - insert, search and delete an element
-
-
-
-Handling Collisions Using separate chaining
----
-- chains the entries with the same hash index in a bucket
-  - a bucket can be implemented as an array, vector, or linked list
-- each cell in the hash table can be viewed as the reference to its bucket
 
 
 Load Factor and Rehashing
@@ -259,6 +247,19 @@ Load Factor and Rehashing
   - `reload and rehash` the entries into the new table
     - a new hash function is needed since the table size is changed
 
+
+💡 Intuition
+---
+- [Hash table with open addressing simulation](https://csvistool.com/OpenHash)
+  - insert, search and delete an element
+  - linear probing, quadratic probing, and double hashing
+
+
+Handling Collisions Using separate chaining
+---
+- chains the entries with the same hash index in a bucket
+  - a bucket can be implemented as an array, vector, or linked list
+- each cell in the hash table can be viewed as the reference to its bucket
 
 
 💡 Intuition
