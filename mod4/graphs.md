@@ -233,6 +233,11 @@ int main()
 ```
 
 
+🏃 Exercise
+---
+In the program above, the adjacency list and adjacency matrix are independent from each other:
+- Modify the program to make them represent the same graph and keep them consistent
+
 
 Graph Traversals
 ---
@@ -523,6 +528,16 @@ procedure Prims(Vertex start, Graph g):
   return MST
 end procedure
 ```
+
+
+Disjoint Set Union (DSU)
+---
+- also known as Disjoint Set Union (DSU) or Merge-Find Set
+- keeps track of a partition of a set into disjoint (non-overlapping) subsets
+- supports two main operations efficiently:
+  - `Find`: Determine which subset a particular element is in
+    - This can be used for checking if two elements are in the same subset
+  - `Union`: Join two subsets into a single subset
 
 
 🏃 Implementation of Prim's Algorithm
