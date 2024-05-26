@@ -8,12 +8,15 @@ Objectives
   - directed/undirected graphs
   - visualize graphs
 - Design and implement 
-  - interface Graph
-  - class AbstractGraph and UnweightedGraph
-  - class AbstractGraph.Tree representing graph traversal
+  - graph using 
+    - adjacency matrices
+    - adjacency lists
   - two graph search algorithms
     - depth-first search
     - breadth-first search
+- Design, implement and analyze algorithms for finding
+  - a minimum spanning tree (MST)
+  - single-source shortest paths
 - Model and solve real-world problems with graphs
   - Seven Bridges of Königsberg problem
   - connected-circle problem
@@ -410,6 +413,153 @@ Applications of BFT
   - [Stack-based DFT](./demos/sga.cpp)
 
 
+Shortest paths of a weighted graph
+---
+- Each edge of a `weighted graph` has an associated numerical value, called a `weight`
+  - These weights often represent costs, distances, or any other metric that `quantifies the relationship` between the connected vertices
+- Weighted graphs can be either directed or undirected
+- In the `shortest path between two vertices`, `the sum of the weights` of its constituent edges is minimized
+
+
+Algorithms of finding shortest paths
+---
+| Feature  | [Dijkstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)   | [Bellman-Ford Algorithm](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm)   | [Floyd-Warshall Algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm)  |
+|-----|---------|-----|---------|
+| **Use Case**   | Single-source shortest paths with non-negative weights | Single-source shortest paths, allows negative weights | All-pairs shortest paths  |
+| **Graph Type**   | Directed or undirected   | Directed or undirected  | Directed or undirected  |
+| **Edge Weights**   | Non-negative   | Can be negative  | Can be negative   |
+| **Complexity** | $O((V + E) \log V)$ with a priority queue | $O(V \cdot E)$    | $O(V^3)$    |
+| **Data Structures Used** | Priority queue, adjacency list| Adjacency list or matrix   | Distance matrix    |
+| **Negative Weight Cycles** | Cannot handle  | Can detect and report  | Cannot handle  |
+| **Steps**  | 1. Initialize distances from source to all vertices as infinite, distance to source as 0.<br>2. Use priority queue to select vertex with smallest distance.<br>3. Update distances to its neighbors.<br>4. Repeat until all vertices are processed. | 1. Initialize distances from source to all vertices as infinite, distance to source as 0.<br>2. Relax all edges $V-1$ times.<br>3. Check for negative-weight cycles by relaxing all edges one more time. | 1. Initialize distance matrix with edge weights, 0 for diagonal.<br>2. Update distances considering all pairs of vertices through an intermediate vertex.<br>3. If path through intermediate vertex is shorter, update distance matrix. |
+| **Advantages**  | Efficient for graphs with non-negative weights | Can handle graphs with negative weights, detects negative cycles | Computes shortest paths between all pairs of vertices |
+| **Disadvantages**   | Cannot handle negative weight edges   | Less efficient for large graphs with no negative weights | High time complexity for large graphs |
+
+
+💡 Intuition for Dijkstra's Algorithm
+---
+- [Animation](https://csvistool.com/Dijkstra)
+
+
+Pseudo code for Dijkstra's Algorithm
+---
+```c++
+ 1  function Dijkstra(Graph, source):
+ 2     
+ 3      for each vertex v in Graph.Vertices:
+ 4          dist[v] ← INFINITY
+ 5          prev[v] ← UNDEFINED
+ 6          add v to Q
+ 7      dist[source] ← 0
+ 8     
+ 9      while Q is not empty:
+10          u ← vertex in Q with minimum dist[u]
+11          remove u from Q
+12         
+13          for each neighbor v of u still in Q:
+14              alt ← dist[u] + Graph.Edges(u, v)
+15              if alt < dist[v]:
+16                  dist[v] ← alt
+17                  prev[v] ← u
+18
+19      return dist[], prev[]
+```
+
+
+🏃 Implementation of Dijkstra's Algorithm
+---
+- [Graph is represented with adjacency list](./demos/djadj.cpp)
+- [Graph is represented with adjacency matrix](./demos/djmx.cpp)
+
+
+Minimum Spanning Tree (MST)
+---
+- A Minimum Spanning Tree (MST) is a `subset of the edges` of a `connected, undirected graph` that `connects all the vertices` together
+  - without any cycles, and with the minimum possible total edge weight
+- It is a spanning tree whose sum of edge weights is the minimum
+
+
+MST Algorithms
+---
+| Feature  | [Prim's Algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm) | [Kruskal's Algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)  | [Borůvka's Algorithm](https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)  |
+|-----|------|-------|-------|
+| **Use Case**   | Efficient for dense graphs with lots of edges  | Efficient for sparse graphs with fewer edges   | Efficient for parallel processing and distributed computing  |
+| **Graph Type**   | Undirected, connected   | Undirected, connected    | Undirected, connected  |
+| **Data Structures Used**  | Min-heap (priority queue), adjacency list  | Disjoint-set (union-find), edge list   | Disjoint-set (union-find), edge list  |
+| **Complexity**   | $O(E \log V)$ using min-heap  | $O(E \log E)$ or $O(E \log V)$ using union-find| $O(E \log V)$ using union-find  |
+| **Approach**  | Greedy algorithm that grows the MST one vertex at a time  | Greedy algorithm that adds the smallest edge that does not form a cycle | Greedy algorithm that grows many components simultaneously  |
+| **Steps**  | 1. Initialize all keys to infinity, except for the start vertex (set to 0).<br>2. Use a min-heap to pick the vertex with the smallest key.<br>3. Update the keys of adjacent vertices.<br>4. Repeat until all vertices are included in the MST. | 1. Sort all edges in non-decreasing order of their weight.<br>2. Pick the smallest edge that does not form a cycle with the MST formed so far.<br>3. Use union-find to detect and avoid cycles.<br>4. Repeat until $V-1$ edges are included in the MST. | 1. Start with each vertex as a separate component.<br>2. Add the smallest edge connecting two different components.<br>3. Use union-find to manage components.<br>4. Repeat until there is only one component. |
+| **Advantages**   | Efficient for dense graphs, easy to implement with adjacency lists | More efficient for sparse graphs, can be easily implemented with sorting algorithms | Good for parallel processing, works in stages  |
+| **Disadvantages**   | Less efficient for sparse graphs, requires a priority queue | Requires sorting of edges, less efficient for dense graphs | Less commonly used, can be more complex to implement |
+
+
+💡 Intuition for Prim's Algorithm
+---
+- [Animation](https://csvistool.com/Prim)
+
+Pseudo code for Prim's Algorithm
+---
+```c++
+procedure Prims(Vertex start, Graph g):
+  initialize a visited set
+  initialize an edge set MST
+  initialize a priority queue
+  add start to visited set
+
+  for each edge adjacent to start vertex in g:
+    enqueue edge
+  end for
+
+  while (queue is not empty && visited set is not full)
+    dequeue edge between vertices v,w
+    add edge to MST
+    add w to visited set
+    for each edge adjacent to w:
+      if (other endpoint vertex is not visited):
+        enqueue edge between w and other endpoint vertex
+      end if
+    end for
+  end while
+  return MST
+end procedure
+```
+
+
+🏃 Implementation of Prim's Algorithm
+---
+- [Graph is represented with adjacency list](./demos/pmadj.cpp)
+- [Graph is represented with adjacency matrix](./demos/pmmx.cpp)
+
+
+💡 Intuition for Kruskal's Algorithm
+---
+- [Animation](https://csvistool.com/Kruskal)
+
+
+Pseudo code for Kruskal's Algorithm
+---
+```c++
+procedure Kruskals(Graph g):
+  initialize a disjoint set with all vertices in g
+  initialize an edge set MST
+  initialize a priority queue with all edges in g
+
+  while (queue is not empty && MST has edges fewer than n-1)
+    dequeue edge between vertices v,w
+    if (v and w are not in the same set):
+      add edge to MST
+      merge v's set with w's set in the disjoint set structure
+    end if
+  end while
+end procedure
+```
+
+
+🏃 Implementation of Kruskal's Algorithm
+---
+- [Graph is represented with adjacency list](./demos/kradj.cpp)
+- [Graph is represented with adjacency matrix](./demos/krmx.cpp)
+
 
 🏃 Application: Solve The Connected Circles Problem
 ---
@@ -439,6 +589,10 @@ Applications of BFT
 
 ![nine tail problem](./images/ng.png)
 
+
+🏃 Application: Solve The Weighted Nine Tail Problem 
+---
+- The number of the flips as the weight on each move
 
 
 # Online resources
