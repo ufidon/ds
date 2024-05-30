@@ -49,6 +49,7 @@ Classes
   - [CS 3110 - Data Structures and Functional Programming](https://cornellcswiki.gitlab.io/classes/CS3110.html)
 - _mit_
   - [6.006 Introduction To Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)
+  - [6.851: Advanced Data Structures](https://courses.csail.mit.edu/6.851/fall17/lectures/)
 
 
 
