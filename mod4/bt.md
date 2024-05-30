@@ -173,7 +173,7 @@ Describe the tree changes while inserting each element:
 - Create a 2-4 tree on [the animator](https://csvistool.com/BTree) by inserting 34,3,50,20,15,16,25,27,29,24 into an empty tree one by one
 - Insert an element into a 2-,3-node respectively
 - Insert an element into a 4-node whose parent is a 3-node and a 4-node respectively
-  - one case is missing from above: $e<e_0$
+  - one case is missing from above: $`e < e_0`$
 
 
 🏃 Insert implementation
