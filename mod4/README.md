@@ -3,8 +3,8 @@
   - Binary Search Trees
 - [Self-balancing BSTs](./sbt.md)
   - [AVL trees](./avl.md)
-  - [Red-Black Tree](./rb.md)
   - [B-tree](./bt.md)
+  - [Red-Black Tree](./rb.md)
 - [Heaps](./heaps.md)
   - Priority Queues
 - [Trie](./trie.md)
