@@ -65,3 +65,7 @@ Online resources
 - [Algorithms and Data Structures Animations for the Liang Java, C++, and Python Books](https://liveexample.pearsoncmg.com/liang/animation/animation.html)
 - [Online visual debugger](https://pythontutor.com/)
 - [boost c++ libraries](https://www.boost.org/)
+
+Tips
+---
+- [解决clangd找不到iostream的错误](https://blog.csdn.net/weixin_61184943/article/details/131820087)
