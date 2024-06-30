@@ -64,7 +64,10 @@ Online resources
   - [Learning Algorithms with Dynamic Animations](https://web.eecs.utk.edu/~czheng4/viz/)
 - [Algorithms and Data Structures Animations for the Liang Java, C++, and Python Books](https://liveexample.pearsoncmg.com/liang/animation/animation.html)
 - [Online visual debugger](https://pythontutor.com/)
+  - [onlineGDB](https://www.onlinegdb.com/)
 - [boost c++ libraries](https://www.boost.org/)
+- [DataStructures.jl](https://juliacollections.github.io/DataStructures.jl/stable/)
+
 
 Tips
 ---
