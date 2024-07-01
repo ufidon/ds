@@ -508,10 +508,6 @@ bool areBracketsBalanced(const std::string &expr)
       continue;
     }
 
-    // If current character is not opening bracket, then it must be closing. So stack cannot be empty at this point.
-    if (s.empty())
-      return false;
-
     switch (expr[i])
     {
     case ')':
