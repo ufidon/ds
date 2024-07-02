@@ -25,12 +25,22 @@ Textbooks
   - [author website](https://users.cs.fiu.edu/~weiss/)
 - [Introduction to Java/Python/C++ Programming and Data Structures](https://yongdanielliang.github.io/book.html)
   - [Introduction to Programming with C++, 3e](https://liveexample.pearsoncmg.com/liang/cpp3e/toc.html)
-- [Open Data Structures](https://opendatastructures.org/)
 - [Applied Discrete Structures](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Applied_Discrete_Structures_(Doerr_and_Levasseur))
 - [Data Structures and Algorithms in Python, 1e](https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python%2C+1st+Edition-p-9781118290279)
 - [Algorithms, 4e](https://algs4.cs.princeton.edu/)
 - [Introduction to Algorithms, 4e](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
 
+Open textbooks
+---
+- - [Open Data Structures](https://opendatastructures.org/)
+- [An Open Guide to Data Structures and Algorithms](https://open.umn.edu/opentextbooks/textbooks/1017)
+- [Open Data Structures: An Introduction](https://www.aupress.ca/books/120226-open-data-structures/)
+- [Algorithms and Data Structures With Applications to Graphics and Geometry](https://open.umn.edu/opentextbooks/textbooks/150)
+- [OpenDSA Data Structures and Algorithms Modules Collection](https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/index.html)
+  - [OpenDSA](https://opendsa-server.cs.vt.edu/)
+- [Foundations of Computer Science in C](http://infolab.stanford.edu/~ullman/focs.html)
+- [⭐️Algorithms](https://algs4.cs.princeton.edu/home/)
+  - [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/)
 
 Classes
 ---
@@ -50,7 +60,8 @@ Classes
 - _mit_
   - [6.006 Introduction To Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)
   - [6.851: Advanced Data Structures](https://courses.csail.mit.edu/6.851/fall17/lectures/)
-
+- _misc_
+  - [⭐️LMU ☀️ CMSI 2120 DATA STRUCTURES](https://cs.lmu.edu/~ray/classes/dsa/)
 
 
 Online resources
@@ -66,7 +77,9 @@ Online resources
 - [Online visual debugger](https://pythontutor.com/)
   - [onlineGDB](https://www.onlinegdb.com/)
 - [boost c++ libraries](https://www.boost.org/)
+- ---
 - [DataStructures.jl](https://juliacollections.github.io/DataStructures.jl/stable/)
+- [The Arcane Algorithm Archive](https://www.algorithm-archive.org/)
 
 
 Tips
