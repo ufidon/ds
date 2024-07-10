@@ -593,7 +593,7 @@ Infix to postfix
 4. **Process Operators**:
    - If the stack is empty or contains a '(', push the operator onto the stack.
    - If the incoming operator has higher precedence than the top of the stack, push it onto the stack.
-   - If the incoming operator has lower or equal precedence, pop the stack until this is not true and then push the incoming operator.
+   - If the incoming operator has `lower or equal` precedence, pop the stack and append the popped to the postfix until this is not true and then push the incoming operator.
 
 5. **Process Parentheses**:
    - If a '(' is encountered, push it onto the stack.
@@ -614,9 +614,9 @@ Infix to postfix
    - `B`: Operand, add to postfix.
    - `*`: Operator. Since `*` has higher precedence than `+`, push it onto the stack.
    - `C`: Operand, add to postfix.
-   - `+`: Operator. Pop `*` from the stack (higher precedence), then push `+` onto the stack.
+   - `+`: Operator. Pop `*` then `+` from the stack (higher or equal precedence), append it to the postfix, then push `+` onto the stack.
    - `D`: Operand, add to postfix.
-3. **Pop Remaining Operators**: After scanning the entire infix expression, pop any remaining operators from the stack and add them to the postfix expression. In this case, pop `+` from the stack.
+3. **Pop Remaining Operators**: After scanning the entire infix expression, pop any remaining operators from the stack and add them to the postfix expression. In this case, pop `+` from the stack then append it to the postfix.
 4. **Final Postfix Expression**: The postfix expression is `ABC*+D+`.
 
 - the postfix expression corresponding to `A + B * C + D` is `ABC*+D+`.
