@@ -36,13 +36,13 @@ Growth rate of cost vs. input size
 
 - when $n→∞, f(n)$ is dominated by $9n^2$, so its `asymptotic behavior` can be described by
   - `dropping the non-dominant terms`: $f(n)=9n^2 + 99n + 999\log n + 9999 ∈ 𝚯(9n^2)$
-  - it can be simplified further by `dropping the constant coefficient`: $𝚯(9n^2) ∈ 𝚯(n^2)$
+  - it can be simplified further by `dropping the constant coefficient`: $𝚯(9n^2) = 𝚯(n^2)$
   - ∴ $f(n)∈𝚯(n^2)$
   - ⚠️ `∈` is used here because $𝚯(n^2)$ denotes `the set of all functions` asymptotically proportional to $n^2$ 
 - $f(n)∈𝚯(n^2)$ describes that $f(n)$ is `proportional` to $n^2$ when n is large enough
   - i.e $\displaystyle \lim_{n→∞}\dfrac{f(n)}{n^2}=c$ 
     - $c$ is a `non-zero` constant
-- A constant function $f(n)=c$ is always proportional to 1 so $f(n)∈𝚯(c)∈𝚯(1)$
+- A constant function $f(n)=c$ is always proportional to 1 so $f(n)∈𝚯(c) = 𝚯(1)$
 
 
 Asymptotic analysis
@@ -323,6 +323,7 @@ for(i=9; i<n*3; i++)
 - Time complexity: ${\displaystyle T(n) = c\frac{n(n+1)}{2} = 𝐎(n^2)}$  
 
 - print a table: n rows x K columns
+  - K is a constant
   ```c++
   for(i=1; i<=n; i++){
     for(k=1; k<=K; k++){
@@ -337,6 +338,7 @@ for(i=9; i<n*3; i++)
 Sequence
 ---
 - print a table with a header: n rows x K columns
+  - K is a constant
   ```c++
   for(k=1; k<= K; k++){
     cout << H[k];
@@ -440,7 +442,7 @@ void Hanoi(n, A, B, C){
 - Time complexity: $T(n) = T(n-1)+c+T(n-1) \Rightarrow T(n) = 𝐎(2^n)$
 
 
-Common Recurrence Relations
+Common [Recurrence Relations](https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms))
 ---
 | Recurrence relation | Result | Example |
 | --- | --- | --- |
@@ -450,8 +452,8 @@ Common Recurrence Relations
 | $T(n)=2T(\frac{n}{2})+𝐎(n)$ | $T(n)=𝐎(n\log n)$ | Merge sort |
 | $T(n)=2T(\frac{n}{2})+𝐎(n\log n)$ | $T(n)=𝐎(n\log^2 n)$ |  |
 | $T(n)=T(n-1)+𝐎(n)$ | $T(n)=𝐎(n^2)$ | Selection sort, insertion sort|
-| $T(n)=2T(n-1)+𝐎(1)$ | $T(n)=𝐎(n^2)$ | Tower of Hanoi |
-| $T(n)=T(n-1) + T(n-2) +𝐎(1)$ | $T(n)=𝐎(n^2)$ | Recursive Fibonacci algorithm |
+| $T(n)=2T(n-1)+𝐎(1)$ | $T(n)=𝐎(2^n)$ | Tower of Hanoi |
+| $T(n)=T(n-1) + T(n-2) +𝐎(1)$ | $T(n)=𝐎(2^n)$ | Recursive Fibonacci algorithm |
 
 Order of growth of common functions
 ---
