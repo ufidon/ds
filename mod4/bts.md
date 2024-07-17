@@ -312,21 +312,13 @@ public:
     }
   }
 
-  void draw(std::string indent, Node<T> *tree, int what = 0)
+  void draw(std::string indent, Node<T> *tree, char sign = ' ')
   {
     if (tree)
     {
-      char sign = ' ';
-      if (what == 1) // left
-        sign = '`';
-      else if (what == 2) // right
-        sign = ',';
-      else
-        sign = ' '; // root
-
-      draw(indent + "   ", tree->right, 2);
+      draw(indent + "   ", tree->right, ',');
       std::cout << indent + sign + "--" << tree->data << std::endl;
-      draw(indent + "   ", tree->left, 1);
+      draw(indent + "   ", tree->left, '`');
     }
   }
 
@@ -528,6 +520,21 @@ public:
       }
     }
   }
+  void draw(std::string indent, Node<T> *tree, char sign = ' ')
+  {
+    if (tree)
+    {
+      draw(indent + "   ", tree->right, ',');
+      std::cout << indent + sign + "--" << tree->val << std::endl;
+      draw(indent + "   ", tree->left, '`');
+    }
+  }
+
+  void draw()
+  {
+    draw("", root);
+    std::cout << std::endl;
+  }  
 };
 
 int main()
@@ -535,11 +542,17 @@ int main()
   BinaryTree<char> tree;
 
   tree.root = new Node<char>('A');
+  tree.draw();
   tree.root->left = new Node<char>('B');
+  tree.draw();
   tree.root->right = new Node<char>('C');
+  tree.draw();
   tree.root->left->left = new Node<char>('D');
+  tree.draw();
   tree.root->left->right = new Node<char>('E');
+  tree.draw();
   tree.root->right->right = new Node<char>('F');
+  tree.draw();
 
   std::cout << "In-order traversal: ";
   tree.iterativeInorder(tree.root);
@@ -625,6 +638,16 @@ private:
     }
   }
 
+  void draw(std::string indent, Node *tree, char sign = ' ')
+  {
+    if (tree)
+    {
+      draw(indent + "   ", tree->right, ',');
+      std::cout << indent + sign + "--" << tree->data << std::endl;
+      draw(indent + "   ", tree->left, '`');
+    }
+  }
+
 public:
   BST() : root(nullptr) {}
 
@@ -667,20 +690,35 @@ public:
     postorder(root);
     cout << endl;
   }
+
+  void draw()
+  {
+    draw("", root);
+    std::cout << std::endl;
+  }  
 };
 
 int main()
 {
   BST<int> tree;
   tree.insert(8);
+  tree.draw();
   tree.insert(3);
+  tree.draw();
   tree.insert(10);
+  tree.draw();
   tree.insert(1);
+  tree.draw();
   tree.insert(6);
+  tree.draw();
   tree.insert(14);
+  tree.draw();
   tree.insert(4);
+  tree.draw();
   tree.insert(7);
+  tree.draw();
   tree.insert(13);
+  tree.draw();
 
   cout << "Inorder traversal: ";
   tree.displayInorder();
@@ -980,6 +1018,16 @@ private:
     return node;
   }
 
+  void draw(std::string indent, Node *tree, char sign = ' ')
+  {
+    if (tree)
+    {
+      draw(indent + "   ", tree->right, ',');
+      std::cout << indent + sign + "--" << tree->data << std::endl;
+      draw(indent + "   ", tree->left, '`');
+    }
+  }
+
 public:
   BST() : root(nullptr) {}
 
@@ -1016,40 +1064,48 @@ public:
     inorder(root);
     std::cout << std::endl;
   }
+
+  void draw()
+  {
+    draw("", root);
+    std::cout << std::endl;
+  }    
 };
 
 int main()
 {
   BST<int> bst;
-  bst.insert(10);
-  bst.insert(5);
-  bst.insert(15);
-  bst.insert(3);
-  bst.insert(2);
-  bst.insert(9);
-  bst.insert(1);
-  bst.insert(8);
-  bst.insert(6);
-  bst.insert(20);
-  bst.insert(14);
+  bst.insert(10); bst.draw();
+  bst.insert(5); bst.draw();
+  bst.insert(15); bst.draw();
+  bst.insert(3); bst.draw();
+  bst.insert(2); bst.draw();
+  bst.insert(9); bst.draw();
+  bst.insert(1); bst.draw();
+  bst.insert(8); bst.draw();
+  bst.insert(6); bst.draw();
+  bst.insert(20); bst.draw();
+  bst.insert(14); bst.draw();
 
-  bst.displayInorder();
 
   std::cout << "Search 10: " << (bst.search(10) ? "Found" : "Not found") << std::endl;
   std::cout << "Search 7: " << (bst.search(7) ? "Found" : "Not found") << std::endl;
 
   bst.remove(10);
-  bst.displayInorder();
-  std::cout << "Search 10 after deletion: " << (bst.search(10) ? "Found" : "Not found") << std::endl;
+  std::cout << "Search 10 after deletion 10: " << (bst.search(10) ? "Found" : "Not found") << std::endl;
+  bst.draw();
 
+  std::cout << "Delete 5" << std::endl;
   bst.remove(5);
-  bst.displayInorder();
+  bst.draw();
 
+  std::cout << "Delete 1" << std::endl;
   bst.remove(1);
-  bst.displayInorder();
+  bst.draw();
 
+  std::cout << "Delete 9" << std::endl;
   bst.remove(9);
-  bst.displayInorder();
+  bst.draw();
   return 0;
 }
 ```
@@ -1203,53 +1259,73 @@ public:
     displayInorder(root);
     cout << endl;
   }
+
+  void draw(std::string indent, Node *tree, char sign = ' ')
+  {
+    if (tree)
+    {
+      draw(indent + "   ", tree->right, ',');
+      std::cout << indent + sign + "--" << tree->data << std::endl;
+      draw(indent + "   ", tree->left, '`');
+    }
+  }
+
+  void draw()
+  {
+    draw("", root);
+    std::cout << std::endl;
+  }  
 };
 
 int main()
 {
   BST<int> tree;
-  tree.insert(5);
-  tree.insert(3);
-  tree.insert(10);
-  tree.insert(2);
-  tree.insert(4);
-  tree.insert(6);
-  tree.insert(11);
-  tree.insert(1);
-  tree.insert(9);
-  tree.insert(15);
-  tree.insert(8);
+  tree.insert(5);  tree.draw();
+  tree.insert(3);    tree.draw();
+  tree.insert(10);  tree.draw();
+  tree.insert(2);  tree.draw();
+  tree.insert(4);  tree.draw();
+  tree.insert(6);  tree.draw();
+  tree.insert(11);  tree.draw();
+  tree.insert(1);  tree.draw();
+  tree.insert(9);  tree.draw();
+  tree.insert(15);  tree.draw();
+  tree.insert(8);  tree.draw();
 
   cout << "Inorder traversal before deletion: ";
   tree.display();
 
-  tree.deleteNode(20);
+  tree.deleteNode(20);   
   cout << "Inorder traversal after deleting 20: ";
-  tree.display();
+  tree.display(); tree.draw();
 
-  tree.deleteNode(6);
+  tree.deleteNode(6); 
   cout << "Inorder traversal after deleting 6: ";
-  tree.display();
+  tree.display(); tree.draw();
 
-  tree.deleteNode(4);
+  tree.deleteNode(4); 
   cout << "Inorder traversal after deleting 4: ";
-  tree.display();
+  tree.display(); tree.draw();
 
-  tree.deleteNode(5);
+  tree.deleteNode(5); 
   cout << "Inorder traversal after deleting 5: ";
-  tree.display();
+  tree.display(); tree.draw();
 
-  tree.deleteNode(1);
+  tree.deleteNode(10); 
+  cout << "Inorder traversal after deleting 10: ";
+  tree.display(); tree.draw();
+
+  tree.deleteNode(1); 
   cout << "Inorder traversal after deleting 1: ";
-  tree.display();
+  tree.display(); tree.draw();
 
-  tree.deleteNode(15);
+  tree.deleteNode(15); 
   cout << "Inorder traversal after deleting 15: ";
-  tree.display();
+  tree.display(); tree.draw();
 
-  tree.deleteNode(3);
+  tree.deleteNode(3); 
   cout << "Inorder traversal after deleting 3: ";
-  tree.display();  
+  tree.display();   tree.draw();
 
   return 0;
 }
