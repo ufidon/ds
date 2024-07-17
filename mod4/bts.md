@@ -232,6 +232,7 @@ procedure postorder(node)
 ```c++
 #include <iostream>
 #include <queue>
+#include <string>
 
 template <typename T>
 class Node
@@ -310,6 +311,30 @@ public:
       }
     }
   }
+
+  void draw(std::string indent, Node<T> *tree, int what = 0)
+  {
+    if (tree)
+    {
+      char sign = ' ';
+      if (what == 1) // left
+        sign = '`';
+      else if (what == 2) // right
+        sign = ',';
+      else
+        sign = ' '; // root
+
+      draw(indent + "   ", tree->right, 2);
+      std::cout << indent + sign + "--" << tree->data << std::endl;
+      draw(indent + "   ", tree->left, 1);
+    }
+  }
+
+  void draw()
+  {
+    draw("", root);
+    std::cout << std::endl;
+  }
 };
 
 int main()
@@ -317,11 +342,17 @@ int main()
   BinaryTree<char> tree;
 
   tree.root = new Node<char>('A');
+  tree.draw();
   tree.root->left = new Node<char>('B');
+  tree.draw();
   tree.root->right = new Node<char>('C');
+  tree.draw();
   tree.root->left->left = new Node<char>('D');
+  tree.draw();
   tree.root->left->right = new Node<char>('E');
+  tree.draw();
   tree.root->right->right = new Node<char>('F');
+  tree.draw();
 
   std::cout << "In-order traversal: ";
   tree.inOrder(tree.root);
