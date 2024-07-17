@@ -323,50 +323,67 @@ public:
   void preOrder()
   {
     preOrder(root);
+    std::cout << std::endl;
   }
+
+  void draw(std::string indent, Node *tree, char sign = ' ')
+  {
+    if (tree)
+    {
+      draw(indent + "   ", tree->right, ',');
+      std::cout << indent + sign + "--" << tree->data << std::endl;
+      draw(indent + "   ", tree->left, '`');
+    }
+  }
+
+  void draw()
+  {
+    draw("", root);
+    std::cout << std::endl;
+  }   
 };
 
 int main()
 {
   std::cout<<"----1.Right rotation for LL imbalance----"<<std::endl;
   AVL<int> ll;
-  ll.insert(3);
-  ll.insert(2);
-  ll.insert(1);
+  ll.insert(3); ll.draw();
+  ll.insert(2); ll.draw();
+  ll.insert(1); ll.draw();
   std::cout<<"Self-balanced: "; ll.preOrder(); std::cout << std::endl;
 
   std::cout<<"----2.Left rotation for RR imbalance----"<<std::endl;
   AVL<int> rr;
-  rr.insert(1);
-  rr.insert(2);
-  rr.insert(3);
+  rr.insert(1); rr.draw();
+  rr.insert(2); rr.draw();
+  rr.insert(3); rr.draw();
   std::cout<<"Self-balanced: "; rr.preOrder(); std::cout << std::endl;
 
   std::cout<<"----3.LR rotation for LR imbalance----"<<std::endl;
   AVL<int> lr;
-  lr.insert(3);
-  lr.insert(1);
-  lr.insert(2);
+  lr.insert(3); lr.draw();
+  lr.insert(1); lr.draw();
+  lr.insert(2); lr.draw();
   std::cout<<"Self-balanced: "; lr.preOrder(); std::cout << std::endl;
 
   std::cout<<"----4.RL rotation for RL imbalance----"<<std::endl;
   AVL<int> rl;
-  rl.insert(1);
-  rl.insert(3);
-  rl.insert(2);
+  rl.insert(1); rl.draw();
+  rl.insert(3); rl.draw();
+  rl.insert(2); rl.draw();
   std::cout<<"Self-balanced: "; rl.preOrder(); std::cout << std::endl;
 
   std::cout<<"----5. Mixed rotations---------------------"<<std::endl;
   AVL<int> tree;
-  tree.insert(9);
-  tree.insert(5);
-  tree.insert(10);
-  tree.insert(0);
-  tree.insert(6);
-  tree.insert(11);
-  tree.insert(-1);
-  tree.insert(1);
-  tree.insert(2);
+  tree.insert(9); tree.draw();
+  tree.insert(5); tree.draw();
+  tree.insert(10); tree.draw();
+  tree.insert(0); tree.draw();
+  tree.insert(6); tree.draw();
+  tree.insert(11); tree.draw();
+  tree.insert(-1); tree.draw();
+  tree.insert(1); tree.draw();
+  tree.insert(2); tree.draw();
 
   std::cout << "Preorder traversal of the constructed AVL tree is \n";
   tree.preOrder();
@@ -375,6 +392,7 @@ int main()
   tree.deleteKey(10);
   std::cout << "Preorder traversal after deletion of 10 \n";
   tree.preOrder();
+  tree.draw();
 
   return 0;
 }
