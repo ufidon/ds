@@ -453,7 +453,7 @@ Common [Recurrence Relations](https://en.wikipedia.org/wiki/Master_theorem_(anal
 | $T(n)=2T(\frac{n}{2})+𝐎(n\log n)$ | $T(n)=𝐎(n\log^2 n)$ |  |
 | $T(n)=T(n-1)+𝐎(n)$ | $T(n)=𝐎(n^2)$ | Selection sort, insertion sort|
 | $T(n)=2T(n-1)+𝐎(1)$ | $T(n)=𝐎(2^n)$ | Tower of Hanoi |
-| $T(n)=T(n-1) + T(n-2) +𝐎(1)$ | $T(n)=𝐎(2^n)$ | Recursive Fibonacci algorithm |
+| $T(n)=T(n-1) + T(n-2) +𝐎(1)$ | $T(n)=𝐎((\dfrac{1+\sqrt{5}}{2})^n)$ | Recursive Fibonacci algorithm |
 
 Order of growth of common functions
 ---
