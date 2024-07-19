@@ -761,6 +761,9 @@ int main()
 }
 ```
 
+- multiple digits support
+  - [Reverse Polish Notation (RPN) Calculator 1](./labs/cal.cpp)
+  - [Reverse Polish Notation (RPN) Calculator 2](./labs/rpc.cpp)
 
 # References
 - [ROPgadget Tool](https://github.com/JonathanSalwan/ROPgadget)
