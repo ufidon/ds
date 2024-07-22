@@ -62,7 +62,10 @@ private:
     int parentIndex = (index - 1) / 2;
     if (heap[index] > heap[parentIndex])
     {
+      drawHeap();
       std::swap(heap[index], heap[parentIndex]);
+      drawHeap();
+
       heapifyUp(parentIndex);
     }
   }
@@ -81,9 +84,57 @@ private:
 
     if (largest != index)
     {
+      drawHeap();
       std::swap(heap[index], heap[largest]);
+      drawHeap();
       heapifyDown(largest);
     }
+  }
+
+  int getParent(int index)
+  {
+    if (isEmpty())
+    {
+      std::cout << "Heap is empty" << std::endl;
+      return -1;
+    }
+    else if (index == 0)
+    {
+      std::cout << "root has NO parent!" << std::endl;
+      return -1;
+    }
+    else
+      return (index - 1) / 2;
+  }
+  int getRightChild(int index)
+  {
+    int ri = 2 * index + 2;
+    if (isEmpty())
+    {
+      std::cout << "Heap is empty" << std::endl;
+      return -2;
+    }
+    else if (ri >= heap.size())
+    {
+      return -1;
+    }
+    else
+      return ri;
+  }
+  int getLeftChild(int index)
+  {
+    int li = 2 * index + 1;
+    if (isEmpty())
+    {
+      std::cout << "Heap is empty" << std::endl;
+      return -2;
+    }
+    else if (li >= heap.size())
+    {
+      return -1;
+    }
+    else
+      return li;
   }
 
 public:
@@ -98,6 +149,7 @@ public:
     if (heap.size() == 0)
       throw std::out_of_range("Heap is empty");
 
+    drawHeap();
     T root = heap[0];
     heap[0] = heap.back();
     heap.pop_back();
@@ -118,6 +170,34 @@ public:
   {
     return heap.size() == 0;
   }
+
+  void printHeap(void)
+  {
+    if (!isEmpty())
+    {
+      for (auto &e : heap)
+      {
+        std::cout << e << " ";
+      }
+      std::cout << std::endl;
+    }
+  }
+
+  void drawHeap(std::string indent, int index, char sign = ' ')
+  {
+    if (!isEmpty() && index != -1)
+    {
+      drawHeap(indent + "   ", getRightChild(index), ',');
+      std::cout << indent + sign + "--" << heap[index] << std::endl;
+      drawHeap(indent + "   ", getLeftChild(index), '`');
+    }
+  }
+  void drawHeap()
+  {
+    printHeap();
+    drawHeap("", 0);
+    std::cout << std::endl;
+  }
 };
 
 int main()
@@ -125,12 +205,30 @@ int main()
   MaxHeap<int> maxHeap;
 
   maxHeap.insert(10);
+  std::cout << "Heapified: " << std::endl;
+  maxHeap.drawHeap();
+  std::cout << "--------------------------\n" << std::endl;
+
   maxHeap.insert(20);
+  std::cout << "Heapified: " << std::endl;
+  maxHeap.drawHeap();
+  std::cout << "--------------------------\n" << std::endl;
+
   maxHeap.insert(5);
+  std::cout << "Heapified: " << std::endl;
+  maxHeap.drawHeap();
+  std::cout << "--------------------------\n" << std::endl;
+
   maxHeap.insert(30);
+  std::cout << "Heapified: " << std::endl;
+  maxHeap.drawHeap();
+  std::cout << "--------------------------\n" << std::endl;
 
   std::cout << "Max element: " << maxHeap.getMax() << std::endl;
   std::cout << "Extracted max element: " << maxHeap.extractMax() << std::endl;
+  std::cout << "Heapified: " << std::endl;
+  maxHeap.drawHeap();
+  std::cout << "--------------------------\n" << std::endl;
   std::cout << "Max element after extraction: " << maxHeap.getMax() << std::endl;
 
   return 0;
