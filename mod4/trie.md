@@ -56,191 +56,234 @@ Advantages and Disadvantages of Tries
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include <vector>
 
 class TrieNode
 {
 public:
-    std::unordered_map<char, TrieNode *> children;
-    bool isEndOfWord;
+  std::unordered_map<char, TrieNode *> children;
+  bool isEndOfWord;
 
-    TrieNode() : isEndOfWord(false) {}
+  TrieNode() : isEndOfWord(false) {}
 };
 
 class Trie
 {
 private:
-    TrieNode *root;
-    static int constexpr ALPHABET_SIZE = 26;
+  TrieNode *root;
+  static int constexpr ALPHABET_SIZE = 26;
 
-    bool deleteHelper(TrieNode *currentNode, const std::string &word, int depth)
+  bool deleteHelper(TrieNode *currentNode, const std::string &word, int depth)
+  {
+    if (depth == word.size())
     {
-        if (depth == word.size())
-        {
-            // If the end of the word is reached, mark it as not end of word
-            if (!currentNode->isEndOfWord)
-            {
-                return false; // Word not found
-            }
-            currentNode->isEndOfWord = false;
-            return currentNode->children.empty(); // If no children, this node can be deleted
-        }
-
-        char ch = word[depth];
-        TrieNode *childNode = currentNode->children[ch];
-        if (childNode == nullptr)
-        {
-            return false; // Word not found
-        }
-
-        bool shouldDeleteChild = deleteHelper(childNode, word, depth + 1);
-
-        if (shouldDeleteChild)
-        {
-            currentNode->children.erase(ch);
-            delete childNode;
-            return currentNode->children.empty() && !currentNode->isEndOfWord;
-        }
-        return false;
+      // If the end of the word is reached, mark it as not end of word
+      if (!currentNode->isEndOfWord)
+      {
+        return false; // Word not found
+      }
+      currentNode->isEndOfWord = false;
+      return currentNode->children.empty(); // If no children, this node can be deleted
     }
 
-    int getnchilds(TrieNode *node)
+    char ch = word[depth];
+    TrieNode *childNode = currentNode->children[ch];
+    if (childNode == nullptr)
     {
-        if (node)
-        {
-            return node->children.size();
-        }
-        else
-            return 0;
+      return false; // Word not found
     }
 
-    void draw(std::string indent, TrieNode *tree, char sign = ' ')
-    {
-        int n = getnchilds(tree);
-        int m = n / 2, c = 0, i = 0;
-        if (tree)
-        {
-            for (; i < ALPHABET_SIZE; i++)
-            {
-                if (tree->children.count((char)(i + 'a')))
-                {
-                    if (c < m)
-                    {
-                        std::cout << indent + sign + "--" << (char)(i + 'a') << "(" << std::noboolalpha << tree->children[(char)(i + 'a')]->isEndOfWord << ")" << std::endl;
-                        draw(indent + "   ", tree->children[(char)(i + 'a')], '`');
-                    }
-                    else
-                    {
-                        std::cout << indent + sign + "--" << (char)(i + 'a') << "(" << std::noboolalpha << tree->children[(char)(i + 'a')]->isEndOfWord << ")" << std::endl;
-                        draw(indent + "   ", tree->children[(char)(i + 'a')], '`');
-                    }
+    bool shouldDeleteChild = deleteHelper(childNode, word, depth + 1);
 
-                    c++;
-                }
-            }
-        }
+    if (shouldDeleteChild)
+    {
+      currentNode->children.erase(ch);
+      delete childNode;
+      return currentNode->children.empty() && !currentNode->isEndOfWord;
     }
+    return false;
+  }
+
+  void draw(std::string indent, TrieNode *tree, char sign = ' ')
+  {
+    int n = tree->children.size();
+    int m = n / 2, c = 0, i = 0;
+    /*
+    if (tree)
+    {
+      for (; i < ALPHABET_SIZE; i++)
+      {
+        if (tree->children.count((char)(i + 'a')))
+        {
+          if (c < m)
+          {
+            std::cout << indent + sign + "--" << (char)(i + 'a') << "(" << std::noboolalpha << tree->children[(char)(i + 'a')]->isEndOfWord << ")" << std::endl;
+            draw(indent + "   ", tree->children[(char)(i + 'a')], '`');
+          }
+          else
+          {
+            std::cout << indent + sign + "--" << (char)(i + 'a') << "(" << std::noboolalpha << tree->children[(char)(i + 'a')]->isEndOfWord << ")" << std::endl;
+            draw(indent + "   ", tree->children[(char)(i + 'a')], '`');
+          }
+
+          c++;
+        }
+      }
+    }
+    */
+    for (auto it : tree->children)
+    {
+      if (c < m)
+      {
+        std::cout << indent + sign + "--" << it.first << "(" << std::noboolalpha << it.second->isEndOfWord << ")" << std::endl;
+        draw(indent + "   ", it.second, '`');
+      }
+      else
+      {
+        std::cout << indent + sign + "--" << it.first << "(" << std::noboolalpha << it.second->isEndOfWord << ")" << std::endl;
+        draw(indent + "   ", it.second, '`');
+      }
+    }
+  }
+
+  void print(TrieNode *node, std::string prefix) const
+  {
+    if (node->isEndOfWord)
+    {
+      std::cout << prefix << " ";
+    }
+    for (auto it : node->children)
+    {
+      print(it.second, prefix + it.first);
+    }
+  }
+
+  void collectWords(TrieNode *node, std::string prefix, std::vector<std::string> &words)
+  {
+    if (node->isEndOfWord)
+    {
+      words.push_back(prefix);
+    }
+    for (auto it : node->children)
+    {
+      collectWords(it.second, prefix + it.first, words);
+    }
+  }
 
 public:
-    Trie()
-    {
-        root = new TrieNode();
-    }
+  Trie()
+  {
+    root = new TrieNode();
+  }
 
-    ~Trie()
-    {
-        // Destructor to clean up dynamically allocated memory
-        deleteTrie(root);
-    }
+  ~Trie()
+  {
+    // Destructor to clean up dynamically allocated memory
+    deleteTrie(root);
+  }
 
-    void deleteTrie(TrieNode *node)
+  void deleteTrie(TrieNode *node)
+  {
+    if (!node)
+      return;
+    for (auto &pair : node->children)
     {
-        if (!node)
-            return;
-        for (auto &pair : node->children)
-        {
-            deleteTrie(pair.second);
-        }
-        delete node;
+      deleteTrie(pair.second);
     }
+    delete node;
+  }
 
-    void insert(const std::string &word)
+  void insert(const std::string &word)
+  {
+    TrieNode *currentNode = root;
+    for (char ch : word)
     {
-        TrieNode *currentNode = root;
-        for (char ch : word)
-        {
-            if (currentNode->children.find(ch) == currentNode->children.end())
-            {
-                currentNode->children[ch] = new TrieNode();
-            }
-            currentNode = currentNode->children[ch];
-        }
-        currentNode->isEndOfWord = true;
+      if (currentNode->children.find(ch) == currentNode->children.end())
+      {
+        currentNode->children[ch] = new TrieNode();
+      }
+      currentNode = currentNode->children[ch];
     }
+    currentNode->isEndOfWord = true;
+  }
 
-    bool search(const std::string &word)
+  bool search(const std::string &word)
+  {
+    TrieNode *currentNode = root;
+    for (char ch : word)
     {
-        TrieNode *currentNode = root;
-        for (char ch : word)
-        {
-            if (currentNode->children.find(ch) == currentNode->children.end())
-            {
-                return false;
-            }
-            currentNode = currentNode->children[ch];
-        }
-        return currentNode->isEndOfWord;
+      if (currentNode->children.find(ch) == currentNode->children.end())
+      {
+        return false;
+      }
+      currentNode = currentNode->children[ch];
     }
+    return currentNode->isEndOfWord;
+  }
 
-    bool startsWith(const std::string &prefix)
+  bool startsWith(const std::string &prefix)
+  {
+    TrieNode *currentNode = root;
+    for (char ch : prefix)
     {
-        TrieNode *currentNode = root;
-        for (char ch : prefix)
-        {
-            if (currentNode->children.find(ch) == currentNode->children.end())
-            {
-                return false;
-            }
-            currentNode = currentNode->children[ch];
-        }
-        return true;
+      if (currentNode->children.find(ch) == currentNode->children.end())
+      {
+        return false;
+      }
+      currentNode = currentNode->children[ch];
     }
+    return true;
+  }
 
-    bool deleteWord(const std::string &word)
-    {
-        return deleteHelper(root, word, 0);
-    }
+  bool deleteWord(const std::string &word)
+  {
+    return deleteHelper(root, word, 0);
+  }
 
-    void draw()
-    {
-        draw("", root);
-        std::cout << std::endl;
-    }
+  void draw()
+  {
+    std::cout << "Stored words: ";
+    print();
+    draw("", root);
+    std::cout << std::endl;
+  }
+
+  void getAllWords(std::vector<std::string> &words)
+  {
+    collectWords(root, "", words);
+  }
+
+  void print()
+  {
+    print(root, "");
+    std::cout << std::endl;
+  }
 };
 
 int main()
 {
-    Trie trie;
-    trie.draw();
-    trie.insert("cat");
-    trie.draw();
-    trie.insert("car");
-    trie.draw();
-    trie.insert("dog");
-    trie.draw();
+  Trie trie;
+  trie.draw();
+  trie.insert("cat");
+  trie.draw();
+  trie.insert("car");
+  trie.draw();
+  trie.insert("dog");
+  trie.draw();
 
-    std::cout << std::boolalpha;
-    std::cout << "Search for 'cat': " << trie.search("cat") << std::endl;    // true
-    std::cout << "Search for 'cap': " << trie.search("cap") << std::endl;    // false
-    std::cout << "Starts with 'ca': " << trie.startsWith("ca") << std::endl; // true
-    std::cout << "Starts with 'do': " << trie.startsWith("do") << std::endl; // true
-    std::cout << "Starts with 'da': " << trie.startsWith("da") << std::endl; // false
+  std::cout << std::boolalpha;
+  std::cout << "Search for 'cat': " << trie.search("cat") << std::endl;    // true
+  std::cout << "Search for 'cap': " << trie.search("cap") << std::endl;    // false
+  std::cout << "Starts with 'ca': " << trie.startsWith("ca") << std::endl; // true
+  std::cout << "Starts with 'do': " << trie.startsWith("do") << std::endl; // true
+  std::cout << "Starts with 'da': " << trie.startsWith("da") << std::endl; // false
 
-    std::cout << "Delete 'cat': " << trie.deleteWord("cat") << std::endl; // true
-    trie.draw();
-    std::cout << "Search for 'cat' after deletion: " << trie.search("cat") << std::endl;          // false
-    std::cout << "Search for 'car' after deletion of 'cat': " << trie.search("car") << std::endl; // true
-    std::cout << "Search for 'dog': " << trie.search("dog") << std::endl;                         // true
+  std::cout << "Delete 'cat': " << trie.deleteWord("cat") << std::endl; // true
+  trie.draw();
+  std::cout << "Search for 'cat' after deletion: " << trie.search("cat") << std::endl;          // false
+  std::cout << "Search for 'car' after deletion of 'cat': " << trie.search("car") << std::endl; // true
+  std::cout << "Search for 'dog': " << trie.search("dog") << std::endl;                         // true
 
-    return 0;
+  return 0;
 }
 ```
