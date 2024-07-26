@@ -466,7 +466,7 @@ Pseudo code for Dijkstra's Algorithm
 14              alt ← dist[u] + Graph.Edges(u, v)
 15              if alt < dist[v]:
 16                  dist[v] ← alt
-17                  prev[v] ← u
+17                  prev[v] ← u // trace path
 18
 19      return dist[], prev[]
 ```
