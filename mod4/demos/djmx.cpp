@@ -10,7 +10,7 @@ class Graph
 public:
   Graph(int vertices);
   void addEdge(const T &src, const T &dest, double weight);
-  std::unordered_map<T, double> dijkstra(const T &start);
+  std::unordered_map<T, double> dijkstra(const T &start, std::unordered_map<T, T> &pre);
 
 private:
   int getIndex(const T &vertex);
@@ -52,7 +52,7 @@ int Graph<T>::getIndex(const T &vertex)
 }
 
 template <typename T>
-std::unordered_map<T, double> Graph<T>::dijkstra(const T &start)
+std::unordered_map<T, double> Graph<T>::dijkstra(const T &start, std::unordered_map<T, T> &pre)
 {
   std::vector<double> distances(vertices, std::numeric_limits<double>::infinity());
   std::vector<bool> visited(vertices, false);
@@ -60,6 +60,7 @@ std::unordered_map<T, double> Graph<T>::dijkstra(const T &start)
 
   int startIndex = getIndex(start);
   distances[startIndex] = 0;
+  pre[start] = start;
 
   for (int i = 0; i < vertices; ++i)
   {
@@ -87,6 +88,7 @@ std::unordered_map<T, double> Graph<T>::dijkstra(const T &start)
         if (alt < distances[v])
         {
           distances[v] = alt;
+          pre[indexVertexMap[v]] = indexVertexMap[u];
         }
       }
     }
@@ -112,12 +114,23 @@ int main()
   graph.addEdge("E", "D", 4);
   graph.addEdge("D", "F", 11);
 
-  auto distances = graph.dijkstra("A");
+  std::string start = "A";
+  std::unordered_map<std::string, std::string> pre;
+  auto distances = graph.dijkstra(start, pre);
 
-  std::cout << "Shortest distances from vertex A:" << std::endl;
+  std::cout << "Shortest distances from vertex " << start << ": " << std::endl;
   for (const auto &pair : distances)
   {
-    std::cout << "Vertex " << pair.first << " is at distance " << pair.second << std::endl;
+    std::cout << "Vertex " << pair.first << " is at distance " << pair.second << ": ";
+
+    std::string cur = pair.first;
+    while (cur != start)
+    {
+      std::cout << cur << " ";
+      cur = pre[cur];
+    }
+    std::cout << cur << " ";
+    std::cout << std::endl;
   }
 
   return 0;

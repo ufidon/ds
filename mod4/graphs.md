@@ -353,12 +353,12 @@ procedure BFS(G, root) is
      Q.enqueue(root)
      while Q is not empty do
          v := Q.dequeue()
-         if v is the goal then
+         if v is the goal then // find the path from root to goal
              return v
          for all edges from v to w in G.adjacentEdges(v) do
              if w is not labeled as explored then
                  label w as explored
-                 w.parent := v
+                 w.parent := v // trace path
                  Q.enqueue(w)
 ```
 

@@ -10,7 +10,7 @@ class Graph
 {
 public:
   void addEdge(const T &src, const T &dest, double weight);
-  std::unordered_map<T, double> dijkstra(const T &start);
+  std::unordered_map<T, double> dijkstra(const T &start, std::unordered_map<T,T>& pre);
 
 private:
   std::unordered_map<T, std::vector<std::pair<T, double>>> adjList;
@@ -24,7 +24,7 @@ void Graph<T>::addEdge(const T &src, const T &dest, double weight)
 }
 
 template <typename T>
-std::unordered_map<T, double> Graph<T>::dijkstra(const T &start)
+std::unordered_map<T, double> Graph<T>::dijkstra(const T &start, std::unordered_map<T,T>& pre)
 {
   std::unordered_map<T, double> distances;
   for (const auto &pair : adjList)
@@ -32,6 +32,9 @@ std::unordered_map<T, double> Graph<T>::dijkstra(const T &start)
     distances[pair.first] = std::numeric_limits<double>::infinity();
   }
   distances[start] = 0;
+
+  
+  pre[start] = start;
 
   using P = std::pair<double, T>;
   std::priority_queue<P, std::vector<P>, std::greater<>> pq;
@@ -58,6 +61,7 @@ std::unordered_map<T, double> Graph<T>::dijkstra(const T &start)
       {
         distances[neighborVertex] = distanceThroughCurrent;
         pq.emplace(distanceThroughCurrent, neighborVertex);
+        pre[neighborVertex] = currentVertex;
       }
     }
   }
@@ -77,12 +81,23 @@ int main()
   graph.addEdge("E", "D", 4);
   graph.addEdge("D", "F", 11);
 
-  auto distances = graph.dijkstra("A");
+  std::unordered_map<std::string,std::string> pre;
+  std::string start = "A";
+  auto distances = graph.dijkstra(start, pre);
 
-  std::cout << "Shortest distances from vertex A:" << std::endl;
+  std::cout << "Shortest distances from vertex " << start << ":" << std::endl;
   for (const auto &pair : distances)
   {
-    std::cout << "Vertex " << pair.first << " is at distance " << pair.second << std::endl;
+    std::cout << "Vertex " << pair.first << " is at distance " << pair.second << ": ";
+
+    std::string cur = pair.first;
+    while (cur != start)
+    {
+      std::cout << cur << " ";
+      cur = pre[cur];
+    }
+    std::cout << cur << " ";
+    std::cout << std::endl;
   }
 
   return 0;
