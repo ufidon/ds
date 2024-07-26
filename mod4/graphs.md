@@ -342,7 +342,7 @@ Applications of DFT
 - Detecting whether there is a cycle in the graph
   - Finding a cycle in the graph
   - Finding a Hamiltonian path/cycle
-
+- [code](./demos/dftapp.cpp)
 
 Pseudo-code for BFT 
 ---
