@@ -237,26 +237,23 @@ public:
             else if (parent[v] != neighbor)
             {
               // Cycle found
-              vector<int> cycle;
-              int current = v;
-              while (current != neighbor)
+              vector<int> arcl, arcr;
+              int curl = v, curr = neighbor;
+              while ((curl != curr) && (find(arcl.begin(), arcl.end(), curr) == arcl.end()))
               {
-                cycle.push_back(current);
-                if (parent.count(current))
-                  current = parent[current];
-                else
-                  break;
+                arcl.push_back(curl), arcr.push_back(curr);
+                
+                if (parent.count(curl) && parent.count(curr))
+                {
+                  curl = parent[curl];
+                  curr = parent[curr];
+                }
               }
 
-              reverse(cycle.begin(), cycle.end());
-              while (find(cycle.begin(), cycle.end(), neighbor) == cycle.end())
-              {
-                cycle.push_back(neighbor);
-                if (parent.count(neighbor))
-                  neighbor = parent[neighbor];
-                else
-                  break;
-              }
+              reverse(arcl.begin(), arcl.end());
+              vector<int> cycle(arcl);
+              cycle.insert(cycle.end(), arcr.begin(), arcr.end());
+
               return cycle;
             }
           }
@@ -274,9 +271,11 @@ int main()
   g.addEdge(5, 6);
   g.addEdge(0, 1);
   g.addEdge(1, 2);
-  // g.addEdge(2, 3);
+  g.addEdge(2, 3);
   g.addEdge(3, 4);
   g.addEdge(4, 1);
+  g.addEdge(3, 8);
+  g.addEdge(4, 9);
 
   cout << "Is the graph connected? " << (g.isConnected() ? "Yes" : "No") << endl;
 
