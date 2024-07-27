@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <limits>
 #include <utility>
+#include <tuple>
 
 template <typename T>
 class Graph
@@ -10,7 +11,7 @@ class Graph
 public:
   Graph(int vertices);
   void addEdge(const T &src, const T &dest, double weight);
-  std::vector<std::pair<T, T>> primMST(const T &start);
+  std::vector<std::tuple<T, T, double>> primMST(const T &start);
 
 private:
   int getIndex(const T &vertex);
@@ -52,12 +53,12 @@ int Graph<T>::getIndex(const T &vertex)
 }
 
 template <typename T>
-std::vector<std::pair<T, T>> Graph<T>::primMST(const T &start)
+std::vector<std::tuple<T, T, double>> Graph<T>::primMST(const T &start)
 {
   std::vector<double> key(vertices, std::numeric_limits<double>::infinity());
   std::vector<int> parent(vertices, -1);
   std::vector<bool> inMST(vertices, false);
-  std::vector<std::pair<T, T>> result;
+  std::vector<std::tuple<T, T, double>> result;
 
   int startIndex = getIndex(start);
   key[startIndex] = 0;
@@ -95,7 +96,7 @@ std::vector<std::pair<T, T>> Graph<T>::primMST(const T &start)
   {
     if (parent[i] != -1)
     {
-      result.emplace_back(indexVertexMap[parent[i]], indexVertexMap[i]);
+      result.emplace_back(indexVertexMap[parent[i]], indexVertexMap[i], adjMatrix[parent[i]][i]);
     }
   }
 
@@ -117,10 +118,13 @@ int main()
   auto mst = graph.primMST("A");
 
   std::cout << "Edges in the Minimum Spanning Tree (MST):" << std::endl;
+  double total = 0;
   for (const auto &edge : mst)
   {
-    std::cout << "Edge: " << edge.first << " - " << edge.second << std::endl;
+    std::cout << "Edge: " << std::get<0>(edge) << " - " << std::get<1>(edge) << "(" << std::get<2>(edge) << ")" << std::endl;
+    total += std::get<2>(edge);
   }
+  std::cout << "MST Total weight: " << total << std::endl;
 
   return 0;
 }

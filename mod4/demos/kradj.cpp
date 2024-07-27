@@ -4,13 +4,24 @@
 #include <algorithm>
 #include <limits>
 #include <utility>
+#include <tuple>
+
+template <typename T>
+struct PairHash {
+    std::size_t operator()(const std::pair<T, T>& p) const {
+        // Implement a suitable hash function here
+        // For example:
+        return std::hash<T>()(p.first) ^ std::hash<T>()(p.second);
+    }
+};
 
 template <typename T>
 class Graph
 {
 public:
   void addEdge(const T &src, const T &dest, double weight);
-  std::vector<std::pair<T, T>> kruskalMST();
+  std::vector<std::tuple<T, T, double>> kruskalMST();
+  std::unordered_map<std::pair<T, T>, double, PairHash<T>> edges;
 
 private:
   int find(int i, std::vector<int> &parent);
@@ -26,6 +37,8 @@ void Graph<T>::addEdge(const T &src, const T &dest, double weight)
 {
   adjList[src].emplace_back(dest, weight);
   adjList[dest].emplace_back(src, weight); // If the graph is undirected
+  edges[{src, dest}] = weight;
+  edges[{dest, src}] = weight;
 
   if (vertexIndexMap.find(src) == vertexIndexMap.end())
   {
@@ -74,7 +87,7 @@ void Graph<T>::unionSets(int u, int v, std::vector<int> &parent, std::vector<int
 }
 
 template <typename T>
-std::vector<std::pair<T, T>> Graph<T>::kruskalMST()
+std::vector<std::tuple<T, T, double>> Graph<T>::kruskalMST()
 {
   std::vector<std::tuple<double, int, int>> edges;
   for (const auto &pair : adjList)
@@ -99,7 +112,7 @@ std::vector<std::pair<T, T>> Graph<T>::kruskalMST()
     parent[i] = i;
   }
 
-  std::vector<std::pair<T, T>> mst;
+  std::vector<std::tuple<T, T, double>> mst;
   for (const auto &edge : edges)
   {
     double weight;
@@ -111,7 +124,7 @@ std::vector<std::pair<T, T>> Graph<T>::kruskalMST()
 
     if (setU != setV)
     {
-      mst.emplace_back(indexVertexMap[u], indexVertexMap[v]);
+      mst.emplace_back(indexVertexMap[u], indexVertexMap[v], this->edges[{indexVertexMap[u], indexVertexMap[v]}]);
       unionSets(setU, setV, parent, rank);
     }
   }
@@ -134,10 +147,13 @@ int main()
   auto mst = graph.kruskalMST();
 
   std::cout << "Edges in the Minimum Spanning Tree (MST):" << std::endl;
+  double total = 0;
   for (const auto &edge : mst)
   {
-    std::cout << "Edge: " << edge.first << " - " << edge.second << std::endl;
+    std::cout << "Edge: " << std::get<0>(edge) << " - " << std::get<1>(edge) << "(" << std::get<2>(edge) << ")" << std::endl;
+    total += std::get<2>(edge);
   }
+  std::cout << "MST Total weight: " << total << std::endl;
 
   return 0;
 }
