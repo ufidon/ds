@@ -6,11 +6,23 @@
 #include <utility>
 
 template <typename T>
+struct PairHash {
+    std::size_t operator()(const std::pair<T, T>& p) const {
+        // Implement a suitable hash function here
+        // For example:
+        return std::hash<T>()(p.first) ^ std::hash<T>()(p.second);
+    }
+};
+
+
+
+template <typename T>
 class Graph
 {
 public:
   void addEdge(const T &src, const T &dest, double weight);
-  std::vector<std::pair<T, T>> primMST(const T &start);
+  std::vector<std::tuple<T, T, double>> primMST(const T &start);
+  std::unordered_map<std::pair<T, T>, double, PairHash<T>> edges;
 
 private:
   std::unordered_map<T, std::vector<std::pair<T, double>>> adjList;
@@ -21,15 +33,17 @@ void Graph<T>::addEdge(const T &src, const T &dest, double weight)
 {
   adjList[src].emplace_back(dest, weight);
   adjList[dest].emplace_back(src, weight); // If the graph is undirected
+  edges[std::make_pair(src, dest)] = weight;
+  edges[std::make_pair(dest, src)] = weight;
 }
 
 template <typename T>
-std::vector<std::pair<T, T>> Graph<T>::primMST(const T &start)
+std::vector<std::tuple<T, T, double>> Graph<T>::primMST(const T &start)
 {
   std::unordered_map<T, double> key;
   std::unordered_map<T, T> parent;
   std::unordered_map<T, bool> inMST;
-  std::vector<std::pair<T, T>> result;
+  std::vector<std::tuple<T, T, double>> result;
 
   for (const auto &pair : adjList)
   {
@@ -69,7 +83,7 @@ std::vector<std::pair<T, T>> Graph<T>::primMST(const T &start)
     T v = pair.first;
     if (v != start && parent.find(v) != parent.end())
     {
-      result.emplace_back(parent[v], v);
+      result.emplace_back(parent[v], v, edges[{parent[v], v}]);
     }
   }
 
@@ -91,10 +105,13 @@ int main()
   auto mst = graph.primMST("A");
 
   std::cout << "Edges in the Minimum Spanning Tree (MST):" << std::endl;
+  double total = 0;
   for (const auto &edge : mst)
   {
-    std::cout << "Edge: " << edge.first << " - " << edge.second << std::endl;
+    std::cout << "Edge: " << std::get<0>(edge) << " - " << std::get<1>(edge) << "(" << std::get<2>(edge) << ")" << std::endl;
+    total += std::get<2>(edge);
   }
+  std::cout << "MST Total weight: " << total << std::endl;
 
   return 0;
 }
