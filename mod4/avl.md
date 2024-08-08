@@ -30,7 +30,7 @@ Balance Factor
    -  *balanced* if its bf = 0
    -  *left-heavy* if its bf > 0
    -  *right-heavy* if its bf < 0
-
+- Every node is balanced in a balanced AVL tree
 
 🏃 Exercise
 ---
@@ -163,10 +163,18 @@ class AVL
     return N ? height(N->left) - height(N->right) : 0;
   }
 
+  bool isBalanced(Node *N)
+  {
+    if (N == nullptr)
+      return true;
+    else
+      return std::abs(getBalance(N)) < 2 && isBalanced(N->left) && isBalanced(N->right);
+  }
+
   std::string imbalance(Node *N)
   {
     std::stringstream ss;
-    ss << "(" <<getBalance(N->left)<<","<<getBalance(N)<<","<<getBalance(N->right) << ")";
+    ss << "(" << getBalance(N->left) << "," << getBalance(N) << "," << getBalance(N->right) << ")";
     return ss.str();
   }
 
@@ -174,7 +182,7 @@ class AVL
   {
     Node *B = A->left;
     Node *T2 = B->right;
-    std::cout << "Right rotation at node(" << A->data << ") for LL imbalance "<<imbalance(A)<<std::endl;
+    std::cout << "Right rotation at node(" << A->data << ") for LL imbalance " << imbalance(A) << std::endl;
     B->right = A;
     A->left = T2;
     A->height = std::max(height(A->left), height(A->right)) + 1;
@@ -186,7 +194,7 @@ class AVL
   {
     Node *B = A->right;
     Node *T2 = B->left;
-    std::cout << "Left rotation at node(" << A->data << ") for RR imbalance "<<imbalance(A)<<std::endl;
+    std::cout << "Left rotation at node(" << A->data << ") for RR imbalance " << imbalance(A) << std::endl;
     B->left = A;
     A->right = T2;
     A->height = std::max(height(A->left), height(A->right)) + 1;
@@ -326,6 +334,11 @@ public:
     std::cout << std::endl;
   }
 
+  bool isBalanced()
+  {
+    return isBalanced(root);
+  }
+
   void draw(std::string indent, Node *tree, char sign = ' ')
   {
     if (tree)
@@ -340,56 +353,86 @@ public:
   {
     draw("", root);
     std::cout << std::endl;
-  }   
+  }
 };
 
 int main()
 {
-  std::cout<<"----1.Right rotation for LL imbalance----"<<std::endl;
+  std::cout << "----1.Right rotation for LL imbalance----" << std::endl;
   AVL<int> ll;
-  ll.insert(3); ll.draw();
-  ll.insert(2); ll.draw();
-  ll.insert(1); ll.draw();
-  std::cout<<"Self-balanced: "; ll.preOrder(); std::cout << std::endl;
+  ll.insert(3);
+  ll.insert(2);
+  ll.draw();
+  ll.insert(1);
+  ll.draw();
+  std::cout << "Self-balanced: ";
+  ll.preOrder();
+  std::cout << std::endl;
 
-  std::cout<<"----2.Left rotation for RR imbalance----"<<std::endl;
+  std::cout << "----2.Left rotation for RR imbalance----" << std::endl;
   AVL<int> rr;
-  rr.insert(1); rr.draw();
-  rr.insert(2); rr.draw();
-  rr.insert(3); rr.draw();
-  std::cout<<"Self-balanced: "; rr.preOrder(); std::cout << std::endl;
+  rr.insert(1);
+  rr.draw();
+  rr.insert(2);
+  rr.draw();
+  rr.insert(3);
+  rr.draw();
+  std::cout << "Self-balanced: ";
+  rr.preOrder();
+  std::cout << std::endl;
 
-  std::cout<<"----3.LR rotation for LR imbalance----"<<std::endl;
+  std::cout << "----3.LR rotation for LR imbalance----" << std::endl;
   AVL<int> lr;
-  lr.insert(3); lr.draw();
-  lr.insert(1); lr.draw();
-  lr.insert(2); lr.draw();
-  std::cout<<"Self-balanced: "; lr.preOrder(); std::cout << std::endl;
+  lr.insert(3);
+  lr.draw();
+  lr.insert(1);
+  lr.draw();
+  lr.insert(2);
+  lr.draw();
+  std::cout << "Self-balanced: ";
+  lr.preOrder();
+  std::cout << std::endl;
 
-  std::cout<<"----4.RL rotation for RL imbalance----"<<std::endl;
+  std::cout << "----4.RL rotation for RL imbalance----" << std::endl;
   AVL<int> rl;
-  rl.insert(1); rl.draw();
-  rl.insert(3); rl.draw();
-  rl.insert(2); rl.draw();
-  std::cout<<"Self-balanced: "; rl.preOrder(); std::cout << std::endl;
+  rl.insert(1);
+  rl.draw();
+  rl.insert(3);
+  rl.draw();
+  rl.insert(2);
+  rl.draw();
+  std::cout << "Self-balanced: ";
+  rl.preOrder();
+  std::cout << std::endl;
 
-  std::cout<<"----5. Mixed rotations---------------------"<<std::endl;
+  std::cout << "----5. Mixed rotations---------------------" << std::endl;
   AVL<int> tree;
-  tree.insert(9); tree.draw();
-  tree.insert(5); tree.draw();
-  tree.insert(10); tree.draw();
-  tree.insert(0); tree.draw();
-  tree.insert(6); tree.draw();
-  tree.insert(11); tree.draw();
-  tree.insert(-1); tree.draw();
-  tree.insert(1); tree.draw();
-  tree.insert(2); tree.draw();
+  tree.insert(9);
+  tree.draw();
+  tree.insert(5);
+  tree.draw();
+  tree.insert(10);
+  tree.draw();
+  tree.insert(0);
+  tree.draw();
+  tree.insert(6);
+  tree.draw();
+  tree.insert(11);
+  tree.draw();
+  tree.insert(-1);
+  tree.draw();
+  tree.insert(1);
+  tree.draw();
+  tree.insert(2);
+  tree.draw();
 
+  std::cout << "Balanced: " << tree.isBalanced() << std::endl;
   std::cout << "Preorder traversal of the constructed AVL tree is \n";
   tree.preOrder();
   std::cout << std::endl;
 
   tree.deleteKey(10);
+  std::cout << "Balanced: " << tree.isBalanced() << std::endl;
   std::cout << "Preorder traversal after deletion of 10 \n";
   tree.preOrder();
   tree.draw();

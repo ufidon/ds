@@ -50,7 +50,7 @@ Advantages and Disadvantages of Tries
 - [Animate a trie](https://www.cs.usfca.edu/~galles/visualization/Trie.html)
 
 
-🏃 Implementation
+🏃 Implementation based on map
 ---
 ```c++
 #include <iostream>
@@ -283,6 +283,295 @@ int main()
   std::cout << "Search for 'cat' after deletion: " << trie.search("cat") << std::endl;          // false
   std::cout << "Search for 'car' after deletion of 'cat': " << trie.search("car") << std::endl; // true
   std::cout << "Search for 'dog': " << trie.search("dog") << std::endl;                         // true
+
+  return 0;
+}
+```
+
+🏃 Implementation based on array
+---
+```c++
+#include <string>
+#include <vector>
+#include <queue>
+#include <iostream>
+
+#define ALPHABET_SIZE 26
+
+class TrieNode
+{
+public:
+  TrieNode()
+  {
+    for (int i = 0; i < ALPHABET_SIZE; i++)
+    {
+      // index [0-25] <--> letter [a-z]
+      children[i] = nullptr;
+    }
+
+    endOfWord = false;
+  }
+
+  // data member
+  TrieNode *children[ALPHABET_SIZE];
+  bool endOfWord;
+};
+
+class Trie
+{
+public:
+  Trie();
+  ~Trie();
+  void insert(const std::string &word);
+  bool search(const std::string &word) const;
+
+  Trie(const std::vector<std::string> &);
+  int count_words() const;
+  int count_words_by_length() const;
+  void print() const;
+  int longest_word_length() const;
+  std::string longest_word() const;
+  void longest_word(TrieNode *node, std::string &curwd, std::string &longwd) const;
+  std::vector<std::string> words_of_length(int len) const;
+
+private:
+  TrieNode *root;
+  void print(TrieNode *node, std::string prefix) const;
+  void deleteTrie(TrieNode *node);
+  int count_words(TrieNode *node) const;
+  int longest_word_length(TrieNode *node, int curlen) const;
+  void words_of_length(TrieNode *node, std::string curword, std::vector<std::string> &result, int len) const;
+};
+
+Trie::Trie(const std::vector<std::string> &words) : root(nullptr)
+{
+  for (auto w : words)
+  {
+    insert(w);
+  }
+}
+
+int Trie::count_words() const
+{
+  return count_words(root);
+}
+int Trie::count_words(TrieNode *node) const
+{
+  if (node == nullptr)
+    return 0;
+
+  int cw = 0;
+
+  if (node->endOfWord)
+  {
+    cw++;
+  }
+
+  for (size_t i = 0; i < ALPHABET_SIZE; i++)
+  {
+    if (node->children[i])
+    {
+      cw += count_words(node->children[i]);
+    }
+  }
+
+  return cw;
+}
+
+std::string Trie::longest_word() const
+{
+  std::string cw, lw;
+  longest_word(root, cw, lw);
+
+  return lw;
+}
+void Trie::longest_word(TrieNode *node, std::string &curwd, std::string &longwd) const
+{
+  if (node == nullptr)
+    return;
+
+  if (node->endOfWord)
+  {
+    if (curwd.length() > longwd.length())
+    {
+      longwd = curwd;
+    }
+  }
+
+  for (size_t i = 0; i < ALPHABET_SIZE; i++)
+  {
+    if (node->children[i])
+    {
+      curwd += 'a' + i;
+      longest_word(node->children[i], curwd, longwd);
+      curwd.pop_back();
+    }
+  }
+}
+
+std::vector<std::string> Trie::words_of_length(int len) const
+{
+  std::vector<std::string> rst;
+  std::string cw;
+  words_of_length(root, cw, rst, len);
+
+  return rst;
+}
+void Trie::words_of_length(TrieNode *node, std::string curword, std::vector<std::string> &result, int len) const
+{
+  if (node == nullptr)
+    return;
+
+  if (curword.length() == len && node->endOfWord)
+    result.push_back(curword);
+
+  if (curword.length() < len)
+  {
+    for (size_t i = 0; i < ALPHABET_SIZE; i++)
+    {
+      if (node->children[i])
+      {
+        curword += 'a' + i;
+        words_of_length(node->children[i], curword, result, len);
+        curword.pop_back();
+      }
+    }
+  }
+}
+
+int Trie::longest_word_length(TrieNode *node, int curlen) const
+{
+  if (node == nullptr)
+  {
+    return 0;
+  }
+
+  if (node->endOfWord)
+  {
+    return curlen;
+  }
+
+  int maxlen = curlen;
+  for (size_t i = 0; i < ALPHABET_SIZE; i++)
+  {
+    if (node->children[i])
+    {
+      maxlen = std::max(maxlen, longest_word_length(node->children[i], curlen + 1));
+    }
+  }
+
+  return maxlen;
+}
+
+int Trie::longest_word_length() const
+{
+  return longest_word_length(root, 0);
+}
+
+void Trie::print() const
+{
+  print(root, "");
+}
+
+void Trie::print(TrieNode *node, std::string prefix) const
+{
+  if (node)
+  {
+    for (size_t i = 0; i < ALPHABET_SIZE; i++)
+    {
+      if (node->children[i])
+      {
+        if (node->children[i]->endOfWord)
+          std::cout << prefix + (char)('a' + i) << std::endl;
+
+        print(node->children[i], prefix + (char)('a' + i));
+      }
+    }
+  }
+}
+
+Trie::Trie() : root(nullptr) {}
+Trie::~Trie() { deleteTrie(root); }
+void Trie::deleteTrie(TrieNode *node)
+{
+  if (node)
+  { // post order
+    for (size_t i = 0; i < ALPHABET_SIZE; i++)
+    {
+      if (node->children[i])
+        deleteTrie(node->children[i]);
+    }
+    delete node;
+  }
+}
+
+void Trie::insert(const std::string &word)
+{
+  if (root == nullptr)
+  {
+    root = new TrieNode();
+  }
+  TrieNode *cur = root;
+
+  for (int i = 0; i < word.size(); i++)
+  {
+    // index [0-25] <--> letter [a-z]
+    int index = word[i] - 'a';
+    if (cur->children[index] == nullptr)
+    {
+      cur->children[index] = new TrieNode();
+    }
+    // move down
+    cur = cur->children[index];
+  }
+  cur->endOfWord = true;
+}
+
+bool Trie::search(const std::string &word) const
+{
+  if (root == nullptr)
+  {
+    return false;
+  }
+  TrieNode *cur = root;
+
+  for (int i = 0; i < word.size(); i++)
+  {
+    // index [0-25] <--> letter [a-z]
+    int index = word[i] - 'a';
+    if (cur->children[index] == nullptr)
+    {
+      return false;
+    }
+
+    cur = cur->children[index];
+  }
+
+  return (cur->endOfWord);
+}
+
+int main()
+{
+  std::vector<std::string> words = {
+      "florida", "virginia", "texas", "wisconsin",
+      "mexico", "washington", "carolina", "georgia",
+      "michigan", "hawaii"};
+
+  Trie tr(words);
+  std::cout << "There are " << tr.count_words() << " words in the Trie" << std::endl;
+  std::cout << "Here are the words:\n";
+  tr.print();
+  std::cout << "The longest word has " << tr.longest_word_length() << " characters\n";
+  std::cout << "The longest word is " << tr.longest_word() << std::endl;
+
+  int wl = 6;
+  auto res = tr.words_of_length(wl);
+  std::cout << "Words of length " << wl << ": ";
+  for (auto w : res)
+  {
+    std::cout << w << " ";
+  }
+  std::cout << std::endl;
 
   return 0;
 }
