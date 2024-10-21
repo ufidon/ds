@@ -80,7 +80,10 @@ Online resources
 - ---
 - [DataStructures.jl](https://juliacollections.github.io/DataStructures.jl/stable/)
 - [The Arcane Algorithm Archive](https://www.algorithm-archive.org/)
-
+- _Coding interview preparation_
+  - [neetcode](https://neetcode.io/)
+  - [Tech Interview Handbook](https://www.techinterviewhandbook.org/)
+  - [leetcode](https://leetcode.com/)
 
 Tips
 ---
